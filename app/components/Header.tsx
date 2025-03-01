@@ -11,6 +11,7 @@ export default function Header() {
           <Link to="/" className={isActive("/")}>Home</Link>
           <Link to="/about" className={isActive("/about")}>About</Link>
           <Link to="/posts" className={isActive("/posts")}>Posts</Link>
+          <Link to="/file" className={isActive("/file")}>File</Link>
         </nav>
       </header>
       <hr />

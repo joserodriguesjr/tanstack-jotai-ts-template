@@ -5,8 +5,12 @@
     "target": "ES2022",
     "jsx": "react-jsx",
     "module": "ESNext",
+    "esModuleInterop": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "isolatedModules": true,
+    "resolveJsonModule": true,
     "types": ["vite/client", "node"],
+    "allowJs": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -16,15 +20,17 @@
 
     /* Linting */
     "skipLibCheck": true,
+    "strictNullChecks": true,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "forceConsistentCasingInFileNames": true,
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["./app/*"]
+    },
   }
 }

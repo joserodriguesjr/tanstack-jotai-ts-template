@@ -1,11 +1,11 @@
 import { Suspense } from "react"
 import { useAtomValue } from 'jotai'
 import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
-import { Button } from "@/components/ui/Button"
-import Loading from "@/components/Loading"
-import { postQueryOptions } from '@/modules/post/api'
-import { PostErrorView } from "@/modules/post/components/PostError"
-import { postAtom } from "@/modules/post/atoms"
+import { Button } from "app/components/ui/Button"
+import Loading from "app/components/Loading"
+import { postQueryOptions } from 'app/modules/post/api'
+import { PostErrorView } from "app/modules/post/components/PostError"
+import { postAtom } from "app/modules/post/atoms"
 
 export const Route = createFileRoute('/posts/$postId')({
   loader: ({ context: { queryClient }, params: { postId } }) => {

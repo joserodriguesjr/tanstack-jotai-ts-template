@@ -15,7 +15,7 @@ function HomePage() {
           alt="logo"
         />
         <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
+          Edit <code>app/routes/index.tsx</code> and save to reload.
         </p>
         <a
           className="text-[#61dafb] hover:underline"

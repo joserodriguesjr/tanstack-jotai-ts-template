@@ -1,7 +1,7 @@
 import React from "react"
 import { useQueryErrorResetBoundary } from "@tanstack/react-query"
 import { type ErrorComponentProps, useRouter, ErrorComponent } from "@tanstack/react-router"
-import { PostNotFoundError } from "@/modules/post/types"
+import { PostNotFoundError } from "app/modules/post/types"
 
 export function PostErrorView({ error }: ErrorComponentProps) {
     const router = useRouter()
