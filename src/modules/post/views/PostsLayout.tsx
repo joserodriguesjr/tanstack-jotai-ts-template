@@ -1,10 +1,15 @@
 import { Link, Outlet } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { postsQueryOptions } from "@/modules/post/api"
+import { postIdAtom } from '@/modules/post/atoms'
+import { usePrefetchPost } from '@/modules/post/hooks'
+import { useSetAtom } from 'jotai'
 
 export function PostsLayoutView() {
     const postsQuery = useSuspenseQuery(postsQueryOptions)
     const posts = postsQuery.data
+    const prefetchPost = usePrefetchPost();
+    const setPostId = useSetAtom(postIdAtom)
 
     return (
         <div className="p-2 flex gap-2">
@@ -15,10 +20,10 @@ export function PostsLayoutView() {
                             <li key={post.id} className="whitespace-nowrap">
                                 <Link
                                     to="/posts/$postId"
-                                    params={{
-                                        postId: post.id,
-                                    }}
+                                    params={{ postId: post.id }}
                                     className="[&.active]:font-bold [&.active]:underline block py-1 text-blue-600 hover:opacity-75"
+                                    onMouseEnter={() => prefetchPost(post.id)}
+                                    onClick={() => setPostId(post.id)}
                                 >
                                     <div>{post.title.substring(0, 20)}</div>
                                 </Link>

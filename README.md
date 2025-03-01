@@ -1,5 +1,7 @@
 Welcome to your new TanStack app!
 
+todo: rename to lower case
+
 # Stack
 
 **Framework:** TanStack

@@ -1,15 +1,21 @@
-import { StrictMode } from 'react'
+import { StrictMode, type ReactNode } from 'react';
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Provider as JotaiProvider } from 'jotai'
+import { useHydrateAtoms } from 'jotai/react/utils'
+import { queryClientAtom } from 'jotai-tanstack-query';
 
-// Import the generated route tree
 import { routeTree } from './routeTree.gen.ts'
-
 import './styles/global.css'
 import reportWebVitals from './reportWebVitals.ts'
 
 const queryClient = new QueryClient();
+
+const HydrateAtoms = ({ children }: { children: ReactNode }) => {
+  useHydrateAtoms([[queryClientAtom, queryClient]])
+  return children
+}
 
 // Create a new router instance
 const router = createRouter({
@@ -39,9 +45,13 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <QueryClientProvider client={queryClient}>
-      <StrictMode>
-        <RouterProvider router={router} />
-      </StrictMode>
+      <JotaiProvider>
+        <StrictMode>
+          <HydrateAtoms>
+            <RouterProvider router={router} />
+          </HydrateAtoms>
+        </StrictMode>
+      </JotaiProvider>
     </QueryClientProvider>
   )
 }

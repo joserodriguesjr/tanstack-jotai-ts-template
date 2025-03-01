@@ -23,6 +23,6 @@ export const fetchPosts = async () => {
     console.info('Fetching posts...')
     await new Promise((r) => setTimeout(r, 500))
     return axios
-        .get<Array<Post>>('https://jsonplaceholder.typicode.com/posts')
+        .get<Array<Post>>('https://jsonplaceholder.typicode.com/posts?_limit=11')
         .then((r) => r.data.slice(0, 10))
 }

@@ -1,11 +1,13 @@
-import { useSuspenseQuery } from "@tanstack/react-query"
-import { Link, Outlet, useParams } from "@tanstack/react-router"
-import { postQueryOptions } from "@/modules/post/api"
+import { Link, Outlet } from "@tanstack/react-router"
 import { Button } from "@/components/ui/button"
+import { Suspense } from "react"
+import { useAtomValue } from "jotai"
+import { postAtom } from "../atoms"
+import Loading from "@/components/Loading"
 
-export function PostView() {
-    const { postId } = useParams({ from: '/posts/$postId' })
-    const { data: post } = useSuspenseQuery(postQueryOptions(postId))
+function PostViewContent() {
+    const { data: post } = useAtomValue(postAtom)
+    console.log("post - ", post)
 
     return (
         <>
@@ -17,7 +19,7 @@ export function PostView() {
                 <Button className="pt-4 pb-2" variant={"link"} size={"icon"}>
                     <Link
                         to="/posts/$postId/edit"
-                        params={{ postId }}
+                        params={{ postId: post.id }}
                         className="[&.active]:text-green-500"
                     >
                         Edit
@@ -27,5 +29,13 @@ export function PostView() {
                 <Outlet />
             </div>
         </>
+    )
+}
+
+export function PostView() {
+    return (
+        <Suspense fallback={<Loading />}>
+            <PostViewContent />
+        </Suspense>
     )
 }
