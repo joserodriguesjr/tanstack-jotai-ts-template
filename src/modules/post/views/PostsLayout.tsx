@@ -1,7 +1,7 @@
 import { Link, Outlet } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { postsQueryOptions } from "@/modules/post/api"
-import { postIdAtom } from '@/modules/post/atoms'
+import { postIdAtom } from "@/modules/post/atoms"
 import { useSetAtom } from 'jotai'
 
 export function PostsLayoutView() {

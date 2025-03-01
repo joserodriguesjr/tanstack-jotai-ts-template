@@ -3,3 +3,5 @@ export type Post = {
     title: string
     body: string
 }
+
+export class PostNotFoundError extends Error { }

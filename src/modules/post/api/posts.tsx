@@ -1,7 +1,5 @@
 import axios from 'redaxios'
-import type { Post } from '@/modules/post/schemas'
-
-export class PostNotFoundError extends Error { }
+import { PostNotFoundError, type Post } from '@/modules/post/types'
 
 export const fetchPost = async (postId: string) => {
     console.info(`Fetching post with id ${postId}...`)
