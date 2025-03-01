@@ -1,5 +1,5 @@
 import { Link, Outlet } from "@tanstack/react-router"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/Button"
 import { Suspense } from "react"
 import { useAtomValue } from "jotai"
 import { postAtom } from "../atoms"
