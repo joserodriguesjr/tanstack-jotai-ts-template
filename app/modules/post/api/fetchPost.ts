@@ -1,7 +1,10 @@
 import axios from 'redaxios'
+import { queryOptions } from '@tanstack/react-query'
+import {atom} from "jotai";
 import { PostNotFoundError, type Post } from 'app/modules/post/types'
+import { atomWithSuspenseQuery } from 'jotai-tanstack-query'
 
-export const fetchPost = async (postId: string) => {
+const fetchPost = async (postId: string) => {
     console.info(`Fetching post with id ${postId}...`)
     await new Promise((r) => setTimeout(r, 500))
     const post = await axios
@@ -17,10 +20,11 @@ export const fetchPost = async (postId: string) => {
     return post
 }
 
-export const fetchPosts = async () => {
-    console.info('Fetching posts...')
-    await new Promise((r) => setTimeout(r, 500))
-    return axios
-        .get<Array<Post>>('https://jsonplaceholder.typicode.com/posts?_limit=11')
-        .then((r) => r.data.slice(0, 10))
-}
+export const postQueryOptions = (postId: string) =>
+    queryOptions({
+        queryKey: ['post', postId],
+        queryFn: () => fetchPost(postId),
+})
+
+export const postIdAtom = atom<string>("1");
+export const postAtom = atomWithSuspenseQuery((get) => postQueryOptions(String(get(postIdAtom))))

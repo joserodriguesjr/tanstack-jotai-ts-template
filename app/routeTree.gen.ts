@@ -14,8 +14,10 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as FileImport } from './routes/file'
 import { Route as AboutImport } from './routes/about'
 import { Route as PostsRouteImport } from './routes/posts/route'
+import { Route as PokemonsRouteImport } from './routes/pokemons/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as PostsIndexImport } from './routes/posts/index'
+import { Route as PokemonsIndexImport } from './routes/pokemons/index'
 import { Route as PostsPostIdImport } from './routes/posts/$postId'
 import { Route as PostsPostIdEditImport } from './routes/posts/$postId.edit'
 
@@ -39,6 +41,12 @@ const PostsRouteRoute = PostsRouteImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const PokemonsRouteRoute = PokemonsRouteImport.update({
+  id: '/pokemons',
+  path: '/pokemons',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
@@ -49,6 +57,12 @@ const PostsIndexRoute = PostsIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => PostsRouteRoute,
+} as any)
+
+const PokemonsIndexRoute = PokemonsIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PokemonsRouteRoute,
 } as any)
 
 const PostsPostIdRoute = PostsPostIdImport.update({
@@ -72,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/pokemons': {
+      id: '/pokemons'
+      path: '/pokemons'
+      fullPath: '/pokemons'
+      preLoaderRoute: typeof PokemonsRouteImport
       parentRoute: typeof rootRoute
     }
     '/posts': {
@@ -102,6 +123,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostsPostIdImport
       parentRoute: typeof PostsRouteImport
     }
+    '/pokemons/': {
+      id: '/pokemons/'
+      path: '/'
+      fullPath: '/pokemons/'
+      preLoaderRoute: typeof PokemonsIndexImport
+      parentRoute: typeof PokemonsRouteImport
+    }
     '/posts/': {
       id: '/posts/'
       path: '/'
@@ -120,6 +148,18 @@ declare module '@tanstack/react-router' {
 }
 
 // Create and export the route tree
+
+interface PokemonsRouteRouteChildren {
+  PokemonsIndexRoute: typeof PokemonsIndexRoute
+}
+
+const PokemonsRouteRouteChildren: PokemonsRouteRouteChildren = {
+  PokemonsIndexRoute: PokemonsIndexRoute,
+}
+
+const PokemonsRouteRouteWithChildren = PokemonsRouteRoute._addFileChildren(
+  PokemonsRouteRouteChildren,
+)
 
 interface PostsPostIdRouteChildren {
   PostsPostIdEditRoute: typeof PostsPostIdEditRoute
@@ -149,10 +189,12 @@ const PostsRouteRouteWithChildren = PostsRouteRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/pokemons': typeof PokemonsRouteRouteWithChildren
   '/posts': typeof PostsRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/file': typeof FileRoute
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
+  '/pokemons/': typeof PokemonsIndexRoute
   '/posts/': typeof PostsIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
 }
@@ -162,6 +204,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/file': typeof FileRoute
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
+  '/pokemons': typeof PokemonsIndexRoute
   '/posts': typeof PostsIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
 }
@@ -169,10 +212,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/pokemons': typeof PokemonsRouteRouteWithChildren
   '/posts': typeof PostsRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/file': typeof FileRoute
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
+  '/pokemons/': typeof PokemonsIndexRoute
   '/posts/': typeof PostsIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
 }
@@ -181,10 +226,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/pokemons'
     | '/posts'
     | '/about'
     | '/file'
     | '/posts/$postId'
+    | '/pokemons/'
     | '/posts/'
     | '/posts/$postId/edit'
   fileRoutesByTo: FileRoutesByTo
@@ -193,15 +240,18 @@ export interface FileRouteTypes {
     | '/about'
     | '/file'
     | '/posts/$postId'
+    | '/pokemons'
     | '/posts'
     | '/posts/$postId/edit'
   id:
     | '__root__'
     | '/'
+    | '/pokemons'
     | '/posts'
     | '/about'
     | '/file'
     | '/posts/$postId'
+    | '/pokemons/'
     | '/posts/'
     | '/posts/$postId/edit'
   fileRoutesById: FileRoutesById
@@ -209,6 +259,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PokemonsRouteRoute: typeof PokemonsRouteRouteWithChildren
   PostsRouteRoute: typeof PostsRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   FileRoute: typeof FileRoute
@@ -216,6 +267,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PokemonsRouteRoute: PokemonsRouteRouteWithChildren,
   PostsRouteRoute: PostsRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   FileRoute: FileRoute,
@@ -232,6 +284,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/pokemons",
         "/posts",
         "/about",
         "/file"
@@ -239,6 +292,12 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/pokemons": {
+      "filePath": "pokemons/route.tsx",
+      "children": [
+        "/pokemons/"
+      ]
     },
     "/posts": {
       "filePath": "posts/route.tsx",
@@ -259,6 +318,10 @@ export const routeTree = rootRoute
       "children": [
         "/posts/$postId/edit"
       ]
+    },
+    "/pokemons/": {
+      "filePath": "pokemons/index.tsx",
+      "parent": "/pokemons"
     },
     "/posts/": {
       "filePath": "posts/index.tsx",

@@ -1,0 +1,410 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "6",
+  "dialect": "sqlite",
+  "tables": {
+    "pokemons": {
+      "name": "pokemons",
+      "columns": {
+        "national_number": {
+          "autoincrement": false,
+          "name": "national_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gen": {
+          "autoincrement": false,
+          "name": "gen",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "english_name": {
+          "autoincrement": false,
+          "name": "english_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "japanese_name": {
+          "autoincrement": false,
+          "name": "japanese_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primary_type": {
+          "autoincrement": false,
+          "name": "primary_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "secondary_type": {
+          "autoincrement": false,
+          "name": "secondary_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "classification": {
+          "autoincrement": false,
+          "name": "classification",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "percent_male": {
+          "autoincrement": false,
+          "name": "percent_male",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "percent_female": {
+          "autoincrement": false,
+          "name": "percent_female",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "height_m": {
+          "autoincrement": false,
+          "name": "height_m",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "weight_kg": {
+          "autoincrement": false,
+          "name": "weight_kg",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "capture_rate": {
+          "autoincrement": false,
+          "name": "capture_rate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "base_egg_steps": {
+          "autoincrement": false,
+          "name": "base_egg_steps",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hp": {
+          "autoincrement": false,
+          "name": "hp",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "attack": {
+          "autoincrement": false,
+          "name": "attack",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "defense": {
+          "autoincrement": false,
+          "name": "defense",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sp_attack": {
+          "autoincrement": false,
+          "name": "sp_attack",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sp_defense": {
+          "autoincrement": false,
+          "name": "sp_defense",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "speed": {
+          "autoincrement": false,
+          "name": "speed",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "abilities_0": {
+          "autoincrement": false,
+          "name": "abilities_0",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "abilities_1": {
+          "autoincrement": false,
+          "name": "abilities_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "abilities_2": {
+          "autoincrement": false,
+          "name": "abilities_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "abilities_hidden": {
+          "autoincrement": false,
+          "name": "abilities_hidden",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_normal": {
+          "autoincrement": false,
+          "name": "against_normal",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_fire": {
+          "autoincrement": false,
+          "name": "against_fire",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_water": {
+          "autoincrement": false,
+          "name": "against_water",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_electric": {
+          "autoincrement": false,
+          "name": "against_electric",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_grass": {
+          "autoincrement": false,
+          "name": "against_grass",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_ice": {
+          "autoincrement": false,
+          "name": "against_ice",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_fighting": {
+          "autoincrement": false,
+          "name": "against_fighting",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_poison": {
+          "autoincrement": false,
+          "name": "against_poison",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_ground": {
+          "autoincrement": false,
+          "name": "against_ground",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_flying": {
+          "autoincrement": false,
+          "name": "against_flying",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_psychic": {
+          "autoincrement": false,
+          "name": "against_psychic",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_bug": {
+          "autoincrement": false,
+          "name": "against_bug",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_rock": {
+          "autoincrement": false,
+          "name": "against_rock",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_ghost": {
+          "autoincrement": false,
+          "name": "against_ghost",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_dragon": {
+          "autoincrement": false,
+          "name": "against_dragon",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_dark": {
+          "autoincrement": false,
+          "name": "against_dark",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_steel": {
+          "autoincrement": false,
+          "name": "against_steel",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "against_fairy": {
+          "autoincrement": false,
+          "name": "against_fairy",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_sublegendary": {
+          "autoincrement": false,
+          "name": "is_sublegendary",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_legendary": {
+          "autoincrement": false,
+          "name": "is_legendary",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_mythical": {
+          "autoincrement": false,
+          "name": "is_mythical",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "evochain_0": {
+          "autoincrement": false,
+          "name": "evochain_0",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "evochain_1": {
+          "autoincrement": false,
+          "name": "evochain_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "evochain_2": {
+          "autoincrement": false,
+          "name": "evochain_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "evochain_3": {
+          "autoincrement": false,
+          "name": "evochain_3",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "evochain_4": {
+          "autoincrement": false,
+          "name": "evochain_4",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "evochain_5": {
+          "autoincrement": false,
+          "name": "evochain_5",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "evochain_6": {
+          "autoincrement": false,
+          "name": "evochain_6",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gigantamax": {
+          "autoincrement": false,
+          "name": "gigantamax",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mega_evolution": {
+          "autoincrement": false,
+          "name": "mega_evolution",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mega_evolution_alt": {
+          "autoincrement": false,
+          "name": "mega_evolution_alt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "autoincrement": false,
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}

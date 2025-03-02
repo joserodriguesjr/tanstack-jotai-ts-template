@@ -2,20 +2,16 @@ import { Suspense } from 'react'
 import { useSetAtom, useAtomValue } from 'jotai'
 import { createFileRoute } from '@tanstack/react-router'
 import { Link, Outlet } from '@tanstack/react-router'
-import { postsQueryOptions } from 'app/modules/post/api'
-import { postIdAtom } from "app/modules/post/atoms"
+import { postIdAtom, postsAtom, postsQueryOptions } from 'app/modules/post/api'
 import Loading from 'app/components/Loading'
-import { postsAtom } from "app/modules/post/atoms"
 
 export const Route = createFileRoute('/posts')({
-    loader: ({ context: { queryClient } }) =>
-        queryClient.ensureQueryData(postsQueryOptions),
+    loader: ({ context: { queryClient } }) => queryClient.prefetchQuery(postsQueryOptions),
     component: PostsView,
 })
 
 function PostsViewContent() {
     const { data: posts } = useAtomValue(postsAtom)
-
     const setPostId = useSetAtom(postIdAtom)
 
     return (

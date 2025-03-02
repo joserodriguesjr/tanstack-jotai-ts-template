@@ -1,3 +1,2 @@
-export * from "./posts";
-export * from "./postQueryOptions";
-export * from "./postsQueryOptions";
+export * from "./fetchPost";
+export * from "./fetchPosts";

@@ -3,14 +3,11 @@ import { useAtomValue } from 'jotai'
 import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
 import { Button } from "app/components/ui/Button"
 import Loading from "app/components/Loading"
-import { postQueryOptions } from 'app/modules/post/api'
+import { postAtom, postQueryOptions } from 'app/modules/post/api'
 import { PostErrorView } from "app/modules/post/components/PostError"
-import { postAtom } from "app/modules/post/atoms"
 
 export const Route = createFileRoute('/posts/$postId')({
-  loader: ({ context: { queryClient }, params: { postId } }) => {
-    return queryClient.ensureQueryData(postQueryOptions(postId))
-  },
+  loader: ({ context: { queryClient }, params: { postId } }) => queryClient.prefetchQuery(postQueryOptions(postId)),
   errorComponent: PostErrorView,
   component: PostView,
 })
