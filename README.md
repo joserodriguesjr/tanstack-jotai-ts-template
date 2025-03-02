@@ -67,6 +67,10 @@ npm run build
 
 This project uses [TanStack Start](https://tanstack.com/start) to generate the server functions.
 
+### ORM
+
+This project uses [Drizzle](https://orm.drizzle.team/) as ORM.
+
 ### Routing
 
 This project uses [TanStack Router](https://tanstack.com/router). The initial setup is a file based router. Which means that the routes are managed as fields in `app/routes`.
