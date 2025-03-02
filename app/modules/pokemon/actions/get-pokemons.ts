@@ -15,7 +15,7 @@ export const getPokemonsAction = createServerFn({
     console.info(`Fetching pokemons for page ${data}...`);
   
     try {
-        const pageSize = 12;
+        const pageSize = 24;
         const offset = (data - 1) * pageSize;
 
         const paginatedPokemons = db.select()

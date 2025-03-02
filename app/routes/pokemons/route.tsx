@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import Loading from "@/components/Loading";
 import { fetchPokemonsOptions, pokemonsAtom } from "@/modules/pokemon/api/fetchPokemons";
+import { useInfiniteScroll } from "@/modules/pokemon/hooks/useInfiniteScroll";
 
 export const Route = createFileRoute('/pokemons')({
     loader: ({ context: { queryClient } }) => queryClient.prefetchInfiniteQuery(fetchPokemonsOptions),
@@ -14,6 +15,12 @@ export const Route = createFileRoute('/pokemons')({
 function PokedexViewContent() {
     const [{ data, fetchNextPage, hasNextPage, isFetchingNextPage }] = useAtom(pokemonsAtom)
     const [search, setSearch] = useState("");
+
+    const { loadMoreRef } = useInfiniteScroll({
+        onIntersect: fetchNextPage,
+        hasMore: hasNextPage,
+        isFetching: isFetchingNextPage,
+    });
 
     return (
         <div className="p-6 max-w-4xl mx-auto">
@@ -29,8 +36,12 @@ function PokedexViewContent() {
                 {data?.pages?.flatMap((page) =>
                     page
                         .filter((pokemon) => pokemon.englishName!.includes(search))
-                        .map((pokemon) => (
-                            <Card key={pokemon.nationalNumber} className="p-4 flex flex-col items-center">
+                        .map((pokemon, index, arr) => (
+                            <Card
+                                key={pokemon.nationalNumber}
+                                className="p-4 flex flex-col items-center"
+                                ref={index === arr.length - 1 ? loadMoreRef : null}
+                            >
                                 <img
                                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.nationalNumber}.png`}
                                     alt={pokemon.englishName!}
@@ -45,16 +56,6 @@ function PokedexViewContent() {
                             </Card>
                         ))
                 )}
-            </div>
-
-            <div className="text-center mt-4">
-                <button
-                    onClick={() => fetchNextPage()}
-                    disabled={!hasNextPage || isFetchingNextPage}
-                    className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-                >
-                    {isFetchingNextPage ? "Loading more..." : "Load More"}
-                </button>
             </div>
         </div>
     );

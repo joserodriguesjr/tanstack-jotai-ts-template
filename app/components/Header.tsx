@@ -9,9 +9,7 @@ export default function Header() {
       <header className="p-2 bg-white text-black text-lg">
         <nav className="flex flex-row gap-2">
           <Link to="/" className={isActive("/")}>Home</Link>
-          <Link to="/about" className={isActive("/about")}>About</Link>
           <Link to="/posts" className={isActive("/posts")}>Posts</Link>
-          <Link to="/file" className={isActive("/file")}>File</Link>
           <Link to="/pokemons" className={isActive("/pokemons")}>Pokemons</Link>
         </nav>
       </header>

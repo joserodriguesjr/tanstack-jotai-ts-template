@@ -11,8 +11,6 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as FileImport } from './routes/file'
-import { Route as AboutImport } from './routes/about'
 import { Route as PostsRouteImport } from './routes/posts/route'
 import { Route as PokemonsRouteImport } from './routes/pokemons/route'
 import { Route as IndexImport } from './routes/index'
@@ -22,18 +20,6 @@ import { Route as PostsPostIdImport } from './routes/posts/$postId'
 import { Route as PostsPostIdEditImport } from './routes/posts/$postId.edit'
 
 // Create/Update Routes
-
-const FileRoute = FileImport.update({
-  id: '/file',
-  path: '/file',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AboutRoute = AboutImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const PostsRouteRoute = PostsRouteImport.update({
   id: '/posts',
@@ -100,20 +86,6 @@ declare module '@tanstack/react-router' {
       path: '/posts'
       fullPath: '/posts'
       preLoaderRoute: typeof PostsRouteImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/file': {
-      id: '/file'
-      path: '/file'
-      fullPath: '/file'
-      preLoaderRoute: typeof FileImport
       parentRoute: typeof rootRoute
     }
     '/posts/$postId': {
@@ -191,8 +163,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/pokemons': typeof PokemonsRouteRouteWithChildren
   '/posts': typeof PostsRouteRouteWithChildren
-  '/about': typeof AboutRoute
-  '/file': typeof FileRoute
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
   '/pokemons/': typeof PokemonsIndexRoute
   '/posts/': typeof PostsIndexRoute
@@ -201,8 +171,6 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/file': typeof FileRoute
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
   '/pokemons': typeof PokemonsIndexRoute
   '/posts': typeof PostsIndexRoute
@@ -214,8 +182,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/pokemons': typeof PokemonsRouteRouteWithChildren
   '/posts': typeof PostsRouteRouteWithChildren
-  '/about': typeof AboutRoute
-  '/file': typeof FileRoute
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
   '/pokemons/': typeof PokemonsIndexRoute
   '/posts/': typeof PostsIndexRoute
@@ -228,28 +194,17 @@ export interface FileRouteTypes {
     | '/'
     | '/pokemons'
     | '/posts'
-    | '/about'
-    | '/file'
     | '/posts/$postId'
     | '/pokemons/'
     | '/posts/'
     | '/posts/$postId/edit'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/about'
-    | '/file'
-    | '/posts/$postId'
-    | '/pokemons'
-    | '/posts'
-    | '/posts/$postId/edit'
+  to: '/' | '/posts/$postId' | '/pokemons' | '/posts' | '/posts/$postId/edit'
   id:
     | '__root__'
     | '/'
     | '/pokemons'
     | '/posts'
-    | '/about'
-    | '/file'
     | '/posts/$postId'
     | '/pokemons/'
     | '/posts/'
@@ -261,16 +216,12 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PokemonsRouteRoute: typeof PokemonsRouteRouteWithChildren
   PostsRouteRoute: typeof PostsRouteRouteWithChildren
-  AboutRoute: typeof AboutRoute
-  FileRoute: typeof FileRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PokemonsRouteRoute: PokemonsRouteRouteWithChildren,
   PostsRouteRoute: PostsRouteRouteWithChildren,
-  AboutRoute: AboutRoute,
-  FileRoute: FileRoute,
 }
 
 export const routeTree = rootRoute
@@ -285,9 +236,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/pokemons",
-        "/posts",
-        "/about",
-        "/file"
+        "/posts"
       ]
     },
     "/": {
@@ -305,12 +254,6 @@ export const routeTree = rootRoute
         "/posts/$postId",
         "/posts/"
       ]
-    },
-    "/about": {
-      "filePath": "about.tsx"
-    },
-    "/file": {
-      "filePath": "file.tsx"
     },
     "/posts/$postId": {
       "filePath": "posts/$postId.tsx",
