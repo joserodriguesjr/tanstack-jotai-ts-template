@@ -49,8 +49,8 @@ function PokedexViewContent() {
                                 />
                                 <CardContent>
                                     <h2 className="text-lg font-semibold capitalize">{pokemon.englishName}</h2>
-                                    <p className="text-sm text-gray-500 capitalize">
-                                        {`${pokemon.primaryType}, ${pokemon.secondaryType}`}
+                                    <p className="text-sm text-gray-500 capitalize text-center">
+                                        {[pokemon.primaryType, pokemon.secondaryType].filter(Boolean).join(", ")}
                                     </p>
                                 </CardContent>
                             </Card>
