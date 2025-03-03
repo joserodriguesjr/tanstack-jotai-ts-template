@@ -11,6 +11,7 @@ const __dirname = dirname(__filename)
 
 export default defineConfig({
   vite: {
+    ssr: { external: ['drizzle-orm'] },
     plugins: [
       tailwindcss(),
       TanStackRouterVite(),
