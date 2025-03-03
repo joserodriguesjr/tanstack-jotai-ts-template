@@ -1,8 +1,8 @@
 // app.config.ts
-import tsConfigPaths from 'vite-tsconfig-paths'
-import tailwindcss from "@tailwindcss/vite";
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import { defineConfig } from '@tanstack/react-start/config'
+import tsConfigPaths from 'vite-tsconfig-paths'
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
+import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from 'url';
 import { resolve, dirname } from "path";
 
@@ -13,11 +13,16 @@ export default defineConfig({
   vite: {
     ssr: { external: ['drizzle-orm'] },
     plugins: [
-      tailwindcss(),
-      TanStackRouterVite(),
+      TanStackRouterVite({
+        target: 'react',
+        autoCodeSplitting: true,
+        routesDirectory: './app/routes',
+        generatedRouteTree: './app/routeTree.gen.ts',
+      }),
       tsConfigPaths({
         projects: ['./tsconfig.json'],
       }),
+      tailwindcss(),
     ],
     resolve: {
       alias: {
