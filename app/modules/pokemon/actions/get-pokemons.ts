@@ -7,7 +7,7 @@ export const getPokemonsAction = createServerFn({
 })
     .validator((page: number) => {
         if (typeof page !== 'number') {
-            throw new Error('Invalid project ID');
+            throw new Error('Invalid page number');
           }
           return page;
     })

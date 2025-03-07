@@ -1,11 +1,27 @@
 import type { ReactNode } from 'react'
-import { createRootRouteWithContext, Link, Outlet, HeadContent, Scripts } from '@tanstack/react-router'
+import { createRootRouteWithContext, Link, useMatchRoute, Outlet, HeadContent, Scripts } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { QueryClient } from '@tanstack/react-query'
-import Header from '@/components/Header';
 import globalCss from "@/assets/global.css?url"
 import { seo } from '@/utils/seo';
+
+function Header() {
+    const matchRoute = useMatchRoute();
+    const isActive = (to: string) => matchRoute({ to, fuzzy: true }) ? "font-bold pt-0.5" : "";
+
+    return (
+        <>
+            <header className="p-2 bg-white text-black text-lg">
+                <nav className="flex flex-row gap-2">
+                    <Link to="/" className={isActive("/")}>Home</Link>
+                    <Link to="/pokemons" className={isActive("/pokemons")}>Pokemons</Link>
+                </nav>
+            </header>
+            <hr />
+        </>
+    )
+}
 
 export const Route = createRootRouteWithContext<{
     queryClient: QueryClient

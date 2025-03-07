@@ -11,27 +11,11 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as PostsRouteImport } from './routes/posts/route'
-import { Route as PokemonsRouteImport } from './routes/pokemons/route'
 import { Route as IndexImport } from './routes/index'
-import { Route as PostsIndexImport } from './routes/posts/index'
-import { Route as PokemonsIndexImport } from './routes/pokemons/index'
-import { Route as PostsPostIdImport } from './routes/posts/$postId'
-import { Route as PostsPostIdEditImport } from './routes/posts/$postId.edit'
+import { Route as pokemonsPokemonsImport } from './routes/(pokemons)/pokemons'
+import { Route as pokemonsPokemonsPokemonImport } from './routes/(pokemons)/pokemons_.$pokemon'
 
 // Create/Update Routes
-
-const PostsRouteRoute = PostsRouteImport.update({
-  id: '/posts',
-  path: '/posts',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PokemonsRouteRoute = PokemonsRouteImport.update({
-  id: '/pokemons',
-  path: '/pokemons',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -39,28 +23,16 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const PostsIndexRoute = PostsIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => PostsRouteRoute,
+const pokemonsPokemonsRoute = pokemonsPokemonsImport.update({
+  id: '/(pokemons)/pokemons',
+  path: '/pokemons',
+  getParentRoute: () => rootRoute,
 } as any)
 
-const PokemonsIndexRoute = PokemonsIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => PokemonsRouteRoute,
-} as any)
-
-const PostsPostIdRoute = PostsPostIdImport.update({
-  id: '/$postId',
-  path: '/$postId',
-  getParentRoute: () => PostsRouteRoute,
-} as any)
-
-const PostsPostIdEditRoute = PostsPostIdEditImport.update({
-  id: '/edit',
-  path: '/edit',
-  getParentRoute: () => PostsPostIdRoute,
+const pokemonsPokemonsPokemonRoute = pokemonsPokemonsPokemonImport.update({
+  id: '/(pokemons)/pokemons_/$pokemon',
+  path: '/pokemons/$pokemon',
+  getParentRoute: () => rootRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -74,154 +46,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/pokemons': {
-      id: '/pokemons'
+    '/(pokemons)/pokemons': {
+      id: '/(pokemons)/pokemons'
       path: '/pokemons'
       fullPath: '/pokemons'
-      preLoaderRoute: typeof PokemonsRouteImport
+      preLoaderRoute: typeof pokemonsPokemonsImport
       parentRoute: typeof rootRoute
     }
-    '/posts': {
-      id: '/posts'
-      path: '/posts'
-      fullPath: '/posts'
-      preLoaderRoute: typeof PostsRouteImport
+    '/(pokemons)/pokemons_/$pokemon': {
+      id: '/(pokemons)/pokemons_/$pokemon'
+      path: '/pokemons/$pokemon'
+      fullPath: '/pokemons/$pokemon'
+      preLoaderRoute: typeof pokemonsPokemonsPokemonImport
       parentRoute: typeof rootRoute
-    }
-    '/posts/$postId': {
-      id: '/posts/$postId'
-      path: '/$postId'
-      fullPath: '/posts/$postId'
-      preLoaderRoute: typeof PostsPostIdImport
-      parentRoute: typeof PostsRouteImport
-    }
-    '/pokemons/': {
-      id: '/pokemons/'
-      path: '/'
-      fullPath: '/pokemons/'
-      preLoaderRoute: typeof PokemonsIndexImport
-      parentRoute: typeof PokemonsRouteImport
-    }
-    '/posts/': {
-      id: '/posts/'
-      path: '/'
-      fullPath: '/posts/'
-      preLoaderRoute: typeof PostsIndexImport
-      parentRoute: typeof PostsRouteImport
-    }
-    '/posts/$postId/edit': {
-      id: '/posts/$postId/edit'
-      path: '/edit'
-      fullPath: '/posts/$postId/edit'
-      preLoaderRoute: typeof PostsPostIdEditImport
-      parentRoute: typeof PostsPostIdImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface PokemonsRouteRouteChildren {
-  PokemonsIndexRoute: typeof PokemonsIndexRoute
-}
-
-const PokemonsRouteRouteChildren: PokemonsRouteRouteChildren = {
-  PokemonsIndexRoute: PokemonsIndexRoute,
-}
-
-const PokemonsRouteRouteWithChildren = PokemonsRouteRoute._addFileChildren(
-  PokemonsRouteRouteChildren,
-)
-
-interface PostsPostIdRouteChildren {
-  PostsPostIdEditRoute: typeof PostsPostIdEditRoute
-}
-
-const PostsPostIdRouteChildren: PostsPostIdRouteChildren = {
-  PostsPostIdEditRoute: PostsPostIdEditRoute,
-}
-
-const PostsPostIdRouteWithChildren = PostsPostIdRoute._addFileChildren(
-  PostsPostIdRouteChildren,
-)
-
-interface PostsRouteRouteChildren {
-  PostsPostIdRoute: typeof PostsPostIdRouteWithChildren
-  PostsIndexRoute: typeof PostsIndexRoute
-}
-
-const PostsRouteRouteChildren: PostsRouteRouteChildren = {
-  PostsPostIdRoute: PostsPostIdRouteWithChildren,
-  PostsIndexRoute: PostsIndexRoute,
-}
-
-const PostsRouteRouteWithChildren = PostsRouteRoute._addFileChildren(
-  PostsRouteRouteChildren,
-)
-
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/pokemons': typeof PokemonsRouteRouteWithChildren
-  '/posts': typeof PostsRouteRouteWithChildren
-  '/posts/$postId': typeof PostsPostIdRouteWithChildren
-  '/pokemons/': typeof PokemonsIndexRoute
-  '/posts/': typeof PostsIndexRoute
-  '/posts/$postId/edit': typeof PostsPostIdEditRoute
+  '/pokemons': typeof pokemonsPokemonsRoute
+  '/pokemons/$pokemon': typeof pokemonsPokemonsPokemonRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/posts/$postId': typeof PostsPostIdRouteWithChildren
-  '/pokemons': typeof PokemonsIndexRoute
-  '/posts': typeof PostsIndexRoute
-  '/posts/$postId/edit': typeof PostsPostIdEditRoute
+  '/pokemons': typeof pokemonsPokemonsRoute
+  '/pokemons/$pokemon': typeof pokemonsPokemonsPokemonRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/pokemons': typeof PokemonsRouteRouteWithChildren
-  '/posts': typeof PostsRouteRouteWithChildren
-  '/posts/$postId': typeof PostsPostIdRouteWithChildren
-  '/pokemons/': typeof PokemonsIndexRoute
-  '/posts/': typeof PostsIndexRoute
-  '/posts/$postId/edit': typeof PostsPostIdEditRoute
+  '/(pokemons)/pokemons': typeof pokemonsPokemonsRoute
+  '/(pokemons)/pokemons_/$pokemon': typeof pokemonsPokemonsPokemonRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/pokemons'
-    | '/posts'
-    | '/posts/$postId'
-    | '/pokemons/'
-    | '/posts/'
-    | '/posts/$postId/edit'
+  fullPaths: '/' | '/pokemons' | '/pokemons/$pokemon'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/posts/$postId' | '/pokemons' | '/posts' | '/posts/$postId/edit'
+  to: '/' | '/pokemons' | '/pokemons/$pokemon'
   id:
     | '__root__'
     | '/'
-    | '/pokemons'
-    | '/posts'
-    | '/posts/$postId'
-    | '/pokemons/'
-    | '/posts/'
-    | '/posts/$postId/edit'
+    | '/(pokemons)/pokemons'
+    | '/(pokemons)/pokemons_/$pokemon'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PokemonsRouteRoute: typeof PokemonsRouteRouteWithChildren
-  PostsRouteRoute: typeof PostsRouteRouteWithChildren
+  pokemonsPokemonsRoute: typeof pokemonsPokemonsRoute
+  pokemonsPokemonsPokemonRoute: typeof pokemonsPokemonsPokemonRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PokemonsRouteRoute: PokemonsRouteRouteWithChildren,
-  PostsRouteRoute: PostsRouteRouteWithChildren,
+  pokemonsPokemonsRoute: pokemonsPokemonsRoute,
+  pokemonsPokemonsPokemonRoute: pokemonsPokemonsPokemonRoute,
 }
 
 export const routeTree = rootRoute
@@ -235,44 +120,18 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/pokemons",
-        "/posts"
+        "/(pokemons)/pokemons",
+        "/(pokemons)/pokemons_/$pokemon"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/pokemons": {
-      "filePath": "pokemons/route.tsx",
-      "children": [
-        "/pokemons/"
-      ]
+    "/(pokemons)/pokemons": {
+      "filePath": "(pokemons)/pokemons.tsx"
     },
-    "/posts": {
-      "filePath": "posts/route.tsx",
-      "children": [
-        "/posts/$postId",
-        "/posts/"
-      ]
-    },
-    "/posts/$postId": {
-      "filePath": "posts/$postId.tsx",
-      "parent": "/posts",
-      "children": [
-        "/posts/$postId/edit"
-      ]
-    },
-    "/pokemons/": {
-      "filePath": "pokemons/index.tsx",
-      "parent": "/pokemons"
-    },
-    "/posts/": {
-      "filePath": "posts/index.tsx",
-      "parent": "/posts"
-    },
-    "/posts/$postId/edit": {
-      "filePath": "posts/$postId.edit.tsx",
-      "parent": "/posts/$postId"
+    "/(pokemons)/pokemons_/$pokemon": {
+      "filePath": "(pokemons)/pokemons_.$pokemon.tsx"
     }
   }
 }

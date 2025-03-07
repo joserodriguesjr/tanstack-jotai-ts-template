@@ -7,6 +7,7 @@ import { Provider as JotaiProvider } from 'jotai'
 import { useHydrateAtoms } from 'jotai/react/utils'
 import { queryClientAtom } from 'jotai-tanstack-query';
 import { createRouter, queryClient } from './router'
+import reportWebVitals from './reportWebVitals';
 
 const router = createRouter()
 
@@ -25,5 +26,9 @@ hydrateRoot(document,
             </React.StrictMode>
         </JotaiProvider>
     </QueryClientProvider>
-
 )
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals(console.log)

@@ -8,9 +8,10 @@ It enables rapid development using modern tools like TanStack Router, Jotai, Dri
 ✅ Full-stack setup – Includes both client and server logic\
 ✅ File-based routing – Powered by TanStack Router\
 ✅ Optimized Data Fetching – TanStack Query for caching & server communication\
-✅ Global State Management – Jotai with a shared cache\
+✅ Global State Management – Jotai with a shared cache with TanStack Query\
 ✅ SSR & API Handlers – Server-side rendering and server functions\
 ✅ Type-safe ORM – Drizzle ORM for database management\
+✅ Schema validation - Zod validation library\
 ✅ Modern Styling – Tailwind CSS + Shadcn UI components
 
 ## Folder Structure
