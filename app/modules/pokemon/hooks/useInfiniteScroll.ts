@@ -4,13 +4,14 @@ interface UseInfiniteScrollProps {
     onIntersect: () => void;
     hasMore: boolean;
     isFetching: boolean;
+    searchQuery: string;
 }
 
-export const useInfiniteScroll = ({ onIntersect, hasMore, isFetching }: UseInfiniteScrollProps) => {
+export const useInfiniteScroll = ({ onIntersect, hasMore, isFetching, searchQuery }: UseInfiniteScrollProps) => {
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
-
+    
     useEffect(() => {
-        if (!loadMoreRef.current || isFetching) return;
+        if (!loadMoreRef.current || isFetching || searchQuery !== "") return;
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -24,7 +25,7 @@ export const useInfiniteScroll = ({ onIntersect, hasMore, isFetching }: UseInfin
         observer.observe(loadMoreRef.current);
 
         return () => observer.disconnect();
-    }, [onIntersect, hasMore, isFetching]);
+    }, [onIntersect, hasMore, isFetching, searchQuery]);
 
     return { loadMoreRef };
 };

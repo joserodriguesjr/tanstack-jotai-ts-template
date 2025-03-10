@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import Loading from '@/components/Loading'
-import { fetchPokemonOptions } from '@/modules/pokemon/api/fetchPokemon'
+import { fetchPokemonOptions } from '@/modules/pokemon/api/fetch-pokemons.api'
 import { PokemonPage } from '@/modules/pokemon/pages/pokemon.page'
 import { createFileRoute } from '@tanstack/react-router'
 

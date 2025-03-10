@@ -79,6 +79,7 @@ export function PokemonPage() {
                     <div className="flex gap-2 justify-center">
                         {[pokemon.evochain0, pokemon.evochain1, pokemon.evochain2, pokemon.evochain3, pokemon.evochain4, pokemon.evochain5, pokemon.evochain6]
                             .filter(Boolean)
+                            .filter((evo) => evo?.trim() !== "Level")
                             .map((evo, index) => (
                                 <span key={index} className="px-2 py-1 bg-gray-200 rounded">{evo}</span>
                             ))}

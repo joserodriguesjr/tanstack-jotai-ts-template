@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import type { Pokemon } from "@/modules/pokemon/schemas/pokemon";
+import type { Pokemon } from "@/modules/pokemon/pokemon.schema";
 import { Button } from "@/components/ui/button";
 
 interface PokemonModalProps {
