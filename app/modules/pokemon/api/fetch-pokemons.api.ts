@@ -1,6 +1,5 @@
 import { queryOptions, infiniteQueryOptions } from '@tanstack/react-query'
 import { getPokemonAction, getAllPokemonsAction } from '../actions/get-pokemons.action'
-import { atomWithSuspenseInfiniteQuery } from "jotai-tanstack-query"
 
 export const fetchAllPokemonsOptions = infiniteQueryOptions({
     queryKey: ['pokemons'],
@@ -8,7 +7,6 @@ export const fetchAllPokemonsOptions = infiniteQueryOptions({
     getNextPageParam: (_, __, lastPageParam, ) => lastPageParam + 1,
     initialPageParam: 1
 })
-export const pokemonsAtom = atomWithSuspenseInfiniteQuery(() => fetchAllPokemonsOptions)
 
 export const fetchPokemonOptions = (pokemonName: string) => 
     queryOptions({

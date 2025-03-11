@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue } from "jotai";
 import { Card, CardContent } from "@/components/ui/card";
-import { pokemonsAtom } from "@/modules/pokemon/api/fetch-pokemons.api";
+import { pokemonsAtom } from "@/modules/pokemon/atoms/pokemons.atom";
 import { useInfiniteScroll } from "@/modules/pokemon/hooks/useInfiniteScroll";
 import type { Pokemon } from "@/modules/pokemon/pokemon.schema";
 import { searchAtom } from "../atoms/search.atom";
