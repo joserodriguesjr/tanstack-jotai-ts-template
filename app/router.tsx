@@ -3,9 +3,17 @@ import { routerWithQueryClient } from '@tanstack/react-router-with-query'
 import { QueryClient } from "@tanstack/react-query";
 import { routeTree } from './routeTree.gen.ts'
 
-export const queryClient = new QueryClient();
-export function createRouter() {
+export const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            networkMode: 'offlineFirst',
+            staleTime: Infinity,
+            gcTime: 1000 * 60 * 60 * 24, // 24 hours
+        },
+    },
+})
 
+export function createRouter() {
     return routerWithQueryClient(
         createTanStackRouter({
             routeTree,
