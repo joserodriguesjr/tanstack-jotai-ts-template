@@ -1,4 +1,5 @@
-import { getRouteApi } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import { getRouteApi, Link } from "@tanstack/react-router";
 
 export function PokemonPage() {
     const routeApi = getRouteApi('/(pokemons)/pokemons_/$pokemon')
@@ -10,6 +11,15 @@ export function PokemonPage() {
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+            {/* Back Button */}
+            <Button>
+                <Link
+                    to="/pokemons"
+                    className="block w-full h-full">
+                    Back to Pokedex
+                </Link>
+            </Button>
+
             {/* Header */}
             <h1 className="text-3xl font-bold text-center capitalize">{pokemon.englishName}</h1>
             <p className="text-center text-gray-500">{pokemon.japaneseName}</p>
@@ -17,7 +27,8 @@ export function PokemonPage() {
             {/* Image */}
             <div className="flex justify-center my-4">
                 <img
-                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.nationalNumber}.png`}
+                    // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.nationalNumber}.png`}
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.nationalNumber}.png`}
                     alt={pokemon.englishName!}
                     className="w-32 h-32"
                 />

@@ -4,6 +4,16 @@ import { pokemonsAtom } from "@/modules/pokemon/atoms/pokemons.atom";
 import { useInfiniteScroll } from "@/modules/pokemon/hooks/useInfiniteScroll";
 import type { Pokemon } from "@/modules/pokemon/pokemon.schema";
 import { searchAtom } from "../atoms/search.atom";
+import { useEffect } from "react";
+
+const preloadImages = (pokemonList: Pokemon[]) => {
+    pokemonList.forEach((pokemon) => {
+        const img = new Image();
+        img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.nationalNumber}.gif`;
+        const backImg = new Image();
+        backImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/back/${pokemon.nationalNumber}.gif`;
+    });
+};
 
 interface PokemonListProps {
     openModal: (pokemon: Pokemon) => void;
@@ -12,6 +22,7 @@ interface PokemonListProps {
 export const PokedexList: React.FC<PokemonListProps> = ({ openModal }) => {
     const searchQuery = useAtomValue(searchAtom);
     const [{ data, fetchNextPage, hasNextPage, isFetchingNextPage }] = useAtom(pokemonsAtom)
+    const pokemons = data?.pages?.flatMap((page) => page) || [];
 
     const { loadMoreRef } = useInfiniteScroll({
         onIntersect: fetchNextPage,
@@ -20,13 +31,13 @@ export const PokedexList: React.FC<PokemonListProps> = ({ openModal }) => {
         searchQuery: searchQuery
     });
 
-    const filteredPokemons = data?.pages?.flatMap((page) =>
-        page.filter((pokemon) =>
-            pokemon.englishName!.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-    ) || [];
-
+    const filteredPokemons = pokemons.filter((pokemon) => pokemon.englishName!.toLowerCase().includes(searchQuery.toLowerCase()));
     const lastPokemonIndex = filteredPokemons.length - 1;
+
+    useEffect(() => {
+        preloadImages(pokemons);
+    }, [pokemons]);
+
 
     return (
         <>

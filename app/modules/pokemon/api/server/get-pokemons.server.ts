@@ -2,6 +2,7 @@ import { createServerFn } from '@tanstack/react-start'
 import db from 'drizzle/db';
 import { pokemons } from 'drizzle/schema';
 import { eq } from 'drizzle-orm';
+import type { Pokemon } from '../../pokemon.schema';
 
 export const getAllPokemonsAction = createServerFn({ 
     method: 'GET' 
@@ -25,7 +26,7 @@ export const getAllPokemonsAction = createServerFn({
             .offset(offset)
             .all();
 
-        return paginatedPokemons;
+        return paginatedPokemons as Pokemon[];
     } catch (error) {
         console.error('Error fetching pokemons:', error);
         throw new Error('Failed to fetch pokemons');
