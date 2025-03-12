@@ -32,7 +32,7 @@ export const PokedexList: React.FC<PokemonListProps> = ({ openModal }) => {
     });
 
     const filteredPokemons = pokemons.filter((pokemon) => pokemon.englishName!.toLowerCase().includes(searchQuery.toLowerCase()));
-    const lastPokemonIndex = filteredPokemons.length - 1;
+    const lastPokemonIndex = filteredPokemons.length - 5;
 
     useEffect(() => {
         preloadImages(pokemons);

@@ -69,15 +69,17 @@ export const PokemonModal: React.FC<PokemonModalProps> = ({ pokemon, isOpen, onC
                         <p><strong>Speed:</strong> {pokemon.speed}</p>
                     </div>
                 </div>
-                <Button onClick={onClose} className="mt-4 px-4 py-2 rounded">
-                    <Link
-                        to="/pokemons/$pokemon"
-                        params={{ pokemon: pokemon.englishName }}
-                        className="block w-full h-full"
+                <Link
+                    to="/pokemons/$pokemon"
+                    params={{ pokemon: pokemon.englishName }}
+                >
+                    <Button
+                        onClick={onClose}
+                        className="block w-full h-full cursor-pointer"
                     >
-                        See all
-                    </Link>
-                </Button>
+                        More details...
+                    </Button>
+                </Link>
             </DialogContent>
         </Dialog>
     );
