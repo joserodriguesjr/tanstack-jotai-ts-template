@@ -1,4 +1,4 @@
-// components/ThemeToggle.tsx
+import { useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { themeAtom } from '../atoms/theme.atom';
 import { Button } from './ui/button';
@@ -9,8 +9,11 @@ const ThemeToggle = () => {
     const toggleTheme = () => {
         const newTheme = theme === 'light' ? 'dark' : 'light';
         setTheme(newTheme);
-        document.documentElement.classList.toggle('dark', newTheme === 'dark');
     };
+
+    useEffect(() => {
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+    }, [theme]);
 
     return (
         <Button
