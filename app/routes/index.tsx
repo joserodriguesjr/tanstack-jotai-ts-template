@@ -1,9 +1,9 @@
-import logo from '@/assets/icons/logo.svg'
-import { createFileRoute } from '@tanstack/react-router'
+import logo from "@/assets/icons/logo.svg";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: HomePage,
-})
+});
 
 function HomePage() {
   return (
@@ -35,5 +35,5 @@ function HomePage() {
         </a>
       </header>
     </div>
-  )
+  );
 }

@@ -1,1 +1,1 @@
-export * from "./tailwind-merge"
+export * from "./tailwind-merge";

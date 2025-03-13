@@ -1,31 +1,36 @@
 import { useEffect, useRef } from "react";
 
 interface UseInfiniteScrollProps {
-    onIntersect: () => void;
-    hasMore: boolean;
-    isFetching: boolean;
-    searchQuery: string;
+  onIntersect: () => void;
+  hasMore: boolean;
+  isFetching: boolean;
+  searchQuery: string;
 }
 
-export const useInfiniteScroll = ({ onIntersect, hasMore, isFetching, searchQuery }: UseInfiniteScrollProps) => {
-    const loadMoreRef = useRef<HTMLDivElement | null>(null);
-    
-    useEffect(() => {
-        if (!loadMoreRef.current || isFetching || searchQuery !== "") return;
+export const useInfiniteScroll = ({
+  onIntersect,
+  hasMore,
+  isFetching,
+  searchQuery,
+}: UseInfiniteScrollProps) => {
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting && hasMore) {
-                    onIntersect();
-                }
-            },
-            { threshold: 1.0 }
-        );
+  useEffect(() => {
+    if (!loadMoreRef.current || isFetching || searchQuery !== "") return;
 
-        observer.observe(loadMoreRef.current);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          onIntersect();
+        }
+      },
+      { threshold: 1.0 },
+    );
 
-        return () => observer.disconnect();
-    }, [onIntersect, hasMore, isFetching, searchQuery]);
+    observer.observe(loadMoreRef.current);
 
-    return { loadMoreRef };
+    return () => observer.disconnect();
+  }, [onIntersect, hasMore, isFetching, searchQuery]);
+
+  return { loadMoreRef };
 };

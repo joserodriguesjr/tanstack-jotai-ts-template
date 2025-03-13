@@ -1,80 +1,97 @@
-import type { ReactNode } from 'react'
-import { createRootRouteWithContext, Link, useMatchRoute, Outlet, HeadContent, Scripts } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import type { ReactNode } from "react";
+import {
+  createRootRouteWithContext,
+  Link,
+  useMatchRoute,
+  Outlet,
+  HeadContent,
+  Scripts,
+} from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import type { QueryClient } from '@tanstack/react-query'
-import globalCss from "@/assets/global.css?url"
+import type { QueryClient } from "@tanstack/react-query";
+import globalCss from "@/assets/global.css?url";
 
 function Header() {
-    const matchRoute = useMatchRoute();
-    const isActive = (to: string) => matchRoute({ to, fuzzy: true }) ? "font-bold pt-0.5" : "";
+  const matchRoute = useMatchRoute();
+  const isActive = (to: string) =>
+    matchRoute({ to, fuzzy: true }) ? "font-bold pt-0.5" : "";
 
-    return (
-        <>
-            <header className="p-2 bg-white text-black text-lg">
-                <nav className="flex flex-row gap-2">
-                    <Link to="/" className={isActive("/")}>Home</Link>
-                    <Link to="/pokemons" className={isActive("/pokemons")}>Pokemons</Link>
-                </nav>
-            </header>
-            <hr />
-        </>
-    )
+  return (
+    <>
+      <header className="p-2 bg-white text-black text-lg">
+        <nav className="flex flex-row gap-2">
+          <Link to="/" className={isActive("/")}>
+            Home
+          </Link>
+          <Link to="/pokemons" className={isActive("/pokemons")}>
+            Pokemons
+          </Link>
+        </nav>
+      </header>
+      <hr />
+    </>
+  );
 }
 
 export const Route = createRootRouteWithContext<{
-    queryClient: QueryClient
+  queryClient: QueryClient;
 }>()({
-    head: () => ({
-        meta: [
-            { charSet: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1', },
-            { title: 'Pokedex App', description: `A PWA for browsing Pokémon data. `, },
-        ],
-        links: [
-            { rel: 'stylesheet', href: globalCss },
-            { rel: 'icon', href: '/favicon.ico' },
-            { rel: 'manifest', href: '/manifest.webmanifest' },
-            { rel: 'manifest', href: '/manifest.json' },
-            { rel: 'apple-touch-icon', sizes: '192x192', href: '/logo192.png' },
-        ]
-    }),
-    component: RootComponent,
-    notFoundComponent: notFound
-})
+  head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        title: "Pokedex App",
+        description: `A PWA for browsing Pokémon data. `,
+      },
+    ],
+    links: [
+      { rel: "stylesheet", href: globalCss },
+      { rel: "icon", href: "/favicon.ico" },
+      { rel: "manifest", href: "/manifest.webmanifest" },
+      { rel: "manifest", href: "/manifest.json" },
+      { rel: "apple-touch-icon", sizes: "192x192", href: "/logo192.png" },
+    ],
+  }),
+  component: RootComponent,
+  notFoundComponent: notFound,
+});
 
 function RootComponent() {
-    return (
-        <>
-            <RootDocument>
-                <Header />
-                <Outlet />
-            </RootDocument>
-        </>
-    )
+  return (
+    <>
+      <RootDocument>
+        <Header />
+        <Outlet />
+      </RootDocument>
+    </>
+  );
 }
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
-    return (
-        <html lang="en">
-            <head>
-                <HeadContent />
-            </head>
-            <body>
-                {children}
-                <ReactQueryDevtools buttonPosition="top-right" />
-                <TanStackRouterDevtools position="bottom-right" />
-                <Scripts />
-            </body>
-        </html>
-    )
+  return (
+    <html lang="en">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        {children}
+        <ReactQueryDevtools buttonPosition="top-right" />
+        <TanStackRouterDevtools position="bottom-right" />
+        <Scripts />
+      </body>
+    </html>
+  );
 }
 
 function notFound() {
-    return (
-        <div className="p-2">
-            <p>This is the notFoundComponent configured on root route</p>
-            <Link className="text-[#61dafb] hover:underline" to="/">Start Over</Link>
-        </div>
-    )
+  return (
+    <div className="p-2">
+      <p>This is the notFoundComponent configured on root route</p>
+      <Link className="text-[#61dafb] hover:underline" to="/">
+        Start Over
+      </Link>
+    </div>
+  );
 }
