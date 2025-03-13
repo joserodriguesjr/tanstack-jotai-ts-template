@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   Dialog,
@@ -13,7 +13,10 @@ import { useAtom } from "jotai";
 export const PokemonModal: React.FC = () => {
   const [pokemon, setPokemon] = useAtom(pokemonAtom);
 
+  useEffect(() => { return setPokemon(null)}, []);
+
   if (!pokemon) return null;
+
 
   return (
     <Dialog open onOpenChange={() => setPokemon(null)}>
@@ -78,7 +81,7 @@ export const PokemonModal: React.FC = () => {
             </p>
           </div>
         </div>
-        <Link to="/pokemons/$pokemon" params={{ pokemon: pokemon.englishName }}>
+        <Link to="/pokemons/$pokemon" params={{ pokemon: pokemon.englishName }}  >
           <Button
             className="block w-full h-full cursor-pointer"
           >

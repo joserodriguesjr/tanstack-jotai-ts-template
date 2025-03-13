@@ -6,7 +6,7 @@ import { PokedexPage } from "@/modules/pokemon/pages/pokedex.page";
 
 export const Route = createFileRoute("/(pokemons)/pokemons/")({
   loader: ({ context: { queryClient } }) =>
-    queryClient.prefetchInfiniteQuery(fetchAllPokemonsOptions),
+    queryClient.prefetchInfiniteQuery(fetchAllPokemonsOptions()),
   component: () => (
     <Suspense fallback={<Loading />}>
       <PokedexPage />

@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { searchAtom } from "@/modules/pokemon/atoms/search.atom";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import { useSetAtom } from "jotai";
+import debounce from "lodash.debounce";
 import { Search } from "lucide-react";
 import ThemeToggle from '../../components/ThemeToogle';
 
@@ -14,6 +17,9 @@ export const Route = createFileRoute("/(pokemons)/pokemons")({
 });
 
 const PokemonHeader = () => {
+  const setSearch = useSetAtom(searchAtom);
+  const onChangeSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value), 350);
+
   return (
     <header className="bg-gray-800 shadow-md sticky top-0 z-50">
       <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
@@ -31,6 +37,7 @@ const PokemonHeader = () => {
           <input
             type="text"
             placeholder="Search Pokémon..."
+            onChange={onChangeSearch}
             className="bg-transparent outline-none text-white placeholder-gray-300"
           />
         </div>
