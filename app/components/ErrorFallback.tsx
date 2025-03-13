@@ -10,10 +10,17 @@ export function ErrorFallback({ error }: ErrorFallbackProps) {
         const chunkFailedMessage = /Loading chunk [\d]+ failed/;
         if (error?.message && chunkFailedMessage.test(error.message)) {
             if (!getWithExpiry("chunk_failed")) {
-                setWithExpiry("chunk_failed", "true", 10000);
+                setWithExpiry("chunk_failed", "true", 1000);
                 window.location.reload();
             }
         }
+        // if (error?.message.includes('Failed to fetch dynamically imported module') ||
+        //     error?.message.includes('Importing a module script failed')
+        // ) {
+        //     window.location.reload();
+        //     window.location = to.fullPath;
+
+        // }
     }, [error]);
 
     return (

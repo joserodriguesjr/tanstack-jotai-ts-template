@@ -1,10 +1,9 @@
 import type { ReactNode } from 'react'
 import { createRootRouteWithContext, Link, useMatchRoute, Outlet, HeadContent, Scripts } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { QueryClient } from '@tanstack/react-query'
 import globalCss from "@/assets/global.css?url"
-import { seo } from '@/utils/seo';
 
 function Header() {
     const matchRoute = useMatchRoute();
@@ -28,27 +27,16 @@ export const Route = createRootRouteWithContext<{
 }>()({
     head: () => ({
         meta: [
-            {
-                charSet: 'utf-8',
-            },
-            {
-                name: 'viewport',
-                content: 'width=device-width, initial-scale=1',
-            },
-            ...seo({
-                title: 'TanStack Start | Type-Safe, Client-First, Full-Stack React Framework',
-                description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
-            }),
+            { charSet: 'utf-8' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1', },
+            { title: 'Pokedex App', description: `A PWA for browsing Pokémon data. `, },
         ],
         links: [
             { rel: 'stylesheet', href: globalCss },
             { rel: 'icon', href: '/favicon.ico' },
-            { rel: 'manifest', href: '/manifest.json', color: '#fffff' },
-            {
-                rel: 'apple-touch-icon',
-                sizes: '192x192',
-                href: '/logo192.png',
-            },
+            { rel: 'manifest', href: '/manifest.webmanifest' },
+            { rel: 'manifest', href: '/manifest.json' },
+            { rel: 'apple-touch-icon', sizes: '192x192', href: '/logo192.png' },
         ]
     }),
     component: RootComponent,

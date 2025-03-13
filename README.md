@@ -9,12 +9,13 @@ It enables rapid development using modern tools like TanStack Router, Jotai, Dri
 ✅ File-based routing – Powered by TanStack Router\
 ✅ Optimized Data Fetching – TanStack Query for caching & server communication\
 ✅ Global State Management – Jotai with a shared cache with TanStack Query\
+✅ Offline Cache – IndexedDB for caching TanStack Query cache\
 ✅ SSR & API Handlers – Server-side rendering and server functions\
 ✅ Type-safe ORM – Drizzle ORM for database management\
 ✅ Schema validation - Zod validation library\
 ✅ Modern Styling – Tailwind CSS + Shadcn UI components
 
-## Folder Structure
+## Folder Structure (todo: UPDATE)
 
 ```txt
 .
@@ -100,6 +101,16 @@ For example, ./app/routes/about.tsx will create a new /about page.
 The project uses Drizzle ORM. Configure your database in the .env file and define your schema in ./app/db/schema.ts.
 
 See the [get started](https://orm.drizzle.team/docs/get-started) for more informations.
+
+### How to manage cache / state?
+
+Loader runs when navigating from the client
+
+If the page is reloaded (f5) or accessed from direct URL, the loader will not have been hydrated with the cache and it'll run on the server
+
+TanStack Query
+Jotai
+IndexedDB
 
 ## Tech Stack
 

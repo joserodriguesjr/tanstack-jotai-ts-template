@@ -9,7 +9,7 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "types": ["vite/client", "node"],
+    "types": ["vite/client", "node", "vite-plugin-pwa/client"],
     "allowJs": true,
 
     /* Bundler mode */

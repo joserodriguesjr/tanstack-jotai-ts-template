@@ -1,7 +1,5 @@
 import { queryOptions, infiniteQueryOptions } from '@tanstack/react-query'
 import { getPokemonAction, getAllPokemonsAction } from './server/get-pokemons.server'
-import { queryClient } from '@/router';
-import type { Pokemon } from "@/modules/pokemon/pokemon.schema";
 
 export const fetchAllPokemonsOptions = infiniteQueryOptions({
     queryKey: ['pokemons'],
@@ -13,19 +11,8 @@ export const fetchAllPokemonsOptions = infiniteQueryOptions({
 export const fetchPokemonOptions = (pokemonName: string) => 
     queryOptions({
         queryKey: ['pokemon', pokemonName],
-        queryFn: async ({ queryKey }) => {
-            const name = queryKey[1];
-
-            const cachedPokemons = queryClient.getQueryData<{pages: Pokemon[]}>(['pokemons']);
-            
-            const foundPokemon = cachedPokemons?.pages
-                .flatMap(page => page)
-                .find(pokemon => pokemon.englishName.toLowerCase() === name.toLowerCase());
-
-            if (foundPokemon) {
-                return foundPokemon;
-            }
-
+        queryFn: async () => {
+            console.log("Running queryFn for pokemon", pokemonName);
             return getPokemonAction({ data: pokemonName });
-        },
+        },        
 })

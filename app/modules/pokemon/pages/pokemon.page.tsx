@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { getRouteApi, Link } from "@tanstack/react-router";
+import type { Pokemon } from "../pokemon.schema";
 
 export function PokemonPage() {
     const routeApi = getRouteApi('/(pokemons)/pokemons_/$pokemon')
-    const pokemon = routeApi.useLoaderData()
+    const pokemon = routeApi.useLoaderData() as Pokemon
+    console.log("Client received pokemon:", pokemon.englishName)
 
     if (!pokemon) {
         return null

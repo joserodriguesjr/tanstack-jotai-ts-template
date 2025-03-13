@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 import type { Pokemon } from "@/modules/pokemon/pokemon.schema";
 import { Button } from "@/components/ui/button";
 
+// todo: remove isOpen (add pokemon!!)
 interface PokemonModalProps {
     pokemon: Pokemon;
     isOpen: boolean;
