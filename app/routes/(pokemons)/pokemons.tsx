@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { Search } from "lucide-react";
+import ThemeToggle from '../../components/ThemeToogle';
 
 export const Route = createFileRoute("/(pokemons)/pokemons")({
   component: () => (
@@ -14,13 +15,15 @@ export const Route = createFileRoute("/(pokemons)/pokemons")({
 
 const PokemonHeader = () => {
   return (
-     <header className="bg-gray-800 shadow-md sticky top-0 z-50">
+    <header className="bg-gray-800 shadow-md sticky top-0 z-50">
       <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
         {/* Logo */}
         <Link to="/" className="text-white text-2xl font-bold flex items-center gap-2">
           {/* <img src="/pokeball.svg" alt="Pokeball" className="w-8 h-8" /> */}
           PokéDex
         </Link>
+
+        <ThemeToggle />
 
         {/* Barra de pesquisa */}
         <div className="hidden sm:flex items-center bg-gray-700 px-3 py-2 rounded-lg">
@@ -35,7 +38,7 @@ const PokemonHeader = () => {
         {/* Menu desktop */}
         <nav className="hidden md:flex gap-6">
           <Link to="/pokemons" className="text-white font-medium hover:underline">
-            Todos Pokémon
+            Todos Pokémons
           </Link>
           <Link to="/pokemons/types" className="text-white font-medium hover:underline">
             Tipos
@@ -55,13 +58,13 @@ const PokemonHeader = () => {
           <SheetContent side="left" className="bg-gray-900 text-white p-6">
             <nav className="flex flex-col gap-4">
               <Link to="/pokemons" className="text-lg font-medium hover:underline">
-                All Pokémon
+                Todos Pokémons
               </Link>
               <Link to="/pokemons/types" className="text-lg font-medium hover:underline">
-                Types
+                Tipos
               </Link>
               <Link to="/pokemons/about" className="text-lg font-medium hover:underline">
-                About
+                Sobre
               </Link>
             </nav>
           </SheetContent>
