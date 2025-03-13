@@ -2,7 +2,7 @@ import { createServerFn } from '@tanstack/react-start'
 import db from 'drizzle/db';
 import { pokemons } from 'drizzle/schema';
 import { eq } from 'drizzle-orm';
-import type { Pokemon } from '../../pokemon.schema';
+import type { Pokemon } from '../pokemon.schema';
 
 export const getAllPokemonsAction = createServerFn({ 
     method: 'GET' 

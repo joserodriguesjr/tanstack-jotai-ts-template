@@ -1,5 +1,5 @@
 import { queryOptions, infiniteQueryOptions } from '@tanstack/react-query'
-import { getPokemonAction, getAllPokemonsAction } from './server/get-pokemons.server'
+import { getPokemonAction, getAllPokemonsAction } from '../server/get-pokemons.server'
 
 export const fetchAllPokemonsOptions = infiniteQueryOptions({
     queryKey: ['pokemons'],
