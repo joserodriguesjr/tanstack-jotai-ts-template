@@ -10,6 +10,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import globalCss from "@/assets/global.css?url";
+import HydrationProvider from "@/components/HydrationProvider";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -39,7 +40,9 @@ function RootComponent() {
   return (
     <>
       <RootDocument>
-        <Outlet />
+        <HydrationProvider>
+          <Outlet />
+        </HydrationProvider>
       </RootDocument>
     </>
   );
