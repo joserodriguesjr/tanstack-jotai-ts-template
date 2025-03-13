@@ -6,48 +6,27 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
-import type { Pokemon } from "@/modules/pokemon/pokemon.schema";
 import { Button } from "@/components/ui/button";
+import { pokemonAtom } from "../atoms/pokemon.atom";
+import { useAtom } from "jotai";
 
-// todo: remove isOpen (add pokemon!!)
-interface PokemonModalProps {
-  pokemon: Pokemon;
-  isOpen: boolean;
-  onClose: () => void;
-}
+export const PokemonModal: React.FC = () => {
+  const [pokemon, setPokemon] = useAtom(pokemonAtom);
 
-export const PokemonModal: React.FC<PokemonModalProps> = ({
-  pokemon,
-  isOpen,
-  onClose,
-}) => {
+  if (!pokemon) return null;
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open onOpenChange={() => setPokemon(null)}>
+      <DialogTitle className="text-center text-2xl font-bold capitalize">
+        {pokemon.englishName}, #{pokemon.nationalNumber}
+      </DialogTitle>
       <DialogContent className="max-w-lg p-6">
-        <DialogTitle className="text-center text-2xl font-bold capitalize">
-          {pokemon.englishName}, #{pokemon.nationalNumber}
-        </DialogTitle>
 
         <DialogDescription className="text-gray-600 text-sm text-center">
           {pokemon.description}
         </DialogDescription>
 
         <div className="flex flex-row items-center my-4">
-          {/* <img
-                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.nationalNumber}.png`}
-                        alt={pokemon.englishName}
-                        className="w-32 h-32 mx-auto"
-                    />
-                    <img
-                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${pokemon.nationalNumber}.png`}
-                        alt={pokemon.englishName}
-                        className="w-32 h-32 mx-auto"
-                    /> */}
-          {/* <img
-                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.nationalNumber}.png`}
-                        alt={pokemon.englishName}
-                        className="w-32 h-32 mx-auto"
-                    /> */}
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.nationalNumber}.gif`}
             alt={pokemon.englishName}
@@ -101,7 +80,6 @@ export const PokemonModal: React.FC<PokemonModalProps> = ({
         </div>
         <Link to="/pokemons/$pokemon" params={{ pokemon: pokemon.englishName }}>
           <Button
-            onClick={onClose}
             className="block w-full h-full cursor-pointer"
           >
             More details...

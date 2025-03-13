@@ -1,10 +1,11 @@
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { Card, CardContent } from "@/components/ui/card";
 import { pokemonsAtom } from "@/modules/pokemon/atoms/pokemons.atom";
 import { useInfiniteScroll } from "@/modules/pokemon/hooks/useInfiniteScroll";
 import type { Pokemon } from "@/modules/pokemon/pokemon.schema";
 import { searchAtom } from "../atoms/search.atom";
 import { useEffect } from "react";
+import { pokemonAtom } from "../atoms/pokemon.atom";
 
 const preloadImages = (pokemonList: Pokemon[]) => {
   pokemonList.forEach((pokemon) => {
@@ -15,11 +16,9 @@ const preloadImages = (pokemonList: Pokemon[]) => {
   });
 };
 
-interface PokemonListProps {
-  openModal: (pokemon: Pokemon) => void;
-}
 
-export const PokedexList: React.FC<PokemonListProps> = ({ openModal }) => {
+export const PokedexList: React.FC = () => {
+  const setPokemon = useSetAtom(pokemonAtom);
   const searchQuery = useAtomValue(searchAtom);
   const [{ data, fetchNextPage, hasNextPage, isFetchingNextPage }] =
     useAtom(pokemonsAtom);
@@ -47,8 +46,8 @@ export const PokedexList: React.FC<PokemonListProps> = ({ openModal }) => {
           return (
             <Card
               key={pokemon.nationalNumber}
-              className="p-4 flex flex-col items-center"
-              onClick={() => openModal(pokemon as Pokemon)}
+              className="p-4 flex flex-col items-center cursor-pointer"
+              onClick={() => setPokemon(pokemon as Pokemon)}
               ref={index === lastPokemonIndex ? loadMoreRef : null}
             >
               <img
