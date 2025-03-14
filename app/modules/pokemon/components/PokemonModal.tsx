@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
+
 import { Link } from "@tanstack/react-router";
+import { useAtom } from "jotai";
+
 import {
   Dialog,
   DialogContent,
@@ -8,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { pokemonAtom } from "../atoms/pokemon.atom";
-import { useAtom } from "jotai";
 
 export const PokemonModal: React.FC = () => {
   const [pokemon, setPokemon] = useAtom(pokemonAtom);
@@ -16,7 +18,6 @@ export const PokemonModal: React.FC = () => {
   useEffect(() => { return setPokemon(null)}, []);
 
   if (!pokemon) return null;
-
 
   return (
     <Dialog open onOpenChange={() => setPokemon(null)}>

@@ -12,8 +12,8 @@ export const Route = createFileRoute("/(pokemons)/pokemons_/$pokemon")({
       "pokemon",
       pokemon,
     ]);
-    console.log("[LOADER] cachedPokemon", cachedPokemon);
     if (cachedPokemon) {
+      console.log("[LOADER] cachedPokemon", cachedPokemon);
       return cachedPokemon;
     }
 
@@ -21,12 +21,11 @@ export const Route = createFileRoute("/(pokemons)/pokemons_/$pokemon")({
     const cachedPokemons = queryClient.getQueryData<{ pages: Pokemon[] }>([
       "pokemons",
     ]);
-    console.log("[LOADER] cachedPokemons", cachedPokemons);
     const foundPokemon = cachedPokemons?.pages
       .flatMap((page) => page)
       .find((item) => item.englishName.toLowerCase() === pokemon.toLowerCase());
-    console.log("[LOADER] foundPokemon", foundPokemon);
-    if (foundPokemon) {
+      if (foundPokemon) {
+      console.log("[LOADER] foundPokemon", foundPokemon);
       return foundPokemon;
     }
 
