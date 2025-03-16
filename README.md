@@ -167,7 +167,7 @@ IndexedDB
 | **Styling** | [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS framework. |
 | **Component Library** | [Shadcn](https://ui.shadcn.com/docs/components/) | Prebuilt UI components for styling. |
 | **Build System** | [Vinxi](https://vinxi.vercel.app/) (to be [removed](https://tanstack.com/start/latest/docs/framework/react/build-from-scratch#install-dependencies:~:text=Vinxi%20will%20be%20removed%20before%20version%201.0.0)) & [Vite](https://vite.dev/) | Build tools for optimizing development and production builds. |
-| **Testing** | [Vitest](https://vitest.dev/) | Fast testing framework for TypeScript/JavaScript. |
+<!-- | **Testing** | [Vitest](https://vitest.dev/) | Fast testing framework for TypeScript/JavaScript. | -->
 
 <!-- And [React Spring](https://www.react-spring.dev/) for animations. -->
 <!-- **Pattern:** Colocation + MVVM? -->
