@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
-import db from "drizzle/db";
-import { pokemons } from "drizzle/schema";
+import db from "@/db/db";
+import { pokemons } from "@/db/schema";
 import { eq, like, sql } from "drizzle-orm";
 import type { Pokemon } from "../pokemon.schema";
 

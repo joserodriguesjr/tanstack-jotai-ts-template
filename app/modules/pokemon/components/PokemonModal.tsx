@@ -15,16 +15,16 @@ import { pokemonAtom } from "../atoms/pokemon.atom";
 export const PokemonModal: React.FC = () => {
   const [pokemon, setPokemon] = useAtom(pokemonAtom);
 
-  useEffect(() => { return setPokemon(null)}, []);
+  useEffect(() => { return setPokemon(null) }, []);
 
   if (!pokemon) return null;
 
   return (
     <Dialog open onOpenChange={() => setPokemon(null)}>
-      <DialogTitle className="text-center text-2xl font-bold capitalize">
-        {pokemon.englishName}, #{pokemon.nationalNumber}
-      </DialogTitle>
       <DialogContent className="max-w-lg p-6">
+        <DialogTitle className="text-center text-2xl font-bold capitalize">
+          {pokemon.englishName}, #{pokemon.nationalNumber}
+        </DialogTitle>
 
         <DialogDescription className="text-gray-600 text-sm text-center">
           {pokemon.description}
