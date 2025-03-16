@@ -1,16 +1,23 @@
-<center>
+<p align="center">
   <a href="https://github.com/joserodriguesjr/tanstack-jotai-ts-template">
     <img src="./public/assets/blueprint-512x384.png" height="150" alt="Logo">
   </a>
 
-# Template for Fullstack App
+  <h1 align="center">Template for Fullstack App</h1>
 
-The definitive template for your next application.
-
-[Learn more »](https://<website>..com)
-
-[Discord](https://discord.gg/<link>) · [Website](https://<website>.com)  · [Issues](https://github.com/joserodriguesjr/tanstack-jotai-ts-template/issues)
-</center>
+  <p align="center">
+  The definitive template for your next application.
+  <br />
+  <a href="https://<website>..com"><strong>Learn more »</strong></a>
+  <br />
+  <br />
+    <a href="https://discord.gg/<link>">Discord</a>
+    ·
+    <a href="https://<website>.com">Website</a>
+    ·
+    <a href="https://github.com/joserodriguesjr/tanstack-jotai-ts-template/issues">Issues</a>
+  </p>
+</p>
 
 ## Purpose
 
