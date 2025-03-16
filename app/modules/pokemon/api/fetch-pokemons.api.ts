@@ -5,7 +5,7 @@ import {
 } from "../server/get-pokemons.server";
 
 export const fetchAllPokemonsOptions = (search?: string ) => infiniteQueryOptions({
-  queryKey: ["pokemons", search],
+  queryKey: ["pokemons", search ?? ""],
     queryFn: async ({ pageParam }) => {
       const result = await getAllPokemonsAction({ data: { search, pageParam } });
 
