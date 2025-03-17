@@ -3,6 +3,7 @@ import db from "@/db/db";
 import { pokemons } from "@/db/schema";
 import { eq, like, sql } from "drizzle-orm";
 import type { Pokemon } from "../pokemon.schema";
+import type { PokemonDTO } from "../pokemon.api";
 
 export const getAllPokemonsAction = createServerFn({
   method: "GET",
@@ -15,7 +16,7 @@ export const getAllPokemonsAction = createServerFn({
 
     return { search, pageParam, pageSize };
   })
-  .handler(async ({ data: { search, pageParam, pageSize }}) => {
+  .handler(async ({ data: { search, pageParam, pageSize }}): Promise<PokemonDTO> => {
     console.info(`Fetching pokemons for page ${pageParam}...`);
     const offset = (pageParam - 1) * pageSize;
  // Obtém os Pokémon da página atual
@@ -62,7 +63,7 @@ export const getPokemonAction = createServerFn({
 
     return { pokemonName };
   })
-  .handler(async ({ data: { pokemonName } }) => {
+  .handler(async ({ data: { pokemonName } }): Promise<Pokemon> => {
     console.info(`Fetching pokemons, looking for ${pokemonName}...`);
 
     const pokemon = db

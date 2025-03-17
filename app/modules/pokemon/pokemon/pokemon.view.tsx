@@ -1,8 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { useLoaderData, Link } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
+import type { UsePokemonViewModelReturn } from "./pokemon.viewModel";
 
-export function PokemonPage() {
-  const pokemon = useLoaderData({ from: "/(pokemons)/pokemons_/$pokemon" });
+export function PokemonView({ pokemon }: UsePokemonViewModelReturn) {
+
+  if (!pokemon) {
+    return null
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">

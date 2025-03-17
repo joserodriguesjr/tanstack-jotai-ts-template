@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
-
 import { Link } from "@tanstack/react-router";
-import { useAtom } from "jotai";
-
 import {
   Dialog,
   DialogContent,
@@ -10,17 +7,22 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { pokemonAtom } from "../filters.atom";
+import type { Pokemon } from "../../pokemon.schema";
 
-export const PokemonModal: React.FC = () => {
-  const [pokemon, setPokemon] = useAtom(pokemonAtom);
 
-  useEffect(() => { return setPokemon(null) }, []);
+interface PokemonModalProps {
+  pokemon: Pokemon | null;
+  setSelectedPokemon: (pokemon: Pokemon | null) => void;
+}
+
+export const PokemonModal: React.FC<PokemonModalProps> = ({ pokemon, setSelectedPokemon }) => {
+
+  useEffect(() => { return setSelectedPokemon(null) }, []);
 
   if (!pokemon) return null;
 
   return (
-    <Dialog open onOpenChange={() => setPokemon(null)}>
+    <Dialog open onOpenChange={() => setSelectedPokemon(null)}>
       <DialogContent className="max-w-lg p-6">
         <DialogTitle className="text-center text-2xl font-bold capitalize">
           {pokemon.englishName}, #{pokemon.nationalNumber}
@@ -82,7 +84,7 @@ export const PokemonModal: React.FC = () => {
             </p>
           </div>
         </div>
-        <Link to="/pokemons/$pokemon" params={{ pokemon: pokemon.englishName }}  >
+        <Link to="/pokemons/$pokemonName" params={{ pokemonName: pokemon.englishName }}  >
           <Button
             className="block w-full h-full cursor-pointer"
           >
