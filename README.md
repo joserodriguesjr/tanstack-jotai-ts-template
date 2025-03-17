@@ -23,18 +23,29 @@
 
 This project serves as a full-stack app template, providing a solid foundation for web applications with support for PWA. It enables rapid development using [modern tools](#tech-stack).
 
+## Example App - Pokedex
+
+This template comes with an example app where a Pokedex is implemented. The data is inside a SQLite in data folder. It has server functions that queries it, a search bar and state stored in IndexedDB. You can take a look to see how the template its supposed to work.
+
+### Desktop Page
+
+![Pokedex - Desktop version](/public/assets/screenshot-desktop.png)
+
+### Mobile Page
+
+![Pokedex - Mobile version](/public/assets/screenshot-mobile.png)
+
 ## Next Steps
 
+- i18n for multilanguage support
+- Mutations (with redirect to new resource)
 - Auth using Better Auth  (<https://www.better-auth.com/docs/installation> / <https://www.better-auth.com/docs/basic-usage> / <https://www.better-auth.com/docs/integrations/tanstack>)
-- PWA support
+- WebSocket and SSE implementation <https://nize.foo/blog/tanstack-start-websockets/>
 - Server Functions structure (useServerFn, ...)
-- Docker with PostgreSQL
 - Backend architecture -> Controller <-> Service <-> Repository
 - Env configuration for DEV and PRD
-- i18n for multilanguage support
-- WebSocket and SSE implementation <https://nize.foo/blog/tanstack-start-websockets/>
-- Mutations (with redirect to new resource)
-- Testar initial data com dados meio prontos E setar time pra encher tudo dps
+- Docker with PostgreSQL
+- PWA support
 
 ## Features
 
@@ -93,8 +104,8 @@ This project serves as a full-stack app template, providing a solid foundation f
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/yourusername/project-name.git
-cd project-name
+git clone https://github.com/joserodriguesjr/tanstack-jotai-ts-template.git
+cd tanstack-jotai-ts-template
 npm install
 ```
 
@@ -114,45 +125,8 @@ To build this application for production:
 
 ```bash
 npm run build
+npm run start
 ```
-
-## How the server side works?
-
-### Client-First
-
-TanStack Start follows a client-first approach for it's fullstack capabilities. In contrast to Next.js where everything is designed with a server-first approach in mind.
-
-There are only a few places where code is executed on the server that you need to be aware of. Other than that, they make it very clear where things run. These are the main ones:
-
-- ssr.tsx (the entry point)
-- The return of the .handler() methods in createServerFn
-- The return of the .server() methods in createMiddleware
-- The custom /api/ directory
-- Route loaders run in the server when you reload the page (the first render, thus not having access to client storages)
-
-## FAQ
-
-### How do I add a new route?
-
-Just create a new file in /app/routes.
-
-For example, creating '/app/routes/about.tsx' will create a new /about page automatically (You need to be running in the development mode).
-
-### How do I connect to a database?
-
-The project uses Drizzle ORM. Configure your database in the .env file and define your schema in /app/db/schema.ts.
-
-See the [get started](https://orm.drizzle.team/docs/get-started) from the offical documentation for more informations.
-
-### How to manage cache / state?
-
-Loader runs when navigating from the client
-
-If the page is reloaded (f5) or accessed from direct URL, the loader will not have been hydrated with the cache and it'll run on the server
-
-TanStack Query
-Jotai
-IndexedDB
 
 ## Tech Stack
 
@@ -164,12 +138,82 @@ IndexedDB
 | **Cache** | [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) | Caches data in client machine for offline support. |
 | **State Management** | [Jotai](https://jotai.org/docs) | Bottom-up state management using atoms. |
 | **ORM** | [Drizzle](https://orm.drizzle.team/) | Database ORM for type-safe queries. |
+| **Validation** | [Zod](https://zod.dev/) | TypeScript-first schema validation with static type inference. |
 | **Styling** | [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS framework. |
 | **Component Library** | [Shadcn](https://ui.shadcn.com/docs/components/) | Prebuilt UI components for styling. |
 | **Build System** | [Vinxi](https://vinxi.vercel.app/) (to be [removed](https://tanstack.com/start/latest/docs/framework/react/build-from-scratch#install-dependencies:~:text=Vinxi%20will%20be%20removed%20before%20version%201.0.0)) & [Vite](https://vite.dev/) | Build tools for optimizing development and production builds. |
 <!-- | **Testing** | [Vitest](https://vitest.dev/) | Fast testing framework for TypeScript/JavaScript. | -->
 
+<!-- TODO -->
 <!-- And [React Spring](https://www.react-spring.dev/) for animations. -->
 <!-- **Pattern:** Colocation + MVVM? -->
 <!-- **Inputs Validation:** React Hook Form + Zod -->
 <!-- **Deploy:** Dokploy + Nixpacks -->
+
+## FAQ
+
+### How do I add a new route?
+
+Create a new file in /app/routes.
+
+For example, creating '/app/routes/about.tsx' will create a new /about page automatically (You need to be running in the development mode).
+
+### How do I connect to a database?
+
+The project uses Drizzle ORM. Configure your database in the .env file and define your schema in /app/db/schema.ts.
+
+See the [get started](https://orm.drizzle.team/docs/get-started) from the offical documentation for more informations.
+
+### How to manage cache / state?
+
+Keep in mind that the Loader runs when navigating from the client. If the page is reloaded (F5) or accessed from direct URL, the loader will not have been hydrated with the cache and it'll run on the server.
+
+For managing filters, search params and other states that could be used between components - use Jotai to share them.
+
+## How is TanStack Start different from Next.js?
+
+### Streaming SSR
+
+Unlike Next.js, which can block rendering while waiting for data, TanStack Start streams critical content immediately, loading slower data incrementally. This results in faster page interactivity.
+
+### Client-First Philosophy
+
+TanStack Start excels in dynamic, real-time apps with offline capabilities, such as dashboards or collaboration tools. While Next.js focuses on SSR and SEO, TanStack Start prioritizes responsiveness and interactivity.
+
+It follows a client-first approach for it's fullstack capabilities. In contrast to Next.js where everything is designed with a server-first approach in mind.
+
+#### Code Execution
+
+There are only a few places where code is executed on the server that you need to be aware of. Other than that, they make it very clear where things run. These are the main ones:
+
+- ssr.tsx (the entry point)
+- The return of the .handler() methods in createServerFn
+- The return of the .server() methods in createMiddleware
+- The custom /api/ directory
+- Route loaders run in the server when you reload the page (the first render, thus not having access to client storages)
+
+### Isomorphic Loaders
+
+TanStack Start’s loaders work seamlessly on both the server and client, reducing code duplication compared to Next.js’s getServerSideProps or getStaticProps.
+
+### Flexibility Over Convention
+
+Next.js is great for rapid prototyping with its conventions but can feel restrictive in complex projects. TanStack Start provides granular control, suiting projects requiring customization.
+
+### Deployment and Lock-In Considerations
+
+#### TanStack Start
+
+- Flexible Deployment: Deploy anywhere compatible with Node.js, including serverless functions.
+- No Vendor Lock-In: Maintain control over your infrastructure.
+- Out-of-the-box preset support for various popular platforms to run your application — Netlify , Vercel, Cloudflare-pages, Node JS server or a Bun Server
+
+#### Next.js
+
+- Optimized for Vercel: This offers additional features like Edge Functions, but relying on them could lead to vendor lock-in.
+- Cost Considerations: Unnecessary SSR can increase costs on serverless platforms like Vercel.
+TanStack Start’s flexibility makes it ideal for teams wanting independence.
+
+## References
+
+[TanStack Start: A New Framework Revolutionizing React Development](https://medium.com/learnwithrahul/tanstack-start-a-new-framework-revolutionizing-react-development-4143de93fc7e)
