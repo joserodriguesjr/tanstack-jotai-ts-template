@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { pokemonAtom } from "../atoms/pokemon.atom";
+import { pokemonAtom } from "../filters.atom";
 
 export const PokemonModal: React.FC = () => {
   const [pokemon, setPokemon] = useAtom(pokemonAtom);

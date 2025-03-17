@@ -5,8 +5,6 @@ import { routeTree } from "./routeTree.gen.ts";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { createIDBPersister } from "./lib/indexedDb.ts";
 import { Provider as JotaiProvider } from "jotai";
-import { useHydrateAtoms } from "jotai/react/utils";
-import { queryClientAtom } from "jotai-tanstack-query";
 
 export function createRouter() {
   // Make sure you create your loader client or similar data
@@ -24,11 +22,6 @@ export function createRouter() {
   });
 
   const persister = createIDBPersister();
-
-  const HydrateAtoms = ({ children }: { children: React.ReactNode }) => {
-    useHydrateAtoms([[queryClientAtom, queryClient]]);
-    return children;
-  };
 
   return routerWithQueryClient(
     createTanStackRouter({
@@ -53,19 +46,14 @@ export function createRouter() {
       Wrap: ({ children }) => {
         return (
           <PersistQueryClientProvider
-            onSuccess={() =>
-              queryClient
-                .resumePausedMutations()
-                .then(() => queryClient.invalidateQueries())
-            }
             client={queryClient}
-            persistOptions={{
-              persister,
-              //   maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+            persistOptions={{ persister }}
+            onSuccess={() => {
+              queryClient.resumePausedMutations().then(() => queryClient.invalidateQueries());
             }}
           >
             <JotaiProvider>
-              <HydrateAtoms>{children}</HydrateAtoms>
+              {children}
             </JotaiProvider>
           </PersistQueryClientProvider>
         );
