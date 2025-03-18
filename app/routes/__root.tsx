@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import {
   createRootRouteWithContext,
   Link,
@@ -10,6 +10,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import globalCss from "@/assets/global.css?url";
+import { useTheme } from "@/hooks/useTheme";
 import HydrationProvider from "@/components/HydrationProvider";
 
 export const Route = createRootRouteWithContext<{
@@ -37,14 +38,20 @@ export const Route = createRootRouteWithContext<{
 });
 
 function RootComponent() {
+  const { theme } = useTheme();
+
+  // TODO: Não está da melhor forma
+  useEffect(() => {
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+  }, [theme]);
+
   return (
-    <>
-      <RootDocument>
-        <HydrationProvider>
-          <Outlet />
-        </HydrationProvider>
-      </RootDocument>
-    </>
+    <RootDocument>
+      <HydrationProvider>
+        <Outlet />
+      </HydrationProvider>
+    </RootDocument>
+
   );
 }
 

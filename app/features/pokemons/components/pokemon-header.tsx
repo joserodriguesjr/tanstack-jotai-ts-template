@@ -5,11 +5,13 @@ import { searchAtom } from "@/features/pokemons/pokemons.filters";
 import { useSetAtom } from "jotai";
 import debounce from "lodash.debounce";
 import { Search } from "lucide-react";
-import { ThemeToggle } from "@/features/theme/theme.component";
-import { Translator } from "@/features/i18n/components/translator";
-import { I18n } from "@/features/i18n/components/i18n";
+import { BrasilFlag, EuaFlag } from '@/assets'
+import { useTranslate } from "@/lib/i18n";
+import { useTheme } from "@/hooks/useTheme";
 
 export const PokemonHeader = () => {
+    const { theme, onToggleTheme } = useTheme()
+    const { language, onChangeLanguage, translator } = useTranslate()
     const setSearch = useSetAtom(searchAtom);
     const onChangeSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value), 350);
 
@@ -22,15 +24,35 @@ export const PokemonHeader = () => {
                     PokéDex
                 </Link>
 
-                <I18n />
-                <ThemeToggle />
+                <div className='flex items-center gap-2'>
+                    <img
+                        src={BrasilFlag}
+                        alt="flag"
+                        onClick={() => onChangeLanguage('pt-BR')}
+                        className={`w-6 h-6 cursor-pointer transition-all ${language === 'pt-BR' ? '' : 'grayscale opacity-50'}`}
+                    />
+                    <img
+                        src={EuaFlag}
+                        alt="flag"
+                        onClick={() => onChangeLanguage('en-US')}
+                        className={`w-6 h-6 cursor-pointer transition-all ${language === 'en-US' ? '' : 'grayscale opacity-50'}`}
+                    />
+                </div>
+                
+                <Button
+                    variant={'noBackground'}
+                    size={'icon'}
+                    onClick={onToggleTheme}
+                >
+                    {theme === 'light' ? '🌙' : '☀️'}
+                </Button>
 
                 {/* Barra de pesquisa */}
                 <div className="hidden sm:flex items-center bg-gray-700 px-3 py-2 rounded-lg">
                     <Search className="text-white w-5 h-5 mr-2" />
                     <input
                         type="text"
-                        placeholder={Translator({ path: "pokemons.header.searchBar" })}
+                        placeholder={translator({ path: "pokemons.header.searchBar" })}
                         onChange={onChangeSearch}
                         className="bg-transparent outline-none text-white placeholder-gray-300"
                     />
@@ -39,13 +61,13 @@ export const PokemonHeader = () => {
                 {/* Menu desktop */}
                 <nav className="hidden md:flex gap-6">
                     <Link to="/pokemons" className="text-white font-medium hover:underline">
-                        {Translator({ path: "pokemons.header.allPokemons" })}
+                        {translator({ path: "pokemons.header.allPokemons" })}
                     </Link>
                     <Link to="/pokemons/types" className="text-white font-medium hover:underline">
-                        {Translator({ path: "pokemons.header.types" })}
+                        {translator({ path: "pokemons.header.types" })}
                     </Link>
                     <Link to="/pokemons/about" className="text-white font-medium hover:underline">
-                        {Translator({ path: "pokemons.header.about" })}
+                        {translator({ path: "pokemons.header.about" })}
                     </Link>
                 </nav>
 
@@ -59,13 +81,13 @@ export const PokemonHeader = () => {
                     <SheetContent side="left" className="bg-gray-900 text-white p-6">
                         <nav className="flex flex-col gap-4">
                             <Link to="/pokemons" className="text-lg font-medium hover:underline">
-                                {Translator({ path: "pokemons.header.allPokemons" })}
+                                {translator({ path: "pokemons.header.allPokemons" })}
                             </Link>
                             <Link to="/pokemons/types" className="text-lg font-medium hover:underline">
-                                {Translator({ path: "pokemons.header.types" })}
+                                {translator({ path: "pokemons.header.types" })}
                             </Link>
                             <Link to="/pokemons/about" className="text-lg font-medium hover:underline">
-                                {Translator({ path: "pokemons.header.about" })}
+                                {translator({ path: "pokemons.header.about" })}
                             </Link>
                         </nav>
                     </SheetContent>

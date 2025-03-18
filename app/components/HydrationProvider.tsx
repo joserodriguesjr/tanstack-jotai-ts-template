@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAtomValue } from "jotai";
 import Loading from "./Loading";
-import { themeAtom } from "@/features/theme/theme.atom";
+import { themeAtom } from "@/hooks/useTheme";
 
+// TODO: Remover se possivel
 const HydrationProvider = ({ children }: { children: React.ReactNode }) => {
     const [hasHydrated, setHasHydrated] = useState(false);
     const theme = useAtomValue(themeAtom);
