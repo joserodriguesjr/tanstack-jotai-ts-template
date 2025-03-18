@@ -12,12 +12,7 @@ interface PokemonCardProps {
 
 export const PokemonCard = forwardRef<HTMLDivElement, PokemonCardProps>(
   ({ nationalNumber, englishName, primaryType, secondaryType, onClick }, ref) => {
-    const translateType = (type: string | null) => {
-      const newType = Translator({ path: `pokemons.types.${type}` })
-      console.log(newType)
-
-      if (type) return newType
-    }
+    const translateType = (type: string | null) => type ? Translator({ path: `pokemons.types.${type}` }) : ""
 
     return (
       <Card
