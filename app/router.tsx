@@ -5,21 +5,14 @@ import { routeTree } from "./routeTree.gen.ts";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { createIDBPersister } from "./lib/indexedDb.ts";
 import { Provider as JotaiProvider } from "jotai";
+import { queryConfig } from "./lib/react-query.ts";
 
 export function createRouter() {
   // Make sure you create your loader client or similar data
   // stores inside of your `createRouter` function. This ensures
   // that your data stores are unique to each request and
   // always present on both server and client.
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        networkMode: "offlineFirst",
-        staleTime: Infinity,
-        gcTime: 1000 * 60 * 60 * 24, // 24 hours
-      },
-    },
-  });
+  const queryClient = new QueryClient({ defaultOptions: queryConfig })
 
   const persister = createIDBPersister();
 
@@ -47,9 +40,32 @@ export function createRouter() {
         return (
           <PersistQueryClientProvider
             client={queryClient}
-            persistOptions={{ persister }}
+            persistOptions={{
+              persister,
+              maxAge: 1000 * 60 * 60 * 24, // 24 hours
+              // dehydrateOptions: {
+              //   shouldDehydrateQuery: (query) => {
+              //     console.log(query)
+              //     // returns true to queries that you want to save
+              //     return (
+              //       // defaultShouldDehydrateQuery contains default logic (state === 'success')
+              //       defaultShouldDehydrateQuery(query) // &&
+              //       // myCustomShouldDehydrateQuery(query)
+              //     )
+              //   },
+              // },
+              // hydrateOptions: {
+              //   defaultOptions: {
+              //     deserializeData: (data) => {
+              //       console.log(data)
+              //     }
+              //   }
+              // }
+            }}
             onSuccess={() => {
-              queryClient.resumePausedMutations().then(() => queryClient.invalidateQueries());
+              console.log(queryClient)
+              queryClient.resumePausedMutations()
+              // .then(() => queryClient.invalidateQueries());
             }}
           >
             <JotaiProvider>

@@ -4,7 +4,6 @@ interface UseInfiniteScrollProps {
   onIntersect: () => void;
   hasMore: boolean;
   isFetching: boolean;
-  searchQuery?: string;
 }
 
 export const useInfiniteScroll = ({

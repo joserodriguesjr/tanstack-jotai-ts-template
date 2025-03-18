@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { searchAtom } from "@/features/pokemons/pokemons-filters.atom";
+import { searchAtom } from "@/features/pokemons/pokemons.filters";
 import { useSetAtom } from "jotai";
 import debounce from "lodash.debounce";
 import { Search } from "lucide-react";

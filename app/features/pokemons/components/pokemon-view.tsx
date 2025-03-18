@@ -1,13 +1,21 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "@tanstack/react-router";
-import { usePokemon } from "./api/get-pokemon";
+import { Link, useParams } from "@tanstack/react-router";
+import { usePokemon } from "../api/get-pokemon";
+import Loading from "@/components/Loading";
 
-export function PokemonPage() {
-  const pokemon = usePokemon()
+export function PokemonView() {
+  const { pokemonName } = useParams({ from: "/(pokemons)/pokemons_/$pokemonName" })
+  const pokemonQuery = usePokemon({ pokemonName })
 
-  if (!pokemon) {
-    return null
+  if (pokemonQuery.isLoading) {
+    return (
+      <Loading />
+    );
   }
+
+  const pokemon = pokemonQuery?.data;
+
+  if (!pokemon) return null
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">

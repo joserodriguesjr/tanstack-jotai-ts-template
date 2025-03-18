@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useAtom } from "jotai";
-import { selectedPokemonAtom } from "../pokemons-filters.atom";
+import { selectedPokemonAtom } from "../pokemons.filters";
 
 export const PokemonModal: React.FC = () => {
   const [pokemon, setSelectedPokemon] = useAtom(selectedPokemonAtom);
