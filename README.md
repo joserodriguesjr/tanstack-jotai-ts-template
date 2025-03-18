@@ -42,17 +42,18 @@ This template comes with an example app where a Pokedex is implemented. The data
 - Auth using Better Auth  (<https://www.better-auth.com/docs/installation> / <https://www.better-auth.com/docs/basic-usage> / <https://www.better-auth.com/docs/integrations/tanstack>)
 - WebSocket and SSE implementation <https://nize.foo/blog/tanstack-start-websockets/>
 - Server Functions structure (useServerFn, ...)
-- Backend architecture -> Controller <-> Service <-> Repository
+- Backend architecture -> IOC
 - Env configuration for DEV and PRD
 - Docker with PostgreSQL
 - PWA support
+- Tests in front and back
 
 ## Features
 
 ✅ Full-stack setup – Includes both client and server logic \
 ✅ File-based routing – Powered by TanStack Router \
 ✅ Optimized Data Fetching – TanStack Query for caching & server communication \
-✅ Global State Management – Jotai with a shared cache with TanStack Query \
+✅ Global State Management – Jotai for atom state management \
 ✅ Offline Cache – IndexedDB for caching TanStack Query cache \
 ✅ SSR & API Handlers – Server-side rendering and server functions \
 ✅ Type-safe ORM – Drizzle ORM for database management \

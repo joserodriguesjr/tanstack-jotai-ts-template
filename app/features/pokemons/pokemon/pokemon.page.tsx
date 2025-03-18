@@ -1,14 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { useLoaderData, Link } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
+import { usePokemon } from "./api/get-pokemon";
 
 export function PokemonPage() {
-  const pokemon = useLoaderData({ from: "/(pokemons)/pokemons_/$pokemon" });
+  const pokemon = usePokemon()
+
+  if (!pokemon) {
+    return null
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       {/* Back Button */}
       <Link to="/pokemons">
-        <Button>Back to Pokedex</Button>
+        <Button
+          className="block h-full cursor-pointer"
+        >
+          Back to Pokedex
+        </Button>
       </Link>
 
       {/* Header */}

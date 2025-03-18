@@ -2,11 +2,11 @@ import { Card, CardContent } from "@/components/ui/card"
 import { forwardRef } from "react"
 
 interface PokemonCardProps {
-    nationalNumber: number
-    englishName: string,
-    primaryType: string,
-    secondaryType: string | null,
-    onClick: () => void,
+  nationalNumber: number
+  englishName: string,
+  primaryType: string,
+  secondaryType: string | null,
+  onClick: () => void,
 }
 
 export const PokemonCard = forwardRef<HTMLDivElement, PokemonCardProps>(

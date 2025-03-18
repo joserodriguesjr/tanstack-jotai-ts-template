@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { themeAtom } from '../atoms/theme.atom';
-import { Button } from './ui/button';
+import { themeAtom } from './theme.atom';
+import { Button } from '@/components/ui/button';
 
-const ThemeToggle = () => {
+export const ThemeToggle = () => {
     const [theme, setTheme] = useAtom(themeAtom);
 
     const toggleTheme = () => {
@@ -25,5 +25,3 @@ const ThemeToggle = () => {
         </Button>
     );
 };
-
-export default ThemeToggle;
