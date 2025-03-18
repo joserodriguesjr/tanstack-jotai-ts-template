@@ -6,6 +6,7 @@ import { StartClient } from "@tanstack/react-start";
 import { createRouter } from "./router";
 import reportWebVitals from "./reportWebVitals";
 import { ErrorFallback } from "./components/ErrorFallback";
+import './i18n'
 
 const router = createRouter();
 

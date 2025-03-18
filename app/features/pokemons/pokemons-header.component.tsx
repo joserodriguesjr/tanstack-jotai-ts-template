@@ -6,6 +6,8 @@ import { useSetAtom } from "jotai";
 import debounce from "lodash.debounce";
 import { Search } from "lucide-react";
 import { ThemeToggle } from "@/features/theme/theme.component";
+import { Translator } from "@/components/i18n/translator";
+import { I18n } from "@/components/i18n/i18n";
 
 export const PokemonHeader = () => {
     const setSearch = useSetAtom(searchAtom);
@@ -20,6 +22,7 @@ export const PokemonHeader = () => {
                     PokéDex
                 </Link>
 
+                <I18n />
                 <ThemeToggle />
 
                 {/* Barra de pesquisa */}
@@ -27,7 +30,7 @@ export const PokemonHeader = () => {
                     <Search className="text-white w-5 h-5 mr-2" />
                     <input
                         type="text"
-                        placeholder="Search Pokémon..."
+                        placeholder={Translator({ path: "pokemons.header.searchBar" })}
                         onChange={onChangeSearch}
                         className="bg-transparent outline-none text-white placeholder-gray-300"
                     />
@@ -36,13 +39,13 @@ export const PokemonHeader = () => {
                 {/* Menu desktop */}
                 <nav className="hidden md:flex gap-6">
                     <Link to="/pokemons" className="text-white font-medium hover:underline">
-                        Todos Pokémons
+                        {Translator({ path: "pokemons.header.allPokemons" })}
                     </Link>
                     <Link to="/pokemons/types" className="text-white font-medium hover:underline">
-                        Tipos
+                        {Translator({ path: "pokemons.header.types" })}
                     </Link>
                     <Link to="/pokemons/about" className="text-white font-medium hover:underline">
-                        Sobre
+                        {Translator({ path: "pokemons.header.about" })}
                     </Link>
                 </nav>
 
@@ -56,13 +59,13 @@ export const PokemonHeader = () => {
                     <SheetContent side="left" className="bg-gray-900 text-white p-6">
                         <nav className="flex flex-col gap-4">
                             <Link to="/pokemons" className="text-lg font-medium hover:underline">
-                                Todos Pokémons
+                                {Translator({ path: "pokemons.header.allPokemons" })}
                             </Link>
                             <Link to="/pokemons/types" className="text-lg font-medium hover:underline">
-                                Tipos
+                                {Translator({ path: "pokemons.header.types" })}
                             </Link>
                             <Link to="/pokemons/about" className="text-lg font-medium hover:underline">
-                                Sobre
+                                {Translator({ path: "pokemons.header.about" })}
                             </Link>
                         </nav>
                     </SheetContent>

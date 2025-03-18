@@ -37,7 +37,6 @@ This template comes with an example app where a Pokedex is implemented. The data
 
 ## Next Steps
 
-- i18n for multilanguage support
 - Mutations (with redirect to new resource)
 - Auth using Better Auth  (<https://www.better-auth.com/docs/installation> / <https://www.better-auth.com/docs/basic-usage> / <https://www.better-auth.com/docs/integrations/tanstack>)
 - WebSocket and SSE implementation <https://nize.foo/blog/tanstack-start-websockets/>
@@ -50,15 +49,16 @@ This template comes with an example app where a Pokedex is implemented. The data
 
 ## Features
 
-✅ Full-stack setup – Includes both client and server logic \
-✅ File-based routing – Powered by TanStack Router \
+✅ Full-stack Setup – Includes both client and server logic \
+✅ File-based Routing – Powered by TanStack Router \
 ✅ Optimized Data Fetching – TanStack Query for caching & server communication \
 ✅ Global State Management – Jotai for atom state management \
 ✅ Offline Cache – IndexedDB for caching TanStack Query cache \
 ✅ SSR & API Handlers – Server-side rendering and server functions \
 ✅ Type-safe ORM – Drizzle ORM for database management \
-✅ Schema validation - Zod validation library \
+✅ Schema Validation - Zod validation library \
 ✅ Modern Styling – Tailwind CSS + Shadcn UI components \
+✅ Multilanguage Support – i18n for multilanguage \
 <!-- ✅ PWA – Service workers configured -->
 
 ## Folder Structure
