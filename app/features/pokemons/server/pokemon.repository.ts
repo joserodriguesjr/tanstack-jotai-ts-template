@@ -1,7 +1,7 @@
 import { db } from "@/db/db";
 import { pokemons } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import type { Pokemon } from "../../pokemons.schema";
+import type { Pokemon } from "../pokemons.schema";
 import { like, sql } from "drizzle-orm";
 
 export const getPokemonByName = async (pokemonName: string): Promise<Pokemon | null> => {

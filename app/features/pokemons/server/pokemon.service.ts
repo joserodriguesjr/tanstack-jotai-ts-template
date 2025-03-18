@@ -1,5 +1,5 @@
 import type { Pokemon, PokemonDTO } from "../pokemons.schema";
-import { getPokemonByName, getPokemonCount, getPokemonsLikeText } from "./repositories/pokemon.repository";
+import { getPokemonByName, getPokemonCount, getPokemonsLikeText } from "./pokemon.repository";
 
 export const findPokemon = async ({ pokemonName }: { pokemonName: string }): Promise<Pokemon> => { 
     console.info(`Fetching pokemons, looking for ${pokemonName}...`);

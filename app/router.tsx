@@ -63,7 +63,6 @@ export function createRouter() {
               // }
             }}
             onSuccess={() => {
-              console.log(queryClient)
               queryClient.resumePausedMutations()
               // .then(() => queryClient.invalidateQueries());
             }}
