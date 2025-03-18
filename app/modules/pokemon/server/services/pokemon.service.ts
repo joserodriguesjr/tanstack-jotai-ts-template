@@ -18,8 +18,12 @@ export const findAllPokemons = async ({ search, pageParam, pageSize }: { search:
     console.info(`Fetching pokemons for page ${pageParam}...`);
     
     const offset = (pageParam - 1) * pageSize;
-    const pokemonsData = await getPokemonsLikeText(search, pageSize, offset)
-    const totalCount = await getPokemonCount(search)
+    const [pokemonsData, totalCount] = await Promise.all(
+        [
+            getPokemonsLikeText(search, pageSize, offset), 
+            getPokemonCount(search)
+        ]
+    )
 
     return {
         content: pokemonsData,

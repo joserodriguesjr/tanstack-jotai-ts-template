@@ -46,6 +46,7 @@ This template comes with an example app where a Pokedex is implemented. The data
 - Env configuration for DEV and PRD
 - Docker with PostgreSQL
 - PWA support
+- Tests in front and back
 
 ## Features
 
