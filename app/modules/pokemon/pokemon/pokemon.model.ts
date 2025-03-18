@@ -1,5 +1,5 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getPokemonAction } from "../server/get-pokemons.server";
+import { getPokemonAction } from "../server/pokemon.server";
 import type { Pokemon } from "../pokemon.schema";
 
 export const fetchPokemon = (pokemonName: string) => {

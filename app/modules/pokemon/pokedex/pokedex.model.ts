@@ -1,4 +1,4 @@
-import { getAllPokemonsAction } from "../server/get-pokemons.server";
+import { getAllPokemonsAction } from "../server/pokemon.server";
 import { infiniteQueryOptions } from "@tanstack/react-query";
 
 export const fetchPokemons = (search = "") => {
