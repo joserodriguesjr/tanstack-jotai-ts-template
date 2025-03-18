@@ -6,8 +6,8 @@ import { useSetAtom } from "jotai";
 import debounce from "lodash.debounce";
 import { Search } from "lucide-react";
 import { ThemeToggle } from "@/features/theme/theme.component";
-import { Translator } from "@/components/i18n/translator";
-import { I18n } from "@/components/i18n/i18n";
+import { Translator } from "@/features/i18n/components/translator";
+import { I18n } from "@/features/i18n/components/i18n";
 
 export const PokemonHeader = () => {
     const setSearch = useSetAtom(searchAtom);
