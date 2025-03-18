@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/sheet";
 import { searchAtom } from "@/features/pokemons/pokemons.filters";
 import { useSetAtom } from "jotai";
 import debounce from "lodash.debounce";
@@ -38,7 +38,7 @@ export const PokemonHeader = () => {
                         className={`w-6 h-6 cursor-pointer transition-all ${language === 'en-US' ? '' : 'grayscale opacity-50'}`}
                     />
                 </div>
-                
+
                 <Button
                     variant={'noBackground'}
                     size={'icon'}

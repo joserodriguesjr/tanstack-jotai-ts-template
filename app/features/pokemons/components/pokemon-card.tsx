@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/card"
 import { forwardRef } from "react"
 import { useTranslate } from "@/lib/i18n";
 
