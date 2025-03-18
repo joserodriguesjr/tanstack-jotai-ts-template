@@ -1,13 +1,12 @@
-import { PokemonModal } from "./components/PokemonModal";
-import { PokemonCard } from "./components/PokemonCard";
-import type { UsePokedexViewModelReturn } from "./pokedex.viewModel";
+import { PokemonModal } from "./pokedex-modal.component";
+import { PokemonCard } from "./pokedex-card.component";
+import { useSetAtom } from "jotai";
+import { selectedPokemonAtom } from "../pokemons-filters.atom";
+import { usePokedexList } from "./api/get-pokemons";
 
-export function PokedexView({
-  pokemons,
-  lastPokemonIndex,
-  loadMoreRef,
-  selectedPokemon,
-  setSelectedPokemon }: UsePokedexViewModelReturn) {
+export function PokedexPage() {
+  const { pokemons, lastPokemonIndex, loadMoreRef } = usePokedexList()
+  const setSelectedPokemon = useSetAtom(selectedPokemonAtom);
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
@@ -24,7 +23,7 @@ export function PokedexView({
           />
         ))}
       </div>
-      <PokemonModal pokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} />
+      <PokemonModal />
     </div>
   );
 }

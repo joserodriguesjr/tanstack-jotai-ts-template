@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { PokemonHeader } from "@/modules/pokemon/components/PokemonHeader";
+import { PokemonHeader } from "@/features/pokemons/pokemons-header.component";
 
 export const Route = createFileRoute("/(pokemons)/pokemons")({
   component: () => (

@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/features/ui/button";
 import { Link } from "@tanstack/react-router";
-import type { UsePokemonViewModelReturn } from "./pokemon.viewModel";
+import { usePokemon } from "./api/get-pokemon";
 
-export function PokemonView({ pokemon }: UsePokemonViewModelReturn) {
+export function PokemonPage() {
+  const pokemon = usePokemon()
 
   if (!pokemon) {
     return null

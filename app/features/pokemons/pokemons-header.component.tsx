@@ -1,11 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { searchAtom } from "@/modules/pokemon/filters.atom";
+import { Button } from "@/features/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/features/ui/sheet";
+import { searchAtom } from "@/features/pokemons/pokemons-filters.atom";
 import { useSetAtom } from "jotai";
 import debounce from "lodash.debounce";
 import { Search } from "lucide-react";
-import ThemeToggle from "@/components/ThemeToogle";
+import { ThemeToggle } from "@/features/theme/theme.component";
 
 export const PokemonHeader = () => {
     const setSearch = useSetAtom(searchAtom);

@@ -1,5 +1,5 @@
 import type { PokemonDTO } from "../../pokemon.api";
-import type { Pokemon } from "../../pokemon.schema";
+import type { Pokemon } from "../../pokemons.schema";
 import { getPokemonByName, getPokemonCount, getPokemonsLikeText } from "../repositories/pokemon.repository";
 
 export const findPokemon = async ({ pokemonName }: { pokemonName: string }): Promise<Pokemon> => { 

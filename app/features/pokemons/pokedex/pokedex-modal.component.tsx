@@ -5,17 +5,13 @@ import {
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import type { Pokemon } from "../../pokemon.schema";
+} from "@/features/ui/dialog";
+import { Button } from "@/features/ui/button";
+import { useAtom } from "jotai";
+import { selectedPokemonAtom } from "../pokemons-filters.atom";
 
-
-interface PokemonModalProps {
-  pokemon: Pokemon | null;
-  setSelectedPokemon: (pokemon: Pokemon | null) => void;
-}
-
-export const PokemonModal: React.FC<PokemonModalProps> = ({ pokemon, setSelectedPokemon }) => {
+export const PokemonModal: React.FC = () => {
+  const [pokemon, setSelectedPokemon] = useAtom(selectedPokemonAtom);
 
   useEffect(() => { return setSelectedPokemon(null) }, []);
 

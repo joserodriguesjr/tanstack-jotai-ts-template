@@ -1,15 +1,14 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { PokemonWrapper } from "@/modules/pokemon/pokemon/pokemon.wrapper";
-import { pokemonLoader } from "@/modules/pokemon/pokemon/pokemon.loader";
-import { fetchPokemon } from "@/modules/pokemon/pokemon/pokemon.model";
+import { PokemonPage } from "@/features/pokemons/pokemon/pokemon.page";
+import { fetchPokemonOptions } from "@/features/pokemons/pokemon/api/get-pokemon";
 
 export const Route = createFileRoute("/(pokemons)/pokemons_/$pokemonName")({
   loader: async ({
     context: { queryClient },
     params: { pokemonName }
-  }) => pokemonLoader(queryClient, pokemonName, fetchPokemon),
+  }) => queryClient.prefetchQuery(fetchPokemonOptions(pokemonName)),
   onError(err: Error) {
     throw redirect({ to: "/pokemons", replace: true, throw: err });
   },
-  component: PokemonWrapper,
+  component: PokemonPage,
 });

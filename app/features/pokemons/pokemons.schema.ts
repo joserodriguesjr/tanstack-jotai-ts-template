@@ -59,3 +59,13 @@ export const PokemonSchema = z.object({
 });
 
 export type Pokemon = z.infer<typeof PokemonSchema>;
+
+export interface PokemonDTO {
+  content: Pokemon[];
+  pagination: {
+      total: number;
+      page: number;
+      pageSize : number;
+        totalPages: number;
+  }
+}
