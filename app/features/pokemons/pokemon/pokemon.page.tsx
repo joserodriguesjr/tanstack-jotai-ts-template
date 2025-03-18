@@ -1,4 +1,4 @@
-import { Button } from "@/features/ui/button";
+import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
 import { usePokemon } from "./api/get-pokemon";
 

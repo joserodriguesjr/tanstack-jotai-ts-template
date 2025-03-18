@@ -5,8 +5,8 @@ import {
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/features/ui/dialog";
-import { Button } from "@/features/ui/button";
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { useAtom } from "jotai";
 import { selectedPokemonAtom } from "../pokemons-filters.atom";
 

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { themeAtom } from './theme.atom';
-import { Button } from '@/features/ui/button';
+import { Button } from '@/components/ui/button';
 
 export const ThemeToggle = () => {
     const [theme, setTheme] = useAtom(themeAtom);
