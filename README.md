@@ -59,6 +59,7 @@ This template comes with an example app where a Pokedex is implemented. The data
 ✅ Schema Validation - Zod validation library \
 ✅ Modern Styling – Tailwind CSS + Shadcn UI components \
 ✅ Multilanguage Support – i18n for multilanguage \
+✅ Linting + Formatter – ESLint with Prettier for enhanced developer experience \
 <!-- ✅ PWA – Service workers configured -->
 
 ## Folder Structure
@@ -143,6 +144,8 @@ npm run start
 | **Styling** | [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS framework. |
 | **Component Library** | [Shadcn](https://ui.shadcn.com/docs/components/) | Prebuilt UI components for styling. |
 | **Build System** | [Vinxi](https://vinxi.vercel.app/) (to be [removed](https://tanstack.com/start/latest/docs/framework/react/build-from-scratch#install-dependencies:~:text=Vinxi%20will%20be%20removed%20before%20version%201.0.0)) & [Vite](https://vite.dev/) | Build tools for optimizing development and production builds. |
+| **Linting** | [ESLint](https://eslint.org/) | Statical analyzer to ensure rules. |
+| **Formatter** | [Prettier](https://prettier.io/) | Formatter keeping code standardized. |
 <!-- | **Testing** | [Vitest](https://vitest.dev/) | Fast testing framework for TypeScript/JavaScript. | -->
 
 <!-- TODO -->
