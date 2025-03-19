@@ -1,19 +1,24 @@
-import { Card, CardContent } from "@/components/card"
-import { forwardRef } from "react"
-import { useTranslate } from "@/lib/i18n";
+import { forwardRef } from 'react';
+
+import { Card, CardContent } from '@/components/card';
+import { useTranslate } from '@/lib/i18n';
 
 interface PokemonCardProps {
-  nationalNumber: number
-  englishName: string,
-  primaryType: string,
-  secondaryType: string | null,
-  onClick: () => void,
+  nationalNumber: number;
+  englishName: string;
+  primaryType: string;
+  secondaryType: string | null;
+  onClick: () => void;
 }
 
 export const PokemonCard = forwardRef<HTMLDivElement, PokemonCardProps>(
-  ({ nationalNumber, englishName, primaryType, secondaryType, onClick }, ref) => {
-    const { translator } = useTranslate()
-    const translateType = (type: string | null) => type ? translator({ path: `pokemons.types.${type}` }) : ""
+  (
+    { nationalNumber, englishName, primaryType, secondaryType, onClick },
+    ref,
+  ) => {
+    const { translator } = useTranslate();
+    const translateType = (type: string | null) =>
+      type ? translator({ path: `pokemons.types.${type}` }) : '';
 
     return (
       <Card
@@ -31,12 +36,14 @@ export const PokemonCard = forwardRef<HTMLDivElement, PokemonCardProps>(
             {englishName} #{nationalNumber}
           </h2>
           <p className="text-sm text-gray-500 capitalize">
-            {[translateType(primaryType), translateType(secondaryType)].filter(Boolean).join(", ")}
+            {[translateType(primaryType), translateType(secondaryType)]
+              .filter(Boolean)
+              .join(', ')}
           </p>
         </CardContent>
       </Card>
     );
-  }
+  },
 );
 
-PokemonCard.displayName = "PokemonCard"; 
+PokemonCard.displayName = 'PokemonCard';

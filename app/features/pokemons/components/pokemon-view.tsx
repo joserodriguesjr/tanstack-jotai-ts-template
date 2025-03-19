@@ -1,31 +1,28 @@
-import { Button } from "@/components/button";
-import { Link, useParams } from "@tanstack/react-router";
-import { usePokemon } from "../api/get-pokemon";
-import Loading from "@/components/Loading";
+import { Link, useParams } from '@tanstack/react-router';
+
+import { Button } from '@/components/button';
+import Loading from '@/components/loading';
+import { usePokemon } from '@/features/pokemons/api/get-pokemon';
 
 export function PokemonView() {
-  const { pokemonName } = useParams({ from: "/(pokemons)/pokemons_/$pokemonName" })
-  const pokemonQuery = usePokemon({ pokemonName })
+  const { pokemonName } = useParams({
+    from: '/(pokemons)/pokemons_/$pokemonName',
+  });
+  const pokemonQuery = usePokemon({ pokemonName });
 
   if (pokemonQuery.isLoading) {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   }
 
   const pokemon = pokemonQuery?.data;
 
-  if (!pokemon) return null
+  if (!pokemon) return null;
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       {/* Back Button */}
       <Link to="/pokemons">
-        <Button
-          className="block h-full cursor-pointer"
-        >
-          Back to Pokedex
-        </Button>
+        <Button className="block h-full cursor-pointer">Back to Pokedex</Button>
       </Link>
 
       {/* Header */}
@@ -67,29 +64,29 @@ export function PokemonView() {
           <strong>Base Egg Steps:</strong> {pokemon.baseEggSteps}
         </p>
         <p>
-          <strong>Gigantamax:</strong> {pokemon.gigantamax ?? "No"}
+          <strong>Gigantamax:</strong> {pokemon.gigantamax ?? 'No'}
         </p>
         <p>
-          <strong>Mega Evolution:</strong> {pokemon.megaEvolution ?? "No"}
+          <strong>Mega Evolution:</strong> {pokemon.megaEvolution ?? 'No'}
         </p>
       </div>
 
       {/* Types */}
       <div className="my-4">
         <p>
-          <strong>Type:</strong> {pokemon.primaryType}{" "}
-          {pokemon.secondaryType ? `, ${pokemon.secondaryType}` : ""}
+          <strong>Type:</strong> {pokemon.primaryType}{' '}
+          {pokemon.secondaryType ? `, ${pokemon.secondaryType}` : ''}
         </p>
       </div>
 
       {/* Abilities */}
       <div className="my-4">
         <p>
-          <strong>Abilities:</strong> {pokemon.abilities0},{" "}
-          {pokemon.abilities1 ?? "—"}, {pokemon.abilities2 ?? "—"}
+          <strong>Abilities:</strong> {pokemon.abilities0},{' '}
+          {pokemon.abilities1 ?? '—'}, {pokemon.abilities2 ?? '—'}
         </p>
         <p>
-          <strong>Hidden Ability:</strong> {pokemon.abilitiesHidden ?? "None"}
+          <strong>Hidden Ability:</strong> {pokemon.abilitiesHidden ?? 'None'}
         </p>
       </div>
 
@@ -123,10 +120,10 @@ export function PokemonView() {
         <h2 className="text-xl font-bold">Weaknesses</h2>
         <div className="grid grid-cols-3 gap-2">
           {Object.entries(pokemon)
-            .filter(([key]) => key.startsWith("against"))
+            .filter(([key]) => key.startsWith('against'))
             .map(([key, value]) => (
               <p key={key}>
-                <strong>{key.replace("against", "")}:</strong> x{value}
+                <strong>{key.replace('against', '')}:</strong> x{value}
               </p>
             ))}
         </div>
@@ -147,7 +144,7 @@ export function PokemonView() {
               pokemon.evochain6,
             ]
               .filter(Boolean)
-              .filter((evo) => evo?.trim() !== "Level")
+              .filter((evo) => evo?.trim() !== 'Level')
               .map((evo, index) => (
                 <span key={index} className="px-2 py-1 bg-gray-200 rounded">
                   {evo}

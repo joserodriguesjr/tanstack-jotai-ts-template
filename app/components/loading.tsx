@@ -1,4 +1,4 @@
-import { Spinner } from "./spinner";
+import { Spinner } from '@/components/spinner';
 
 // todo: deixar mais bonito
 export default function Loading() {

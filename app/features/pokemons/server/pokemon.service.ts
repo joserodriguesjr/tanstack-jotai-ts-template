@@ -1,36 +1,50 @@
-import type { Pokemon, PokemonDTO } from "../pokemons.schema";
-import { getPokemonByName, getPokemonCount, getPokemonsLikeText } from "./pokemon.repository";
+import type { Pokemon, PokemonDTO } from '@/features/pokemons/pokemons.schema';
+import {
+  getPokemonByName,
+  getPokemonCount,
+  getPokemonsLikeText,
+} from '@/features/pokemons/server/pokemon.repository';
 
-export const findPokemon = async ({ pokemonName }: { pokemonName: string }): Promise<Pokemon> => { 
-    console.info(`Fetching pokemons, looking for ${pokemonName}...`);
-    
-    const pokemon = await getPokemonByName(pokemonName);
+export const findPokemon = async ({
+  pokemonName,
+}: {
+  pokemonName: string;
+}): Promise<Pokemon> => {
+  console.info(`Fetching pokemons, looking for ${pokemonName}...`);
 
-    if (!pokemon) {
-        throw new Error("No Pokémon found with the given name");
-    }
+  const pokemon = await getPokemonByName(pokemonName);
 
-    return pokemon as Pokemon;
+  if (!pokemon) {
+    throw new Error('No Pokémon found with the given name');
+  }
+
+  return pokemon as Pokemon;
 };
 
-export const findAllPokemons = async ({ search, pageParam, pageSize }: { search: string, pageParam: number, pageSize: number }): Promise<PokemonDTO> => { 
-    console.info(`Fetching pokemons for page ${pageParam}...`);
-    
-    const offset = (pageParam - 1) * pageSize;
-    const [pokemonsData, totalCount] = await Promise.all(
-        [
-            getPokemonsLikeText(search, pageSize, offset), 
-            getPokemonCount(search)
-        ]
-    )
+export const findAllPokemons = async ({
+  search,
+  pageParam,
+  pageSize,
+}: {
+  search: string;
+  pageParam: number;
+  pageSize: number;
+}): Promise<PokemonDTO> => {
+  console.info(`Fetching pokemons for page ${pageParam}...`);
 
-    return {
-        content: pokemonsData,
-        pagination: {
-            total: totalCount,
-            page: pageParam,
-            pageSize,
-            totalPages: Math.ceil(totalCount / pageSize)
-        }
-    };
-}
+  const offset = (pageParam - 1) * pageSize;
+  const [pokemonsData, totalCount] = await Promise.all([
+    getPokemonsLikeText(search, pageSize, offset),
+    getPokemonCount(search),
+  ]);
+
+  return {
+    content: pokemonsData,
+    pagination: {
+      total: totalCount,
+      page: pageParam,
+      pageSize,
+      totalPages: Math.ceil(totalCount / pageSize),
+    },
+  };
+};

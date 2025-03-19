@@ -1,19 +1,20 @@
-import React, { useEffect } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link } from '@tanstack/react-router';
+import { useAtom } from 'jotai';
+import React, { useEffect } from 'react';
+
+import { Button } from '@/components/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/dialog";
-import { Button } from "@/components/button";
-import { useAtom } from "jotai";
-import { selectedPokemonAtom } from "../pokemons.filters";
+} from '@/components/dialog';
+import { selectedPokemonAtom } from '@/features/pokemons/pokemons.filters';
 
 export const PokemonModal: React.FC = () => {
   const [pokemon, setSelectedPokemon] = useAtom(selectedPokemonAtom);
 
-  useEffect(() => { return setSelectedPokemon(null) }, []);
+  useEffect(() => setSelectedPokemon(null));
 
   if (!pokemon) return null;
 
@@ -45,7 +46,7 @@ export const PokemonModal: React.FC = () => {
           <div className="grid grid-cols-2 gap-4">
             <p className="capitalize">
               <strong>Type:</strong> {pokemon.primaryType}
-              {pokemon.secondaryType ? `, ${pokemon.secondaryType}` : ""}
+              {pokemon.secondaryType ? `, ${pokemon.secondaryType}` : ''}
             </p>
             <p>
               <strong>Height:</strong> {pokemon.heightM}m
@@ -80,10 +81,11 @@ export const PokemonModal: React.FC = () => {
             </p>
           </div>
         </div>
-        <Link to="/pokemons/$pokemonName" params={{ pokemonName: pokemon.englishName }}  >
-          <Button
-            className="block w-full h-full cursor-pointer"
-          >
+        <Link
+          to="/pokemons/$pokemonName"
+          params={{ pokemonName: pokemon.englishName }}
+        >
+          <Button className="block w-full h-full cursor-pointer">
             More details...
           </Button>
         </Link>

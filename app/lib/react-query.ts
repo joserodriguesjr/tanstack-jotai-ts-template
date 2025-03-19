@@ -2,9 +2,9 @@ import type { UseMutationOptions, DefaultOptions } from '@tanstack/react-query';
 
 export const queryConfig = {
   queries: {
-      networkMode: "offlineFirst",
-      staleTime: Infinity,
-      gcTime: 1000 * 60 * 60 * 24, // 24 hours
+    networkMode: 'offlineFirst',
+    staleTime: Infinity,
+    gcTime: 1000 * 60 * 60 * 24, // 24 hours
     // throwOnError: true,
     // refetchOnWindowFocus: false,
     // retry: false,

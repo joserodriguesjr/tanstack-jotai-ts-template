@@ -1,23 +1,30 @@
-import { useAtomValue, useSetAtom } from "jotai";
-import { searchAtom, selectedPokemonAtom } from "../pokemons.filters";
-import { usePokemons } from "../api/get-pokemons";
-import { PokemonCard } from "./pokemon-card";
-import { PokemonModal } from "./pokemon-modal";
-import { useMemo } from "react";
-import { useInfiniteScroll } from "../hooks/use-infinite-scroll";
+import { useAtomValue, useSetAtom } from 'jotai';
+import { useMemo } from 'react';
+
+import { usePokemons } from '@/features/pokemons/api/get-pokemons';
+import { PokemonCard } from '@/features/pokemons/components/pokemon-card';
+import { PokemonModal } from '@/features/pokemons/components/pokemon-modal';
+import { useInfiniteScroll } from '@/features/pokemons/hooks/use-infinite-scroll';
+import {
+  searchAtom,
+  selectedPokemonAtom,
+} from '@/features/pokemons/pokemons.filters';
 
 export function PokemonList() {
   const setSelectedPokemon = useSetAtom(selectedPokemonAtom);
-  const search = useAtomValue(searchAtom)
+  const search = useAtomValue(searchAtom);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = usePokemons({
     search,
     queryConfig: {
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
-    }
+    },
   });
-  const pokemons = useMemo(() => data?.pages.flatMap((page) => page.content) ?? [], [data]);
+  const pokemons = useMemo(
+    () => data?.pages.flatMap((page) => page.content) ?? [],
+    [data],
+  );
   const lastPokemonIndex = pokemons.length > 5 ? pokemons.length - 5 : 0;
 
   const { loadMoreRef } = useInfiniteScroll({

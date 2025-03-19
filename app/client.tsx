@@ -1,12 +1,13 @@
 /// <reference types="vinxi/types/client" />
-import React from "react";
-import { ErrorBoundary } from "react-error-boundary";
-import { hydrateRoot } from "react-dom/client";
-import { StartClient } from "@tanstack/react-start";
-import { createRouter } from "./router";
-import reportWebVitals from "./reportWebVitals";
-import { ErrorFallback } from "./components/ErrorFallback";
-import '@/lib/i18n'
+import { StartClient } from '@tanstack/react-start';
+import React from 'react';
+import { hydrateRoot } from 'react-dom/client';
+import { ErrorBoundary } from 'react-error-boundary';
+
+import { ErrorFallback } from '@/components/error-fallback';
+import reportWebVitals from '@/report-web-vitals';
+import { createRouter } from '@/router';
+import '@/lib/i18n';
 
 const router = createRouter();
 

@@ -1,14 +1,14 @@
-import { get, set, del } from "idb-keyval";
 import type {
   PersistedClient,
   Persister,
-} from "@tanstack/react-query-persist-client";
+} from '@tanstack/react-query-persist-client';
+import { get, set, del } from 'idb-keyval';
 
 /**
  * Creates an Indexed DB persister
  * @see https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API
  */
-export function createIDBPersister(idbValidKey: IDBValidKey = "react-query") {
+export function createIDBPersister(idbValidKey: IDBValidKey = 'react-query') {
   return {
     persistClient: async (client: PersistedClient) => {
       await set(idbValidKey, client);

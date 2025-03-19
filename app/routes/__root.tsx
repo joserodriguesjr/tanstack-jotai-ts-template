@@ -1,36 +1,37 @@
-import { useEffect, type ReactNode } from "react";
+import type { QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
   createRootRouteWithContext,
   Link,
   Outlet,
   HeadContent,
   Scripts,
-} from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import type { QueryClient } from "@tanstack/react-query";
-import globalCss from "@/assets/global.css?url";
-import { useTheme } from "@/hooks/useTheme";
-import HydrationProvider from "@/components/HydrationProvider";
+} from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import { useEffect, type ReactNode } from 'react';
+
+import globalCss from '@/assets/global.css?url';
+import HydrationProvider from '@/components/hydration-provider';
+import { useTheme } from '@/hooks/use-theme';
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
 }>()({
   head: () => ({
     meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { charSet: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
-        title: "Pokedex App",
+        title: 'Pokedex App',
         description: `A PWA for browsing Pokémon data. `,
       },
     ],
     links: [
-      { rel: "stylesheet", href: globalCss },
-      { rel: "icon", href: "/favicon.ico" },
-      { rel: "manifest", href: "/manifest.webmanifest" },
-      { rel: "manifest", href: "/manifest.json" },
-      { rel: "apple-touch-icon", sizes: "192x192", href: "/logo192.png" },
+      { rel: 'stylesheet', href: globalCss },
+      { rel: 'icon', href: '/favicon.ico' },
+      { rel: 'manifest', href: '/manifest.webmanifest' },
+      { rel: 'manifest', href: '/manifest.json' },
+      { rel: 'apple-touch-icon', sizes: '192x192', href: '/logo192.png' },
     ],
   }),
   component: RootComponent,
@@ -42,7 +43,7 @@ function RootComponent() {
 
   // TODO: Não está da melhor forma
   useEffect(() => {
-        document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 
   return (
@@ -51,7 +52,6 @@ function RootComponent() {
         <Outlet />
       </HydrationProvider>
     </RootDocument>
-
   );
 }
 

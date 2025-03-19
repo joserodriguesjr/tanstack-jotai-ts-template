@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 interface ErrorFallbackProps {
   error: { message?: string } | null;
@@ -9,8 +9,8 @@ export function ErrorFallback({ error }: ErrorFallbackProps) {
   useEffect(() => {
     const chunkFailedMessage = /Loading chunk [\d]+ failed/;
     if (error?.message && chunkFailedMessage.test(error.message)) {
-      if (!getWithExpiry("chunk_failed")) {
-        setWithExpiry("chunk_failed", "true", 1000);
+      if (!getWithExpiry('chunk_failed')) {
+        setWithExpiry('chunk_failed', 'true', 1000);
         window.location.reload();
       }
     }
