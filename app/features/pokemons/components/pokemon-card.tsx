@@ -24,12 +24,12 @@ export const PokemonCard = forwardRef<HTMLDivElement, PokemonCardProps>(
       <Card
         ref={ref}
         onClick={onClick}
-        className="p-4 flex flex-col items-center cursor-pointer hover:shadow-lg transition-shadow"
+        className="flex cursor-pointer flex-col items-center p-4 transition-shadow hover:shadow-lg"
       >
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${nationalNumber}.png`}
           alt={englishName}
-          className="w-24 h-24"
+          className="h-24 w-24"
         />
         <CardContent className="text-center">
           <h2 className="text-base font-semibold capitalize">

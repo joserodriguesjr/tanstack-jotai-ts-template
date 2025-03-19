@@ -19,24 +19,24 @@ export function PokemonView() {
   if (!pokemon) return null;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-lg">
       {/* Back Button */}
       <Link to="/pokemons">
         <Button className="block h-full cursor-pointer">Back to Pokedex</Button>
       </Link>
 
       {/* Header */}
-      <h1 className="text-3xl font-bold text-center capitalize">
+      <h1 className="text-center text-3xl font-bold capitalize">
         {pokemon.englishName}
       </h1>
       <p className="text-center text-gray-500">{pokemon.japaneseName}</p>
 
       {/* Image */}
-      <div className="flex justify-center my-4">
+      <div className="my-4 flex justify-center">
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.nationalNumber}.png`}
           alt={pokemon.englishName!}
-          className="w-32 h-32"
+          className="h-32 w-32"
         />
       </div>
 
@@ -133,7 +133,7 @@ export function PokemonView() {
       {pokemon.evochain0 && (
         <div className="my-4">
           <h2 className="text-xl font-bold">Evolution Chain</h2>
-          <div className="flex gap-2 justify-center">
+          <div className="flex justify-center gap-2">
             {[
               pokemon.evochain0,
               pokemon.evochain1,
@@ -146,7 +146,7 @@ export function PokemonView() {
               .filter(Boolean)
               .filter((evo) => evo?.trim() !== 'Level')
               .map((evo, index) => (
-                <span key={index} className="px-2 py-1 bg-gray-200 rounded">
+                <span key={index} className="rounded bg-gray-200 px-2 py-1">
                   {evo}
                 </span>
               ))}

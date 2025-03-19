@@ -57,9 +57,9 @@ export default defineConfig([
         'plugin:react/recommended',
         'plugin:react-hooks/recommended',
         'plugin:jsx-a11y/recommended',
-        'plugin:prettier/recommended',
         'plugin:testing-library/react',
         'plugin:jest-dom/recommended',
+        'plugin:prettier/recommended',
         // 'plugin:tailwindcss/recommended',
         // 'plugin:vitest/legacy-recommended',
       ),
@@ -83,6 +83,9 @@ export default defineConfig([
         typescript: {
           alwaysTryTypes: true,
         },
+      },
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
       },
     },
 

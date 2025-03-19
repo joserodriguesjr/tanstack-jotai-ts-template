@@ -27,20 +27,20 @@ export const PokemonModal: React.FC = () => {
           {pokemon.englishName}, #{pokemon.nationalNumber}
         </DialogTitle>
 
-        <DialogDescription className="text-gray-600 text-sm text-center">
+        <DialogDescription className="text-center text-sm text-gray-600">
           {pokemon.description}
         </DialogDescription>
 
-        <div className="flex flex-row items-center my-4">
+        <div className="my-4 flex flex-row items-center">
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.nationalNumber}.gif`}
             alt={pokemon.englishName}
-            className="w-32 h-32 mx-auto"
+            className="mx-auto h-32 w-32"
           />
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/back/${pokemon.nationalNumber}.gif`}
             alt={pokemon.englishName}
-            className="w-32 h-32 mx-auto"
+            className="mx-auto h-32 w-32"
           />
         </div>
 
@@ -87,7 +87,7 @@ export const PokemonModal: React.FC = () => {
           to="/pokemons/$pokemonName"
           params={{ pokemonName: pokemon.englishName }}
         >
-          <Button className="block w-full h-full cursor-pointer">
+          <Button className="block h-full w-full cursor-pointer">
             More details...
           </Button>
         </Link>

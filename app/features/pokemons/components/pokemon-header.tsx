@@ -20,12 +20,12 @@ export const PokemonHeader = () => {
   );
 
   return (
-    <header className="bg-gray-800 shadow-md sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
+    <header className="sticky top-0 z-50 bg-gray-800 shadow-md">
+      <div className="mx-auto flex max-w-6xl items-center justify-between p-4">
         {/* Logo */}
         <Link
           to="/"
-          className="text-white text-2xl font-bold flex items-center gap-2"
+          className="flex items-center gap-2 text-2xl font-bold text-white"
         >
           {/* <img src="/pokeball.svg" alt="Pokeball" className="w-8 h-8" /> */}
           PokéDex
@@ -40,7 +40,7 @@ export const PokemonHeader = () => {
             <img
               src={BrasilFlag}
               alt="Brazilian flag"
-              className={`w-6 h-6 cursor-pointer transition-all ${language === 'pt-BR' ? '' : 'grayscale opacity-50'}`}
+              className={`h-6 w-6 cursor-pointer transition-all ${language === 'pt-BR' ? '' : 'opacity-50 grayscale'}`}
             />
           </button>
 
@@ -51,7 +51,7 @@ export const PokemonHeader = () => {
             <img
               src={EuaFlag}
               alt="US flag"
-              className={`w-6 h-6 cursor-pointer transition-all ${language === 'en-US' ? '' : 'grayscale opacity-50'}`}
+              className={`h-6 w-6 cursor-pointer transition-all ${language === 'en-US' ? '' : 'opacity-50 grayscale'}`}
             />
           </button>
         </div>
@@ -61,33 +61,33 @@ export const PokemonHeader = () => {
         </Button>
 
         {/* Barra de pesquisa */}
-        <div className="hidden sm:flex items-center bg-gray-700 px-3 py-2 rounded-lg">
-          <Search className="text-white w-5 h-5 mr-2" />
+        <div className="hidden items-center rounded-lg bg-gray-700 px-3 py-2 sm:flex">
+          <Search className="mr-2 h-5 w-5 text-white" />
           <input
             type="text"
             placeholder={translator({ path: 'pokemons.header.searchBar' })}
             onChange={onChangeSearch}
-            className="bg-transparent outline-none text-white placeholder-gray-300"
+            className="bg-transparent text-white placeholder-gray-300 outline-none"
           />
         </div>
 
         {/* Menu desktop */}
-        <nav className="hidden md:flex gap-6">
+        <nav className="hidden gap-6 md:flex">
           <Link
             to="/pokemons"
-            className="text-white font-medium hover:underline"
+            className="font-medium text-white hover:underline"
           >
             {translator({ path: 'pokemons.header.allPokemons' })}
           </Link>
           <Link
             to="/pokemons/types"
-            className="text-white font-medium hover:underline"
+            className="font-medium text-white hover:underline"
           >
             {translator({ path: 'pokemons.header.types' })}
           </Link>
           <Link
             to="/pokemons/about"
-            className="text-white font-medium hover:underline"
+            className="font-medium text-white hover:underline"
           >
             {translator({ path: 'pokemons.header.about' })}
           </Link>
@@ -99,12 +99,12 @@ export const PokemonHeader = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden text-white"
+              className="text-white md:hidden"
             >
               ☰
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="bg-gray-900 text-white p-6">
+          <SheetContent side="left" className="bg-gray-900 p-6 text-white">
             <nav className="flex flex-col gap-4">
               <Link
                 to="/pokemons"
