@@ -14,7 +14,9 @@ import { selectedPokemonAtom } from '@/features/pokemons/pokemons.filters';
 export const PokemonModal: React.FC = () => {
   const [pokemon, setSelectedPokemon] = useAtom(selectedPokemonAtom);
 
-  useEffect(() => setSelectedPokemon(null));
+  useEffect(() => {
+    return setSelectedPokemon(null);
+  }, [setSelectedPokemon]);
 
   if (!pokemon) return null;
 
