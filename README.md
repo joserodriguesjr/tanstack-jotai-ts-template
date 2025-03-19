@@ -60,6 +60,7 @@ This template comes with an example app where a Pokedex is implemented. The data
 ✅ Modern Styling – Tailwind CSS + Shadcn UI components \
 ✅ Multilanguage Support – i18n for multilanguage \
 ✅ Linting + Formatter – ESLint with Prettier for enhanced developer experience \
+✅ Git Hooks – Husky and Lint Staged ensuring good practices \
 <!-- ✅ PWA – Service workers configured -->
 
 ## Folder Structure
