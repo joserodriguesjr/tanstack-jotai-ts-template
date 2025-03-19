@@ -33,21 +33,27 @@ export const PokemonHeader = () => {
 
         {/* todo: create component from changing language */}
         <div className="flex items-center gap-2">
-          <Button
+          <button
             onClick={() => onChangeLanguage('pt-BR')}
-            className={`w-6 h-6 cursor-pointer transition-all ${language === 'pt-BR' ? '' : 'grayscale opacity-50'}`}
             aria-label="Switch to Portuguese"
           >
-            <img src={BrasilFlag} alt="Brazilian flag" />
-          </Button>
+            <img
+              src={BrasilFlag}
+              alt="Brazilian flag"
+              className={`w-6 h-6 cursor-pointer transition-all ${language === 'pt-BR' ? '' : 'grayscale opacity-50'}`}
+            />
+          </button>
 
-          <Button
+          <button
             onClick={() => onChangeLanguage('en-US')}
-            className={`w-6 h-6 cursor-pointer transition-all ${language === 'en-US' ? '' : 'grayscale opacity-50'}`}
             aria-label="Switch to English"
           >
-            <img src={EuaFlag} alt="US flag" />
-          </Button>
+            <img
+              src={EuaFlag}
+              alt="US flag"
+              className={`w-6 h-6 cursor-pointer transition-all ${language === 'en-US' ? '' : 'grayscale opacity-50'}`}
+            />
+          </button>
         </div>
 
         <Button variant={'noBackground'} size={'icon'} onClick={onToggleTheme}>
