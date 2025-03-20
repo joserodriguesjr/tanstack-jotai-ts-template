@@ -19,79 +19,72 @@
   </p>
 </p>
 
-## Purpose
+## Overview
 
-This project serves as a full-stack app template, providing a solid foundation for web applications with support for PWA. It enables rapid development using [modern tools](#tech-stack).
+This project serves as a comprehensive fullstack template designed for rapid development of web applications, with built-in support for PWA. It leverages modern tools and best practices for a streamlined developer experience.
 
 ## Example App - Pokedex
 
-This template comes with an example app where a Pokedex is implemented. The data is inside a SQLite in data folder. It has server functions that queries it, a search bar and state stored in IndexedDB. You can take a look to see how the template its supposed to work.
+The template includes an example application implementing a Pokedex. It features:
 
-### Desktop Page
+- A SQLite database located in the data/ folder
+- Server functions to query the database
+- A search bar
+- State persistence in IndexedDB
+
+This example demonstrates how to structure and utilize the template effectively.
+
+### Desktop View
 
 ![Pokedex - Desktop version](/public/assets/screenshot-desktop.png)
 
-### Mobile Page
+### Mobile View
 
 ![Pokedex - Mobile version](/public/assets/screenshot-mobile.png)
 
-## Next Steps
+## Roadmap
 
-- Mutations (with redirect to new resource)
-- Auth using Better Auth  (<https://www.better-auth.com/docs/installation> / <https://www.better-auth.com/docs/basic-usage> / <https://www.better-auth.com/docs/integrations/tanstack>)
-- WebSocket and SSE implementation <https://nize.foo/blog/tanstack-start-websockets/>
-- Server Functions structure (useServerFn, ...)
-- Backend architecture -> IOC
-- Env configuration for DEV and PRD
-- Docker with PostgreSQL
-- PWA support
-- Tests in front and back
+- Implement mutations with redirects to new resources
+- Integrate authentication using [Better Auth](https://www.better-auth.com/docs/installation)
+- Add WebSocket and SSE support ([reference](https://nize.foo/blog/tanstack-start-websockets))
+- Improve server function structure (useServerFn, ...)
+- Enhance backend architecture with IoC (Inversion of Control)
+- Configure environment settings for development and production
+- Dockerize with PostgreSQL support
+- Add PWA functionality
+- Implement frontend and backend testing
 
-## Features
+## Key Features
 
-✅ Full-stack Setup – Includes both client and server logic \
-✅ File-based Routing – Powered by TanStack Router \
-✅ Optimized Data Fetching – TanStack Query for caching & server communication \
-✅ Global State Management – Jotai for atom state management \
-✅ Offline Cache – IndexedDB for caching TanStack Query cache \
-✅ SSR & API Handlers – Server-side rendering and server functions \
-✅ Type-safe ORM – Drizzle ORM for database management \
-✅ Schema Validation - Zod validation library \
-✅ Modern Styling – Tailwind CSS + Shadcn UI components \
-✅ Multilanguage Support – i18n for multilanguage \
-✅ Linting + Formatter – ESLint with Prettier for enhanced developer experience \
-✅ Git Hooks – Husky and Lint Staged ensuring good practices \
-<!-- ✅ PWA – Service workers configured -->
+✅ Fullstack setup with client and server integration \
+✅ File-based routing powered by TanStack Router \
+✅ Optimized data fetching with TanStack Query \
+✅ Global state management using Jotai \
+✅ Offline cache support via IndexedDB \
+✅ SSR and API handlers for server-side logic \
+✅ Type-safe ORM with Drizzle \
+✅ Schema validation with Zod \
+✅ Modern styling using Tailwind CSS + Shadcn UI \
+✅ Multilanguage support with i18n \
+✅ Linting and formatting via ESLint + Prettier \
+✅ Git hooks with Husky and Lint Staged
+<!-- ✅ PWA built-in support -->
 
-## Folder Structure
+## Project Structure
 
 ```txt
 .
 ├── app/
-│   ├── assets/                → Static assets included in the client bundle
-│   ├── atoms/                 → Global state management (e.g., theme, auth, ...)
+│   ├── assets/                → Static assets
 │   ├── components/            → Shared UI components
-│   ├── config/                → Global configurations (e.g., API, environment settings)
-│   ├── constants/             → Reusable constants (e.g., messages, roles, ...)
-│   ├── db/                    → Database related files
-│   ├── hooks/                 → Global hooks
-│   ├── lib/                   → Wrappers for external libraries
-│   ├── utils/                 → Utility functions (e.g., formatters, helpers)
-│   ├── modules/               → Feature-based modules, each with:
-│   │   ├── api/               → API wrappers
-│   │   ├── atoms/             → Local state management (e.g., filters, toogles, ...)
-│   │   ├── components/        → Module-specific UI components
-│   │   ├── hooks/             → Custom hooks
-│   │   ├── pages/             → Module pages that will be rendered
-│   │   ├── server/            → Server-side functions
-│   │   ├── module.schema.ts   → Schema definitions for module
-│   ├── routes/                → Application pages
-│   │   ├── __root.tsx         → App-wide settings (head, meta, layout)
-│   │   ├── index.tsx          → Homepage (/)
-│   │   ├── moduleA/
-│   │   │   ├── index.tsx      → Page for /moduleA
-│   │   │   ├── route.tsx      → Layout for /moduleA
-│   │   │   ├── $id.tsx        → Dynamic route for /moduleA/$id
+│   ├── config/                → Global configurations
+│   ├── constants/             → Reusable constants
+│   ├── db/                    → Database-related files
+│   ├── features/              → Feature-based modules
+│   ├── hooks/                 → Custom hooks
+│   ├── lib/                   → External library wrappers
+│   ├── utils/                 → Utility functions
+│   ├── routes/                → Application pages and routing logic
 ```
 
 ## Getting Started
@@ -99,54 +92,24 @@ This template comes with an example app where a Pokedex is implemented. The data
 ### Prerequisites
 
 - Node.js v18+
-- npm or pnpm installed
-- A .env file with required environment variables
-
-### Installation
-
-Clone the repository and install dependencies:
-
-```bash
-git clone https://github.com/joserodriguesjr/tanstack-jotai-ts-template.git
-cd tanstack-jotai-ts-template
-npm install
-```
-
-### Development Server
-
-Run the app in development mode:
-
-```bash
-npm run dev
-```
-
-This will start the server at `http://localhost:3000/`.
-
-## Building For Production
-
-To build this application for production:
-
-```bash
-npm run build
-npm run start
-```
+- npm installed
+- `.env` file with required environment variables
 
 ## Tech Stack
 
 | Category            | Tool/Library                                      | Description |
 |---------------------|------------------------------------------------|-------------|
-| **SSR + Server Functions** | [TanStack Start](https://tanstack.com/start) | Generates the server functions. |
-| **Routing** | [TanStack Router](https://tanstack.com/router) | File-based router, managing routes in `app/routes`. |
-| **Data Fetching** | [TanStack Query](https://tanstack.com/query) | Fetches and caches data efficiently. |
-| **Cache** | [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) | Caches data in client machine for offline support. |
-| **State Management** | [Jotai](https://jotai.org/docs) | Bottom-up state management using atoms. |
-| **ORM** | [Drizzle](https://orm.drizzle.team/) | Database ORM for type-safe queries. |
-| **Validation** | [Zod](https://zod.dev/) | TypeScript-first schema validation with static type inference. |
+| **Fullstack Framework** | [TanStack Start](https://tanstack.com/start) | Provides SSR and server functions. |
+| **Routing** | [TanStack Router](https://tanstack.com/router) | File-based routing. |
+| **Data Fetching** | [TanStack Query](https://tanstack.com/query) | Efficient caching and server communication. |
+| **State Management** | [Jotai](https://jotai.org/docs) | Atom-based global state management. |
+| **ORM** | [Drizzle](https://orm.drizzle.team/) | Type-safe database queries. |
+| **Validation** | [Zod](https://zod.dev/) | Schema validation. |
 | **Styling** | [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS framework. |
-| **Component Library** | [Shadcn](https://ui.shadcn.com/docs/components/) | Prebuilt UI components for styling. |
-| **Build System** | [Vinxi](https://vinxi.vercel.app/) (to be [removed](https://tanstack.com/start/latest/docs/framework/react/build-from-scratch#install-dependencies:~:text=Vinxi%20will%20be%20removed%20before%20version%201.0.0)) & [Vite](https://vite.dev/) | Build tools for optimizing development and production builds. |
-| **Linting** | [ESLint](https://eslint.org/) | Statical analyzer to ensure rules. |
-| **Formatter** | [Prettier](https://prettier.io/) | Formatter keeping code standardized. |
+| **Component Library** | [Shadcn](https://ui.shadcn.com/docs/components/) | Prebuilt UI components. |
+| **Build System** | [Vinxi](https://vinxi.vercel.app/) (to be [removed](https://tanstack.com/start/latest/docs/framework/react/build-from-scratch#install-dependencies:~:text=Vinxi%20will%20be%20removed%20before%20version%201.0.0)) & [Vite](https://vite.dev/) | Optimized build tool. |
+| **Linting** | [ESLint](https://eslint.org/) | Code quality enforcement. |
+| **Formatter** | [Prettier](https://prettier.io/) | Code formatting. |
 <!-- | **Testing** | [Vitest](https://vitest.dev/) | Fast testing framework for TypeScript/JavaScript. | -->
 
 <!-- TODO -->
@@ -159,65 +122,34 @@ npm run start
 
 ### How do I add a new route?
 
-Create a new file in /app/routes.
-
-For example, creating '/app/routes/about.tsx' will create a new /about page automatically (You need to be running in the development mode).
+Create a new file in `/app/routes/`. For example, adding `/app/routes/about.tsx` automatically creates the `/about` page (in development mode).
 
 ### How do I connect to a database?
 
-The project uses Drizzle ORM. Configure your database in the .env file and define your schema in /app/db/schema.ts.
+Configure Drizzle ORM by defining your schema in `/app/db/schema.ts` and updating your `.env` file accordingly. Refer to the [Drizzle documentation](https://orm.drizzle.team/docs/get-started) for details.
 
-See the [get started](https://orm.drizzle.team/docs/get-started) from the offical documentation for more informations.
+### How is cache and state managed?
 
-### How to manage cache / state?
+- Loaders run on the client during navigation but execute on the server on full-page reloads.
+- Use Jotai for sharing state between components, particularly for filters and search parameters.
 
-Keep in mind that the Loader runs when navigating from the client. If the page is reloaded (F5) or accessed from direct URL, the loader will not have been hydrated with the cache and it'll run on the server.
-
-For managing filters, search params and other states that could be used between components - use Jotai to share them.
-
-## How is TanStack Start different from Next.js?
+## Why Choose TanStack Start Over Next.js?
 
 ### Streaming SSR
 
-Unlike Next.js, which can block rendering while waiting for data, TanStack Start streams critical content immediately, loading slower data incrementally. This results in faster page interactivity.
+TanStack Start streams content progressively, enhancing interactivity. In contrast, Next.js can block rendering while waiting for data.
 
 ### Client-First Philosophy
 
-TanStack Start excels in dynamic, real-time apps with offline capabilities, such as dashboards or collaboration tools. While Next.js focuses on SSR and SEO, TanStack Start prioritizes responsiveness and interactivity.
-
-It follows a client-first approach for it's fullstack capabilities. In contrast to Next.js where everything is designed with a server-first approach in mind.
-
-#### Code Execution
-
-There are only a few places where code is executed on the server that you need to be aware of. Other than that, they make it very clear where things run. These are the main ones:
-
-- ssr.tsx (the entry point)
-- The return of the .handler() methods in createServerFn
-- The return of the .server() methods in createMiddleware
-- The custom /api/ directory
-- Route loaders run in the server when you reload the page (the first render, thus not having access to client storages)
-
-### Isomorphic Loaders
-
-TanStack Start’s loaders work seamlessly on both the server and client, reducing code duplication compared to Next.js’s getServerSideProps or getStaticProps.
+TanStack Start is optimized for dynamic, real-time apps with offline support, focusing on responsiveness rather than traditional SSR/SEO.
 
 ### Flexibility Over Convention
 
-Next.js is great for rapid prototyping with its conventions but can feel restrictive in complex projects. TanStack Start provides granular control, suiting projects requiring customization.
+While Next.js provides strong conventions for rapid development, TanStack Start offers more customization and control.
 
 ### Deployment and Lock-In Considerations
 
-#### TanStack Start
-
-- Flexible Deployment: Deploy anywhere compatible with Node.js, including serverless functions.
-- No Vendor Lock-In: Maintain control over your infrastructure.
-- Out-of-the-box preset support for various popular platforms to run your application — Netlify , Vercel, Cloudflare-pages, Node JS server or a Bun Server
-
-#### Next.js
-
-- Optimized for Vercel: This offers additional features like Edge Functions, but relying on them could lead to vendor lock-in.
-- Cost Considerations: Unnecessary SSR can increase costs on serverless platforms like Vercel.
-TanStack Start’s flexibility makes it ideal for teams wanting independence.
+TanStack Start supports flexible deployment (e.g., Netlify, Vercel, Cloudflare, Node.js, Bun) without vendor lock-in. Next.js, while powerful, is tightly integrated with Vercel.
 
 ## References
 
