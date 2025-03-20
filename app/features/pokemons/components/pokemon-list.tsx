@@ -1,7 +1,6 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useMemo } from 'react';
 
-import { usePokemons } from '@/features/pokemons/api/get-pokemons';
 import { PokemonCard } from '@/features/pokemons/components/pokemon-card';
 import { PokemonModal } from '@/features/pokemons/components/pokemon-modal';
 import { useInfiniteScroll } from '@/features/pokemons/hooks/use-infinite-scroll';
@@ -9,6 +8,7 @@ import {
   searchAtom,
   selectedPokemonAtom,
 } from '@/features/pokemons/pokemons.filters';
+import { usePokemons } from '@/features/pokemons/services/get-pokemons';
 
 export function PokemonList() {
   const setSelectedPokemon = useSetAtom(selectedPokemonAtom);

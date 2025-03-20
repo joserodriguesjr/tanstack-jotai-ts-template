@@ -1,7 +1,7 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 
-import { getPokemonQueryOptions } from '@/features/pokemons/api/get-pokemon';
 import { PokemonView } from '@/features/pokemons/components/pokemon-view';
+import { getPokemonQueryOptions } from '@/features/pokemons/services/get-pokemon';
 
 export const Route = createFileRoute('/(pokemons)/pokemons_/$pokemonName')({
   loader: async ({ context: { queryClient }, params: { pokemonName } }) =>

@@ -2,7 +2,7 @@ import { Link, useParams } from '@tanstack/react-router';
 
 import { Button } from '@/components/button';
 import Loading from '@/components/loading';
-import { usePokemon } from '@/features/pokemons/api/get-pokemon';
+import { usePokemon } from '@/features/pokemons/services/get-pokemon';
 
 export function PokemonView() {
   const { pokemonName } = useParams({

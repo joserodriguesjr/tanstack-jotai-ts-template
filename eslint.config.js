@@ -123,11 +123,21 @@ export default defineConfig([
               from: ['./app/features'],
             },
             // disables cross-feature imports:
-            // eg. app/features/pokemons should not import from other features
+            // eg. features should not import other features server code (but they can import other packages)
             {
-              target: './app/features/pokemons',
-              from: './app/features',
-              except: ['./pokemons'],
+              target: './app/features/*/!(services)/**', // Any file inside a feature except `services/`
+              from: './app/features/*/server/**',
+              message: 'Only the feature service can access its server',
+            },
+            {
+              target: './app/features/*/index.ts', // Block feature root index.ts
+              from: './app/features/*/server/**',
+              message: 'Only the feature service can access its server',
+            },
+            {
+              target: './app/features/*', // Block imports from other features
+              from: './app/features/*/server/**',
+              message: 'Only the feature service can access its server',
             },
           ],
         },
