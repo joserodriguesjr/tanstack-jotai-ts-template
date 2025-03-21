@@ -21,7 +21,9 @@
 
 ## Overview
 
-This project serves as a comprehensive fullstack template designed for rapid development of web applications, with built-in support for PWA. It leverages modern tools and best practices for a streamlined developer experience.
+This project serves as a comprehensive fullstack template designed for rapid development of web applications. It leverages modern tools and best practices for a streamlined developer experience.
+
+<!-- todo: with built-in support for PWA. -->
 
 ## Example App - Pokedex
 
@@ -67,24 +69,44 @@ This example demonstrates how to structure and utilize the template effectively.
 ✅ Modern styling using Tailwind CSS + Shadcn UI \
 ✅ Multilanguage support with i18n \
 ✅ Linting and formatting via ESLint + Prettier \
-✅ Git hooks with Husky and Lint Staged
+✅ Git hooks with Husky and Lint Staged \
+✅ FSD architecture enforced by ESLint
 <!-- ✅ PWA built-in support -->
 
-## Project Structure
+## Architecture
+
+### Why `src/`, `app/` and `server/`?
+
+- `src/` -> All client code
+- `server/` -> All server code
+- `app/` -> TanStack Start needs entry point files to be inside a root `app/` folder
+
+### Rules
+
+There are some set of rules in ESLint to avoid coupling layers, following Feature Sliced Design architecture:
+
+- `src/shared` can't import any other layers  
+- `src/entities` can't import `features`, `widgets` and `pages` layers
+- `src/features` can't import `widgets` and `pages` layers
+- `src/widgets` can't import `pages` layers
+- `src/` can't import any file inside `app/`  
+- Only `src/entities/<entity>/api` can import `server/`  
+- `server/` can't import any file inside `src/` or `app/`  
+- There can't be any cross-import inside `src/entities`, `src/features` or `src/widgets`
+
+### Folder Structure
 
 ```txt
 .
-├── app/
-│   ├── assets/                → Static assets
-│   ├── components/            → Shared UI components
-│   ├── config/                → Global configurations
-│   ├── constants/             → Reusable constants
+├── app/                       → TanStack Start entry points
+├── src/
+│   ├── shared/                → Reusable ui, hooks, libs and utils
+│   ├── entities/              → Doman-specifc models and logic
+│   ├── features/              → User interaction with app
+│   ├── widgets/               → Combines features/entities
+│   ├── pages/                 → Combines everything into pages
+├── server/
 │   ├── db/                    → Database-related files
-│   ├── features/              → Feature-based modules
-│   ├── hooks/                 → Custom hooks
-│   ├── lib/                   → External library wrappers
-│   ├── utils/                 → Utility functions
-│   ├── routes/                → Application pages and routing logic
 ```
 
 ## Getting Started

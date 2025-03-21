@@ -4,9 +4,9 @@ import { createRouter as createTanStackRouter } from '@tanstack/react-router';
 import { routerWithQueryClient } from '@tanstack/react-router-with-query';
 import { Provider as JotaiProvider } from 'jotai';
 
-import { createIDBPersister } from '@/lib/indexed-db.ts';
-import { queryConfig } from '@/lib/react-query.ts';
-import { routeTree } from '@/routeTree.gen.ts';
+import { createIDBPersister } from '@/shared/lib/indexed-db';
+import { queryConfig } from '@/shared/lib/react-query';
+import { routeTree } from '@app/page-tree.gen';
 
 export function createRouter() {
   // Make sure you create your loader client or similar data

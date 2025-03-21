@@ -4,10 +4,11 @@ import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { ErrorFallback } from '@/components/error-fallback';
-import reportWebVitals from '@/report-web-vitals';
-import { createRouter } from '@/router';
-import '@/lib/i18n';
+import { ErrorFallback } from '@/shared/ui/error-fallback';
+import reportWebVitals from '@app/report-web-vitals';
+import { createRouter } from '@app/router';
+
+import '@/shared/lib/i18n';
 
 const router = createRouter();
 

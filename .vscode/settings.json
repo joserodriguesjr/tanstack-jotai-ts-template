@@ -9,6 +9,38 @@
     "**/routeTree.gen.ts": true
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always"
+    "source.fix.eslint": "always"
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "editor.formatOnSave": true,
+  "eslint.format.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "html",
+    "typescriptreact",
+    "typescript",
+    "json",
+    "jsonc"
+  ],
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "launch": {
+    "configurations": [],
+    "compounds": []
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

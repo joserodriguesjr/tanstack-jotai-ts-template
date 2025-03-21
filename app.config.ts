@@ -14,16 +14,16 @@ export default defineConfig({
   vite: {
     ssr: { external: ['drizzle-orm'] },
     plugins: [
-      TanStackRouterVite({
-        target: 'react',
-        autoCodeSplitting: true,
-        routesDirectory: './app/routes',
-        generatedRouteTree: './app/routeTree.gen.ts',
-      }),
       tsConfigPaths({
         projects: ['./tsconfig.json'],
       }),
       tailwindcss(),
+      TanStackRouterVite({
+        target: 'react',
+        autoCodeSplitting: true,
+        routesDirectory: './src/pages',
+        generatedRouteTree: './app/page-tree.gen.ts',
+      }),
       //VitePWA({
       //registerType: 'autoUpdate',
       // injectManifest: {},
@@ -78,7 +78,9 @@ export default defineConfig({
     ],
     resolve: {
       alias: {
-        '@': resolve(__dirname, './app'),
+        '@': resolve(__dirname, './src'),
+        '@app': resolve(__dirname, './app'),
+        '@server': resolve(__dirname, './server'),
       },
     },
   },

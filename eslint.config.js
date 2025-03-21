@@ -8,6 +8,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
 import { FlatCompat } from '@eslint/eslintrc';
+import crossImporter from './.plugins/eslint-plugin-cross-importer.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,6 +34,7 @@ export default defineConfig([
     plugins: {
       import: fixupPluginRules(_import),
       'check-file': checkFile,
+      'cross-importer': crossImporter,
     },
 
     languageOptions: {
@@ -43,9 +45,135 @@ export default defineConfig([
       ecmaVersion: 'latest',
       sourceType: 'module',
     },
+
+    rules: {
+      'cross-importer/check': 'error',
+    },
   },
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['src/**/*.ts', 'src/**/*.tsx', 'app/**/*.ts', 'app/**/*.tsx'],
+
+    ignores: ['src/app/**'],
+
+    rules: {
+      'import/no-restricted-paths': [
+        'error',
+        {
+          // 'target' contains the paths where the restricted imports should be applied.
+          // 'from' paths define the folders that are not allowed to be used in an import.
+          // 'except' may be defined for a zone, allowing exception paths that would otherwise violate the related 'from'.
+          // “when linting a file inside 'target', if it imports a file from 'from', that’s an error”.
+          // e.g. 'target' can't import 'from', unless 'from' == 'except'
+          zones: [
+            // ❌ Prevent lower layers from importing higher layers (Following FSD)
+            {
+              target: './src/shared',
+              from: './src',
+              except: ['./shared'],
+              message: 'Shared should not depend on other layers.',
+            },
+            {
+              target: './src/entities',
+              from: './src',
+              except: ['./entities', './shared'],
+              message:
+                'Entities should not depend on features, widgets or pages.',
+            },
+            {
+              target: './src/features',
+              from: './src',
+              except: ['./features', './entities', './shared'],
+              message: 'Features should not depend on widgets or pages.',
+            },
+            {
+              target: './src/widgets',
+              from: './src',
+              except: ['./widgets', './features', './entities', './shared'],
+              message: 'Widgets should not depend on pages.',
+            },
+            // Commented because app folder is outside for TanStack Start
+            // {
+            //   target: './src/pages',
+            //   from: './src',
+            //   except: [
+            //     './pages',
+            //     './widgets',
+            //     './features',
+            //     './entities',
+            //     './shared',
+            //   ],
+            //   message: 'Pages should not depend on app.',
+            // },
+            {
+              target: './src',
+              from: './app',
+              message: 'Source files should not depend on app.',
+            },
+
+            // ❌ Only entities/api can import server code
+            {
+              target: [
+                './src/shared',
+                './src/entities/*/!(api)/**',
+                './src/features',
+                './src/widgets',
+                './src/pages',
+              ],
+              from: './server',
+              message: 'Only an entity API can access server code.',
+            },
+
+            // ❌ Server side can't depend on client side
+            {
+              target: './server',
+              from: './src',
+              message: 'Server side cant depend on client side.',
+            },
+            {
+              target: './server',
+              from: './app',
+              message: 'Server side cant depend on client side.',
+            },
+
+            // ❌ Prevent cross-entity imports (entities should not depend on each other)
+            {
+              target: './src/entities/pokemon',
+              from: './src/entities',
+              except: ['./pokemon'],
+              message: '[pokemon] entity must be independent.',
+            },
+
+            // ❌ Prevent cross-feature imports (features should not import each other)
+            {
+              target: './src/features/pokemon',
+              from: './src/features',
+              except: ['./pokemon'],
+              message:
+                '[pokemon] should not import another feature. Use entities/shared instead.',
+            },
+            {
+              target: './src/features/mercado-pago',
+              from: './src/features',
+              except: ['./mercado-pago'],
+              message:
+                '[mercado-pago] should not import another feature. Use entities/shared instead.',
+            },
+
+            // ❌ Prevent cross-widget imports (entities should not depend on each other)
+            {
+              target: './src/widgets/pokemon',
+              from: './src/widgets',
+              except: ['./pokemon'],
+              message:
+                '[pokemon] should not import another widget. Use features/entities/shared instead',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ['src/**/*.ts', 'src/**/*.tsx', 'app/**/*.ts', 'app/**/*.tsx'],
 
     extends: fixupConfigRules(
       compat.extends(
@@ -95,49 +223,8 @@ export default defineConfig([
         {
           patterns: [
             {
-              group: ['./', '../'],
+              group: ['../'],
               message: 'Relative imports are not allowed.',
-            },
-          ],
-        },
-      ],
-
-      'import/no-restricted-paths': [
-        'error',
-        {
-          // 'target' contains the paths where the restricted imports should be applied.
-          // 'from' paths define the folders that are not allowed to be used in an import.
-          // 'except' may be defined for a zone, allowing exception paths that would otherwise violate the related 'from'.
-          // e.g. 'target' can't import 'from', unless 'from' == 'except'
-          zones: [
-            // enforce unidirectional codebase:
-            // e.g app/features can import from these shared modules but not the other way around
-            {
-              target: [
-                './app/components',
-                './app/hooks',
-                './app/lib',
-                './app/types',
-                './app/utils',
-              ],
-              from: ['./app/features'],
-            },
-            // disables cross-feature imports:
-            // eg. features should not import other features server code (but they can import other packages)
-            {
-              target: './app/features/*/!(services)/**', // Any file inside a feature except `services/`
-              from: './app/features/*/server/**',
-              message: 'Only the feature service can access its server',
-            },
-            {
-              target: './app/features/*/index.ts', // Block feature root index.ts
-              from: './app/features/*/server/**',
-              message: 'Only the feature service can access its server',
-            },
-            {
-              target: './app/features/*', // Block imports from other features
-              from: './app/features/*/server/**',
-              message: 'Only the feature service can access its server',
             },
           ],
         },
@@ -173,7 +260,7 @@ export default defineConfig([
       'import/no-relative-parent-imports': [
         'error',
         {
-          ignore: ['@/'],
+          ignore: ['@/', '@app/', '@server/'],
         },
       ],
       'import/no-named-as-default-member': 'off',
@@ -182,7 +269,7 @@ export default defineConfig([
       'import/no-unresolved': [
         'error',
         {
-          ignore: ['^@/'],
+          ignore: ['@/', '@app/', '@server/'],
         },
       ],
 
@@ -213,7 +300,7 @@ export default defineConfig([
     },
   },
   {
-    ignores: ['app/routes/**/*'],
+    ignores: ['src/pages/**/*'],
     rules: {
       'check-file/filename-naming-convention': [
         'error',
