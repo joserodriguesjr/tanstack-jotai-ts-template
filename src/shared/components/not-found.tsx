@@ -42,7 +42,7 @@ export function NotFound({
           </p>
           <Button
             onClick={() => navigate({ to: redirectTo, replace: true })}
-            className="mt-4"
+            className="mt-4 cursor-pointer"
           >
             Go Back Now
           </Button>
