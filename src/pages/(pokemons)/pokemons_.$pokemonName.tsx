@@ -6,8 +6,8 @@ import { NotFound } from '@/shared/components/not-found';
 import { Button } from '@/shared/components/ui/button';
 
 export const Route = createFileRoute('/(pokemons)/pokemons_/$pokemonName')({
-  loader: ({ context: { queryClient }, params: { pokemonName } }) =>
-    queryClient.ensureQueryData(getPokemonQueryOptions(pokemonName)),
+  loader: async ({ context: { queryClient }, params: { pokemonName } }) =>
+    await queryClient.ensureQueryData(getPokemonQueryOptions(pokemonName)),
   component: PokemonView,
   errorComponent: () => <Navigate to="/pokemons" replace />,
   notFoundComponent: () => {

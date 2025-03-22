@@ -9,6 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
 import { FlatCompat } from '@eslint/eslintrc';
+import pluginRouter from '@tanstack/eslint-plugin-router'
 import crossImporter from './.plugins/eslint-plugin-cross-importer.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -20,6 +21,8 @@ const compat = new FlatCompat({
 });
 
 export default defineConfig([
+  ...pluginRouter.configs['flat/recommended'],
+  
   globalIgnores([
     '.output/*',
     '.vinxi/*',
