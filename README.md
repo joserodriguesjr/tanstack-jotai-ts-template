@@ -93,6 +93,7 @@ There are some set of rules in ESLint to avoid coupling layers, following Featur
 - Only `src/entities/<entity>/api` can import `server/`  
 - `server/` can't import any file inside `src/` or `app/`  
 - There can't be any cross-import inside `src/entities`, `src/features` or `src/widgets`
+- Should import only from `index.ts` files
 
 ### Folder Structure
 
