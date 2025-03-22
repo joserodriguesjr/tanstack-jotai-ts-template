@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
+import { Card, CardContent } from '@/shared/components/ui/card';
 import { useTranslate } from '@/shared/lib/i18n';
-import { Card, CardContent } from '@/shared/ui/card';
 
 interface PokemonCardProps {
   nationalNumber: number;

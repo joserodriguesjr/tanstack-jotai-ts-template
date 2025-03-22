@@ -2,10 +2,14 @@ import { Link } from '@tanstack/react-router';
 
 import { SearchPokemon } from '@/features/pokemon/search-pokemon/search-pokemon.ui';
 import { BrasilFlag, EuaFlag } from '@/shared/assets';
+import { Button } from '@/shared/components/ui/button';
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from '@/shared/components/ui/sheet';
 import { useTheme } from '@/shared/hooks/use-theme';
 import { useTranslate } from '@/shared/lib/i18n';
-import { Button } from '@/shared/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/shared/ui/sheet';
 
 export const PokemonHeader = () => {
   const { theme, onToggleTheme } = useTheme();

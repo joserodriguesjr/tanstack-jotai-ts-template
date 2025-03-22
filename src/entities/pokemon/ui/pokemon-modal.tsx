@@ -2,13 +2,13 @@ import { Link } from '@tanstack/react-router';
 import React, { useEffect } from 'react';
 
 import type { Pokemon } from '@/entities/pokemon/model/pokemon.schema';
-import { Button } from '@/shared/ui/button';
+import { Button } from '@/shared/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from '@/shared/ui/dialog';
+} from '@/shared/components/ui/dialog';
 
 interface PokemonModalProps {
   pokemon: Pokemon | null;
