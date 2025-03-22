@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 
-import { SearchPokemon } from '@/features/pokemon/search-pokemon/search-pokemon.ui';
+import { SearchPokemon } from '@/features/pokemon';
 import { BrasilFlag, EuaFlag } from '@/shared/assets';
 import { Button } from '@/shared/components/ui/button';
 import {

@@ -1,4 +1,4 @@
-import { sqliteTable, integer, text, real } from 'drizzle-orm/sqlite-core';
+import { integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 export const pokemons = sqliteTable('pokemons', {
   nationalNumber: integer('national_number'),

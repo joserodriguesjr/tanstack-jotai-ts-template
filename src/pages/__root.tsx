@@ -1,14 +1,14 @@
 import type { QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
-  createRootRouteWithContext,
+  HeadContent,
   Link,
   Outlet,
-  HeadContent,
   Scripts,
+  createRootRouteWithContext,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-import { useEffect, type ReactNode } from 'react';
+import { type ReactNode, useEffect } from 'react';
 
 import globalCss from '@/shared/assets/global.css?url';
 import HydrationProvider from '@/shared/components/hydration-provider';

@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { SelectPokemon } from '@/features/pokemon/select-pokemon/select-pokemon.ui';
-import { PokemonList } from '@/widgets/pokemon/pokemon-list/pokemon-list.ui';
+import { SelectPokemon } from '@/features/pokemon';
+import { PokemonList } from '@/widgets/pokemon';
 
 export const Route = createFileRoute('/(pokemons)/pokemons/')({
   component: () => {

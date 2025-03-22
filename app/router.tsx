@@ -1,4 +1,4 @@
-import { dehydrate, hydrate, QueryClient } from '@tanstack/react-query';
+import { QueryClient, dehydrate, hydrate } from '@tanstack/react-query';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { createRouter as createTanStackRouter } from '@tanstack/react-router';
 import { routerWithQueryClient } from '@tanstack/react-router-with-query';

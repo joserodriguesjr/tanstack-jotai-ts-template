@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import React, { useEffect } from 'react';
 
-import type { Pokemon } from '@/entities/pokemon/model/pokemon.schema';
+import type { Pokemon } from '@/entities/pokemon';
 import { Button } from '@/shared/components/ui/button';
 import {
   Dialog,

@@ -1,9 +1,6 @@
-import { createFileRoute, Link, Navigate } from '@tanstack/react-router';
+import { Link, Navigate, createFileRoute } from '@tanstack/react-router';
 
-import {
-  getPokemonQueryOptions,
-  usePokemon,
-} from '@/entities/pokemon/api/get-pokemon';
+import { getPokemonQueryOptions, usePokemon } from '@/entities/pokemon';
 import Loading from '@/shared/components/loading';
 import { NotFound } from '@/shared/components/not-found';
 import { Button } from '@/shared/components/ui/button';

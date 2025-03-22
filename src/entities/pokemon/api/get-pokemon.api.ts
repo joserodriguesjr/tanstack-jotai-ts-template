@@ -1,4 +1,4 @@
-import { useQuery, queryOptions } from '@tanstack/react-query';
+import { queryOptions, useQuery } from '@tanstack/react-query';
 
 import type { QueryConfig } from '@/shared/lib/react-query';
 import { getPokemon } from '@server/pokemon/pokemon.controller';

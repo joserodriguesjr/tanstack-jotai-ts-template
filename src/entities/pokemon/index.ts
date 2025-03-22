@@ -1,15 +1,9 @@
-// todo: To be used external to feature
+/* eslint-disable import/no-internal-modules */
 
-// export * from '@/features/pokemons/components/pokemon-card';
-// export * from '@/features/pokemons/components/pokemon-header';
-// export * from '@/features/pokemons/components/pokemon-list';
-// export * from '@/features/pokemons/components/pokemon-modal';
-// export * from '@/features/pokemons/components/pokemon-view';
+export * from '@/entities/pokemon/ui/pokemon-card.ui';
+export * from '@/entities/pokemon/ui/pokemon-modal.ui';
 
-// export * from '@/features/pokemons/hooks/use-infinite-scroll';
+export * from '@/entities/pokemon/model/pokemon.model';
 
-// export * from '@/features/pokemons/services/get-pokemon';
-// export * from '@/features/pokemons/services/get-pokemons';
-
-// export * from '@/features/pokemons/pokemons.filters';
-// export * from '@/features/pokemons/pokemons.schema';
+export * from '@/entities/pokemon/api/get-pokemon.api';
+export * from '@/entities/pokemon/api/get-pokemons.api';

@@ -1,5 +1,6 @@
 import { defineConfig, globalIgnores } from 'eslint/config';
 import checkFile from 'eslint-plugin-check-file';
+import unusedImports from 'eslint-plugin-unused-imports';
 import _import from 'eslint-plugin-import';
 import { fixupPluginRules, fixupConfigRules } from '@eslint/compat';
 import globals from 'globals';
@@ -35,6 +36,7 @@ export default defineConfig([
       import: fixupPluginRules(_import),
       'check-file': checkFile,
       'cross-importer': crossImporter,
+      'unused-imports': unusedImports,
     },
 
     languageOptions: {
@@ -50,12 +52,88 @@ export default defineConfig([
       'cross-importer/check': 'error',
     },
   },
-  {
-    files: ['src/**/*.ts', 'src/**/*.tsx', 'app/**/*.ts', 'app/**/*.tsx'],
 
-    ignores: ['src/app/**'],
+  {
+    files: [
+      'src/**/*.ts',
+      'src/**/*.tsx',
+      'app/**/*.ts',
+      'app/**/*.tsx',
+      'server/**/*.ts',
+    ],
+
+    extends: fixupConfigRules(
+      compat.extends(
+        'eslint:recommended',
+        'plugin:import/errors',
+        'plugin:import/recommended',
+        'plugin:import/warnings',
+        'plugin:import/typescript',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:jsx-a11y/recommended',
+        'plugin:testing-library/react',
+        'plugin:jest-dom/recommended',
+        'plugin:prettier/recommended',
+        // 'plugin:tailwindcss/recommended',
+        // 'plugin:vitest/legacy-recommended',
+      ),
+    ),
+
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+
+      parser: tsParser,
+    },
+
+    settings: {
+      react: {
+        version: 'detect',
+      },
+
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+        },
+      },
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+    },
 
     rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['../'],
+              message: 'Relative imports are not allowed.',
+            },
+          ],
+        },
+      ],
+
+      'import/no-internal-modules': [
+        'error',
+        {
+          forbid: [
+            // folders
+            // '**/ui/*',
+            // '**/api/*',
+            // '**/model/*',
+            // file type
+            '**/*.ui',
+            '**/*.api',
+            '**/*.model',
+          ],
+        },
+      ],
+
       'import/no-restricted-paths': [
         'error',
         {
@@ -170,70 +248,8 @@ export default defineConfig([
           ],
         },
       ],
-    },
-  },
-  {
-    files: ['src/**/*.ts', 'src/**/*.tsx', 'app/**/*.ts', 'app/**/*.tsx'],
-
-    extends: fixupConfigRules(
-      compat.extends(
-        'eslint:recommended',
-        'plugin:import/errors',
-        'plugin:import/warnings',
-        'plugin:import/typescript',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:react/recommended',
-        'plugin:react-hooks/recommended',
-        'plugin:jsx-a11y/recommended',
-        'plugin:testing-library/react',
-        'plugin:jest-dom/recommended',
-        'plugin:prettier/recommended',
-        // 'plugin:tailwindcss/recommended',
-        // 'plugin:vitest/legacy-recommended',
-      ),
-    ),
-
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
-
-      parser: tsParser,
-    },
-
-    settings: {
-      react: {
-        version: 'detect',
-      },
-
-      'import/resolver': {
-        typescript: {
-          alwaysTryTypes: true,
-        },
-      },
-      'import/parsers': {
-        '@typescript-eslint/parser': ['.ts', '.tsx'],
-      },
-    },
-
-    rules: {
-      'no-restricted-imports': [
-        'error',
-        {
-          patterns: [
-            {
-              group: ['../'],
-              message: 'Relative imports are not allowed.',
-            },
-          ],
-        },
-      ],
 
       'import/no-cycle': 'error',
-      'linebreak-style': ['error', 'unix'],
-      'react/prop-types': 'off',
-
       'import/order': [
         'error',
         {
@@ -254,7 +270,6 @@ export default defineConfig([
           },
         },
       ],
-
       'import/default': 'off',
       'import/no-relative-packages': 'error',
       'import/no-relative-parent-imports': [
@@ -265,7 +280,6 @@ export default defineConfig([
       ],
       'import/no-named-as-default-member': 'off',
       'import/no-named-as-default': 'off',
-
       'import/no-unresolved': [
         'error',
         {
@@ -273,22 +287,54 @@ export default defineConfig([
         },
       ],
 
-      // 'import/no-unused-modules': [
-      //   1,
-      //   {
-      //     missingExports: true,
-      //     unusedExports: true,
-      //   },
-      // ],
+      'linebreak-style': ['error', 'unix'],
 
+      'react/prop-types': 'off',
       'react/jsx-uses-react': 'off',
+      'react/jsx-uses-vars': 'off',
       'react/react-in-jsx-scope': 'off',
+
       'jsx-a11y/anchor-is-valid': 'off',
+
       '@typescript-eslint/no-unused-vars': ['error'],
+      'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
+      ],
+
       '@typescript-eslint/explicit-function-return-type': ['off'],
       '@typescript-eslint/explicit-module-boundary-types': ['off'],
       '@typescript-eslint/no-empty-function': ['off'],
       '@typescript-eslint/no-explicit-any': ['off'],
+
+      'no-useless-rename': [
+        'error',
+        {
+          ignoreDestructuring: false,
+          ignoreImport: false,
+          ignoreExport: false,
+        },
+      ],
+
+      yoda: ['error'],
+
+      'sort-vars': ['error'],
+
+      'vars-on-top': ['error'],
+
+      'prefer-const': ['error'],
+      'prefer-object-spread': ['error'],
+      'prefer-rest-params': ['error'],
+      'prefer-template': ['error'],
+
+      radix: ['error'],
 
       'prettier/prettier': [
         'error',
@@ -300,6 +346,13 @@ export default defineConfig([
     },
   },
   {
+    files: [
+      'src/**/*.ts',
+      'src/**/*.tsx',
+      'app/**/*.ts',
+      'app/**/*.tsx',
+      'server/**/*.ts',
+    ],
     ignores: ['src/pages/**/*'],
     rules: {
       'check-file/filename-naming-convention': [

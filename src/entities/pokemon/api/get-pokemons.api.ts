@@ -1,4 +1,4 @@
-import { useInfiniteQuery, infiniteQueryOptions } from '@tanstack/react-query';
+import { infiniteQueryOptions, useInfiniteQuery } from '@tanstack/react-query';
 
 import type { QueryConfig } from '@/shared/lib/react-query';
 import { getPokemons } from '@server/pokemon/pokemon.controller';

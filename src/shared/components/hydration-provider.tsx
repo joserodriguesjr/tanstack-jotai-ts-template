@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Loading from '@/shared/components/loading';
 import { themeAtom } from '@/shared/hooks/use-theme';

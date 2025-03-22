@@ -2,7 +2,7 @@ import { useSetAtom } from 'jotai';
 import debounce from 'lodash.debounce';
 import { Search } from 'lucide-react';
 
-import { searchAtom } from '@/features/pokemon/search-pokemon/search-pokemon.model';
+import { searchAtom } from '@/features/pokemon/search-pokemon/model';
 import { useTranslate } from '@/shared/lib/i18n';
 
 export function SearchPokemon() {

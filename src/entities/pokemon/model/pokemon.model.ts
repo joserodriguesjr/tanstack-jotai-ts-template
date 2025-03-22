@@ -1,5 +1,4 @@
 // todo: crete pokemon model decoupling from backend type
-
 import { z } from 'zod';
 
 export const PokemonSchema = z.object({
