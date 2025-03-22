@@ -1,8 +1,8 @@
 import { useAtomValue } from 'jotai';
 import { useState, useEffect } from 'react';
 
+import Loading from '@/shared/components/loading';
 import { themeAtom } from '@/shared/hooks/use-theme';
-import Loading from '@/shared/ui/loading';
 
 // TODO: Remover se possivel
 const HydrationProvider = ({ children }: { children: React.ReactNode }) => {

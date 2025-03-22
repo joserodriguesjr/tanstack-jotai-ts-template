@@ -1,4 +1,4 @@
-import { Spinner } from '@/shared/ui/spinner';
+import { Spinner } from '@/shared/components/ui/spinner';
 
 // todo: deixar mais bonito
 export default function Loading() {

@@ -1,24 +1,24 @@
+import { notFound } from '@tanstack/react-router';
+
 import {
   getPokemonByName,
   getPokemonCount,
   getPokemonsLikeText,
 } from '@server/pokemon/pokemon.repository';
-import type { Pokemon, PokemonDTO } from '@server/pokemon/pokemon.schema';
+import type { PokemonDTO } from '@server/pokemon/pokemon.schema';
 
-export const findPokemon = async ({
-  pokemonName,
-}: {
-  pokemonName: string;
-}): Promise<Pokemon> => {
+export const findPokemon = async ({ pokemonName }: { pokemonName: string }) => {
   console.info(`Fetching pokemons, looking for ${pokemonName}...`);
 
   const pokemon = await getPokemonByName(pokemonName);
 
   if (!pokemon) {
-    throw new Error('No Pokémon found with the given name');
+    throw notFound({
+      data: `No Pokemon found with the given name: ${pokemonName}`,
+    });
   }
 
-  return pokemon as Pokemon;
+  return pokemon;
 };
 
 export const findAllPokemons = async ({

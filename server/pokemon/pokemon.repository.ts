@@ -4,14 +4,12 @@ import { db } from '@server/db/db';
 import { pokemons } from '@server/db/schema';
 import type { Pokemon } from '@server/pokemon/pokemon.schema';
 
-export const getPokemonByName = async (
-  pokemonName: string,
-): Promise<Pokemon | null> => {
+export const getPokemonByName = async (pokemonName: string) => {
   return db
     .select()
     .from(pokemons)
     .where(eq(pokemons.englishName, pokemonName))
-    .get() as Pokemon | null;
+    .get();
 };
 
 export const getPokemonsLikeText = async (

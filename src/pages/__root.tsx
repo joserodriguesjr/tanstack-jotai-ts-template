@@ -11,8 +11,8 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { useEffect, type ReactNode } from 'react';
 
 import globalCss from '@/shared/assets/global.css?url';
+import HydrationProvider from '@/shared/components/hydration-provider';
 import { useTheme } from '@/shared/hooks/use-theme';
-import HydrationProvider from '@/shared/ui/hydration-provider';
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;

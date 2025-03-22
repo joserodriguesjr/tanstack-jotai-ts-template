@@ -1,19 +1,33 @@
-import { createFileRoute, redirect, Link } from '@tanstack/react-router';
+import { createFileRoute, Link, Navigate } from '@tanstack/react-router';
 
 import {
   getPokemonQueryOptions,
   usePokemon,
 } from '@/entities/pokemon/api/get-pokemon';
-import { Button } from '@/shared/ui/button';
-import Loading from '@/shared/ui/loading';
+import Loading from '@/shared/components/loading';
+import { NotFound } from '@/shared/components/not-found';
+import { Button } from '@/shared/components/ui/button';
 
 export const Route = createFileRoute('/(pokemons)/pokemons_/$pokemonName')({
-  loader: async ({ context: { queryClient }, params: { pokemonName } }) =>
-    queryClient.prefetchQuery(getPokemonQueryOptions(pokemonName)),
-  onError(err: Error) {
-    throw redirect({ to: '/pokemons', replace: true, throw: err });
-  },
+  loader: ({ context: { queryClient }, params: { pokemonName } }) =>
+    queryClient.ensureQueryData(getPokemonQueryOptions(pokemonName)),
   component: PokemonView,
+  errorComponent: () => <Navigate to="/pokemons" replace />,
+  notFoundComponent: () => {
+    const {
+      error,
+    }: { error: { data: string; isNotFound: boolean; routeId: string } } =
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      Route.useMatch();
+
+    return (
+      <NotFound
+        countdown={5}
+        redirectTo="/pokemons"
+        errorMessage={error.data}
+      />
+    );
+  },
 });
 
 function PokemonView() {
