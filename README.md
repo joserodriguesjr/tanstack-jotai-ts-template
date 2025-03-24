@@ -21,9 +21,7 @@
 
 ## Overview
 
-This project serves as a comprehensive fullstack template designed for rapid development of web applications. It leverages modern tools and best practices for a streamlined developer experience.
-
-<!-- todo: with built-in support for PWA. -->
+This project serves as a comprehensive fullstack template designed for rapid development of web applications with built-in support for PWA. It leverages modern tools and best practices for a streamlined developer experience.
 
 ## Example App - Pokedex
 
@@ -33,6 +31,7 @@ The template includes an example application implementing a Pokedex. It features
 - Server functions to query the database
 - A search bar
 - State persistence in IndexedDB
+- Offline support with service worker
 
 This example demonstrates how to structure and utilize the template effectively.
 
@@ -53,16 +52,16 @@ This example demonstrates how to structure and utilize the template effectively.
 - Enhance backend architecture with IoC (Inversion of Control)
 - Configure environment settings for development and production
 - Dockerize with PostgreSQL support
-- Add PWA functionality
 - Implement frontend and backend testing
 
 ## Key Features
 
+✅ PWA built-in support \
 ✅ Fullstack setup with client and server integration \
 ✅ File-based routing powered by TanStack Router \
 ✅ Optimized data fetching with TanStack Query \
 ✅ Global state management using Jotai \
-✅ Offline cache support via IndexedDB \
+✅ Offline cache support via IndexedDB (Synced with react query) \
 ✅ SSR and API handlers for server-side logic \
 ✅ Type-safe ORM with Drizzle \
 ✅ Schema validation with Zod \
@@ -70,29 +69,21 @@ This example demonstrates how to structure and utilize the template effectively.
 ✅ Multilanguage support with i18n \
 ✅ Linting and formatting via ESLint + Prettier \
 ✅ Git hooks with Husky and Lint Staged \
-✅ FSD architecture enforced by ESLint
-<!-- ✅ PWA built-in support -->
+✅ FSD-like architecture enforced by ESLint
 
 ## Architecture
-
-### Why `src/`, `app/` and `server/`?
-
-- `src/` -> All client code
-- `server/` -> All server code
-- `app/` -> TanStack Start needs entry point files to be inside a root `app/` folder
 
 ### Rules
 
 There are some set of rules in ESLint to avoid coupling layers, following Feature Sliced Design architecture:
 
-- `src/shared` can't import any other layers  
-- `src/entities` can't import `features`, `widgets` and `pages` layers
-- `src/features` can't import `widgets` and `pages` layers
-- `src/widgets` can't import `pages` layers
-- `src/` can't import any file inside `app/`  
-- Only `src/entities/<entity>/api` can import `server/`  
-- `server/` can't import any file inside `src/` or `app/`  
-- There can't be any cross-import inside `src/entities`, `src/features` or `src/widgets`
+- `app/shared` can't import any other layers  
+- `app/entities` can't import `features`, `widgets` and `pages` layers
+- `app/features` can't import `widgets` and `pages` layers
+- `app/widgets` can't import `routes` layers
+- Only `app/entities/<entity>/api` can import `server/`  
+- `server/` can't import any file inside `app/`  
+- There can't be any cross-import inside `app/entities`, `app/features` or `app/widgets`
 - Should import only from `index.ts` files
 
 ### Folder Structure
@@ -100,12 +91,11 @@ There are some set of rules in ESLint to avoid coupling layers, following Featur
 ```txt
 .
 ├── app/                       → TanStack Start entry points
-├── src/
 │   ├── shared/                → Reusable ui, hooks, libs and utils
 │   ├── entities/              → Doman-specifc models and logic
 │   ├── features/              → User interaction with app
 │   ├── widgets/               → Combines features/entities
-│   ├── pages/                 → Combines everything into pages
+│   ├── routes/                → Define pages with file router
 ├── server/
 │   ├── db/                    → Database-related files
 ```

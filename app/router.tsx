@@ -5,6 +5,7 @@ import { routerWithQueryClient } from '@tanstack/react-router-with-query';
 import { Provider as JotaiProvider } from 'jotai';
 
 import { routeTree } from '@/routeTree.gen';
+import { SwPrompt } from '@/shared/components/sw-prompt';
 import { createIDBPersister } from '@/shared/lib/indexed-db';
 import { queryConfig } from '@/shared/lib/react-query';
 
@@ -68,7 +69,10 @@ export function createRouter() {
               // .then(() => queryClient.invalidateQueries());
             }}
           >
-            <JotaiProvider>{children}</JotaiProvider>
+            <JotaiProvider>
+              <SwPrompt />
+              {children}
+            </JotaiProvider>
           </PersistQueryClientProvider>
         );
       },

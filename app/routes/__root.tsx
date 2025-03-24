@@ -4,7 +4,6 @@ import {
   HeadContent,
   Link,
   Outlet,
-  ScriptOnce,
   Scripts,
   createRootRouteWithContext,
 } from '@tanstack/react-router';
@@ -13,6 +12,7 @@ import { type ReactNode, useEffect } from 'react';
 
 import globalCss from '@/shared/assets/global.css?url';
 import HydrationProvider from '@/shared/components/hydration-provider';
+import { Toaster } from '@/shared/components/ui/sonner';
 import { useTheme } from '@/shared/hooks/use-theme';
 
 export const Route = createRootRouteWithContext<{
@@ -62,33 +62,18 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <main>{children}</main>
+        <Toaster position="top-right" richColors />
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <TanStackRouterDevtools position="bottom-right" />
 
-        {/* <ScriptOnce>
+        {/* <ScriptOnce> TODO
 					{`document.documentElement.classList.toggle(
             'dark',
             localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
             )`}
 				</ScriptOnce> */}
 
-        <ScriptOnce>
-          {`(async () => {
-              if ('serviceWorker' in navigator) {
-                const registration = await navigator.serviceWorker.register('/_build/sw.js');
-                
-                registration.addEventListener('updatefound', () => {
-                  const newWorker = registration.installing;
-                  newWorker.addEventListener('statechange', () => {
-                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                      dispatchEvent(new CustomEvent('swUpdated'));
-                    }
-                  });
-                });
-              }
-            })();`}
-        </ScriptOnce>
         <Scripts />
       </body>
     </html>

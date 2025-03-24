@@ -29,7 +29,11 @@ export default defineConfig([
     'node_modules/*',
     'data/*',
     'drizzle/*',
-    'public/mockServiceWorker.js',
+    'public/*',
+    'vite.sw.config.ts',
+    'tsconfig.json',
+    'package.json',
+    'package-lock.json',
     'generators/*',
   ]),
   {
@@ -66,7 +70,6 @@ export default defineConfig([
       'app/**/*.tsx',
       'server/**/*.ts',
       'app.config.ts',
-      'public/sw.js',
     ],
 
     extends: fixupConfigRules(
@@ -176,24 +179,6 @@ export default defineConfig([
               except: ['./widgets', './features', './entities', './shared'],
               message: 'Widgets should not depend on pages.',
             },
-            // Commented because app folder is outside for TanStack Start
-            // {
-            //   target: './app/pages',
-            //   from: './app',
-            //   except: [
-            //     './pages',
-            //     './widgets',
-            //     './features',
-            //     './entities',
-            //     './shared',
-            //   ],
-            //   message: 'Pages should not depend on app.',
-            // },
-            // {
-            //   target: './app',
-            //   from: './app',
-            //   message: 'Source files should not depend on app.',
-            // },
 
             // ❌ Only entities/api can import server code
             {
@@ -209,11 +194,6 @@ export default defineConfig([
             },
 
             // ❌ Server side can't depend on client side
-            {
-              target: './server',
-              from: './app',
-              message: 'Server side cant depend on client side.',
-            },
             {
               target: './server',
               from: './app',
