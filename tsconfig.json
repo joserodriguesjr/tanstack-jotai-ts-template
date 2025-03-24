@@ -6,7 +6,7 @@
     "jsx": "react-jsx",
     "module": "ESNext",
     "esModuleInterop": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable", "WebWorker"],
     "isolatedModules": true,
     "resolveJsonModule": true,
     "types": ["vite/client", "node", "vite-plugin-pwa/client"],
@@ -30,8 +30,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@app/*": ["./app/*"],
+      "@/*": ["./app/*"],
       "@server/*": ["./server/*"]
     }
   }

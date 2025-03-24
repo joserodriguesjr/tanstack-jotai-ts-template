@@ -7,7 +7,7 @@
   "useTabs": false,
   "arrowParens": "always",
   "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindStylesheet": "./src/shared/assets/global.css",
+  "tailwindStylesheet": "./app/shared/assets/global.css",
   "tailwindFunctions": ["clsx", "cva", "cn", "tw"],
   "overrides": [
     {

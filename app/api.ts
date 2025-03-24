@@ -1,7 +1,7 @@
-// import {
-//   createStartAPIHandler,
-//   defaultAPIRoutesHandler,
-// } from '@tanstack/start-api-routes';
+import {
+  createStartAPIHandler,
+  defaultAPIFileRouteHandler,
+} from '@tanstack/start-api-routes';
 
 // // import { initMercadoPagoAPI } from '';
 
@@ -12,3 +12,5 @@
 //     },
 //   }),
 // );
+
+export default createStartAPIHandler(defaultAPIFileRouteHandler);

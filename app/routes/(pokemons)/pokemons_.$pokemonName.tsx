@@ -14,7 +14,6 @@ export const Route = createFileRoute('/(pokemons)/pokemons_/$pokemonName')({
     const {
       error,
     }: { error: { data: string; isNotFound: boolean; routeId: string } } =
-      // eslint-disable-next-line react-hooks/rules-of-hooks
       Route.useMatch();
 
     return (

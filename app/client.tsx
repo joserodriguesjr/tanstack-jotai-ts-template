@@ -4,9 +4,9 @@ import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { ErrorBoundary } from 'react-error-boundary';
 
+import { createRouter } from '@/router';
 import { ErrorFallback } from '@/shared/components/error-fallback';
-// import reportWebVitals from '@app/report-web-vitals';
-import { createRouter } from '@app/router';
+// import reportWebVitals from '@/report-web-vitals';
 
 import '@/shared/lib/i18n';
 

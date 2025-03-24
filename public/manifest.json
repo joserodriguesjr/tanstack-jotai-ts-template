@@ -1,40 +1,36 @@
 {
-  "short_name": "Pokedex",
-  "name": "Pokedex App",
-  "description": "A PWA for browsing Pokémon data",
-  "start_url": "/?source=pwa",
-  "id": "/",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "icons/logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "icons/logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "screenshots": [
-        {
-            "src": "img/mobile-screenshot1.png",
-            "type": "image/png",
-            "sizes": "409x542",
-            "form_factor": "wide"
-        },
-        {
-          "src": "img/mobile-screenshot1.png",
-          "type": "image/png",
-          "sizes": "409x542"
-      }
-  ]
-}
+    "short_name":"Pokedex",
+    "name":"Pokedex App",
+    "description":"A Pokedex built with TanStack Start, Jotai, and Drizzle (USING MANIFEST.JSON).",
+    "start_url":"/",
+    "display":"standalone",
+    "background_color":"#ffffff",
+    "theme_color":"#007bff",
+    "orientation":"portrait",
+    "icons":[
+       {
+          "src":"/assets/blueprint-192x192.png",
+          "type":"image/png",
+          "sizes":"192x192"
+       },
+       {
+          "src":"/assets/blueprint-512x512.png",
+          "type":"image/png",
+          "sizes":"512x512"
+       }
+    ],
+    "screenshots":[
+       {
+          "src":"/assets/screenshot-desktop.png",
+          "type":"image/png",
+          "sizes":"1197x704",
+          "form_factor":"wide"
+       },
+       {
+          "src":"/assets/screenshot-mobile.png",
+          "type":"image/png",
+          "sizes":"415x736",
+          "form_factor":"narrow"
+       }
+    ]
+ }

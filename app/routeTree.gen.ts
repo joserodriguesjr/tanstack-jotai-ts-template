@@ -10,13 +10,13 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './../src/pages/__root'
-import { Route as IndexImport } from './../src/pages/index'
-import { Route as pokemonsPokemonsImport } from './../src/pages/(pokemons)/pokemons'
-import { Route as pokemonsPokemonsIndexImport } from './../src/pages/(pokemons)/pokemons.index'
-import { Route as pokemonsPokemonsPokemonNameImport } from './../src/pages/(pokemons)/pokemons_.$pokemonName'
-import { Route as pokemonsPokemonsTypesImport } from './../src/pages/(pokemons)/pokemons.types'
-import { Route as pokemonsPokemonsAboutImport } from './../src/pages/(pokemons)/pokemons.about'
+import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/index'
+import { Route as pokemonsPokemonsImport } from './routes/(pokemons)/pokemons'
+import { Route as pokemonsPokemonsIndexImport } from './routes/(pokemons)/pokemons.index'
+import { Route as pokemonsPokemonsPokemonNameImport } from './routes/(pokemons)/pokemons_.$pokemonName'
+import { Route as pokemonsPokemonsTypesImport } from './routes/(pokemons)/pokemons.types'
+import { Route as pokemonsPokemonsAboutImport } from './routes/(pokemons)/pokemons.about'
 
 // Create/Update Routes
 

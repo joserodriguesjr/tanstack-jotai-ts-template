@@ -6,8 +6,8 @@ export const queryConfig = {
     staleTime: Infinity,
     gcTime: 1000 * 60 * 60 * 24, // 24 hours
     // throwOnError: true,
-    // refetchOnWindowFocus: false,
-    // retry: false,
+    refetchOnWindowFocus: false,
+    retry: false,
   },
 } satisfies DefaultOptions;
 

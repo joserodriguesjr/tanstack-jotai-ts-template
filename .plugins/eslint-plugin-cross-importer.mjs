@@ -5,19 +5,19 @@ import path from 'path';
 
 const createFeatureRestrictionPattern = (feature) => {
   return new RegExp(
-    `target:\\s*['"\`]\\.\\/src\\/features\\/${feature}['"\`],\\s*from:\\s*['"\`]\\.\\/src\\/features['"\`],\\s*except:\\s*\\[\\s*['"\`]\\.\\/${feature}['"\`]\\s*\\]`,
+    `target:\\s*['"\`]\\.\\/app\\/features\\/${feature}['"\`],\\s*from:\\s*['"\`]\\.\\/app\\/features['"\`],\\s*except:\\s*\\[\\s*['"\`]\\.\\/${feature}['"\`]\\s*\\]`,
   );
 };
 
 const createEntityRestrictionPattern = (entity) => {
   return new RegExp(
-    `target:\\s*['"\`]\\.\\/src\\/entities\\/${entity}['"\`],\\s*from:\\s*['"\`]\\.\\/src\\/entities['"\`],\\s*except:\\s*\\[\\s*['"\`]\\.\\/${entity}['"\`]\\s*\\]`,
+    `target:\\s*['"\`]\\.\\/app\\/entities\\/${entity}['"\`],\\s*from:\\s*['"\`]\\.\\/app\\/entities['"\`],\\s*except:\\s*\\[\\s*['"\`]\\.\\/${entity}['"\`]\\s*\\]`,
   );
 };
 
 const createWidgetRestrictionPattern = (widget) => {
   return new RegExp(
-    `target:\\s*['"\`]\\.\\/src\\/widgets\\/${widget}['"\`],\\s*from:\\s*['"\`]\\.\\/src\\/widgets['"\`],\\s*except:\\s*\\[\\s*['"\`]\\.\\/${widget}['"\`]\\s*\\]`,
+    `target:\\s*['"\`]\\.\\/app\\/widgets\\/${widget}['"\`],\\s*from:\\s*['"\`]\\.\\/app\\/widgets['"\`],\\s*except:\\s*\\[\\s*['"\`]\\.\\/${widget}['"\`]\\s*\\]`,
   );
 };
 
@@ -39,9 +39,9 @@ const crossImportRule = {
     if (HAS_RUN) return {};
 
     const projectRoot = process.cwd();
-    const featuresPath = path.resolve(projectRoot, 'src/features');
-    const entitiesPath = path.resolve(projectRoot, 'src/entities');
-    const widgetsPath = path.resolve(projectRoot, 'src/widgets');
+    const featuresPath = path.resolve(projectRoot, 'app/features');
+    const entitiesPath = path.resolve(projectRoot, 'app/entities');
+    const widgetsPath = path.resolve(projectRoot, 'app/widgets');
     const eslintConfigPath = path.resolve(projectRoot, 'eslint.config.js');
 
     let featureDirs = [];
@@ -98,8 +98,8 @@ const crossImportRule = {
             message: `Feature '${feature}' is missing in ESLint import/no-restricted-paths. Add:
 
             {
-              target: './src/features/${feature}',
-              from: './src/features',
+              target: './app/features/${feature}',
+              from: './app/features',
               except: ['./${feature}'],
             }
             `,
@@ -120,8 +120,8 @@ const crossImportRule = {
             message: `Entity '${entity}' is missing in ESLint import/no-restricted-paths. Add:
 
             {
-              target: './src/entities/${entity}',
-              from: './src/entities',
+              target: './app/entities/${entity}',
+              from: './app/entities',
               except: ['./${entity}'],
               message: 'SOME INFORMATIVE MESSAGE',
             }
@@ -143,8 +143,8 @@ const crossImportRule = {
             message: `Widget '${widget}' is missing in ESLint import/no-restricted-paths. Add:
 
             {
-              target: './src/widgets/${widget}',
-              from: './src/widgets',
+              target: './app/widgets/${widget}',
+              from: './app/widgets',
               except: ['./${widget}'],
               message: 'SOME INFORMATIVE MESSAGE',
             }

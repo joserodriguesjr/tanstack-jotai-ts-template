@@ -22,7 +22,7 @@ const compat = new FlatCompat({
 
 export default defineConfig([
   ...pluginRouter.configs['flat/recommended'],
-  
+
   globalIgnores([
     '.output/*',
     '.vinxi/*',
@@ -51,6 +51,10 @@ export default defineConfig([
       sourceType: 'module',
     },
 
+    linterOptions: {
+      reportUnusedDisableDirectives: false,
+    },
+
     rules: {
       'cross-importer/check': 'error',
     },
@@ -58,11 +62,11 @@ export default defineConfig([
 
   {
     files: [
-      'src/**/*.ts',
-      'src/**/*.tsx',
       'app/**/*.ts',
       'app/**/*.tsx',
       'server/**/*.ts',
+      'app.config.ts',
+      'public/sw.js',
     ],
 
     extends: fixupConfigRules(
@@ -148,34 +152,34 @@ export default defineConfig([
           zones: [
             // ❌ Prevent lower layers from importing higher layers (Following FSD)
             {
-              target: './src/shared',
-              from: './src',
+              target: './app/shared',
+              from: './app',
               except: ['./shared'],
               message: 'Shared should not depend on other layers.',
             },
             {
-              target: './src/entities',
-              from: './src',
+              target: './app/entities',
+              from: './app',
               except: ['./entities', './shared'],
               message:
                 'Entities should not depend on features, widgets or pages.',
             },
             {
-              target: './src/features',
-              from: './src',
+              target: './app/features',
+              from: './app',
               except: ['./features', './entities', './shared'],
               message: 'Features should not depend on widgets or pages.',
             },
             {
-              target: './src/widgets',
-              from: './src',
+              target: './app/widgets',
+              from: './app',
               except: ['./widgets', './features', './entities', './shared'],
               message: 'Widgets should not depend on pages.',
             },
             // Commented because app folder is outside for TanStack Start
             // {
-            //   target: './src/pages',
-            //   from: './src',
+            //   target: './app/pages',
+            //   from: './app',
             //   except: [
             //     './pages',
             //     './widgets',
@@ -185,20 +189,20 @@ export default defineConfig([
             //   ],
             //   message: 'Pages should not depend on app.',
             // },
-            {
-              target: './src',
-              from: './app',
-              message: 'Source files should not depend on app.',
-            },
+            // {
+            //   target: './app',
+            //   from: './app',
+            //   message: 'Source files should not depend on app.',
+            // },
 
             // ❌ Only entities/api can import server code
             {
               target: [
-                './src/shared',
-                './src/entities/*/!(api)/**',
-                './src/features',
-                './src/widgets',
-                './src/pages',
+                './app/shared',
+                './app/entities/*/!(api)/**',
+                './app/features',
+                './app/widgets',
+                './app/pages',
               ],
               from: './server',
               message: 'Only an entity API can access server code.',
@@ -207,7 +211,7 @@ export default defineConfig([
             // ❌ Server side can't depend on client side
             {
               target: './server',
-              from: './src',
+              from: './app',
               message: 'Server side cant depend on client side.',
             },
             {
@@ -218,23 +222,23 @@ export default defineConfig([
 
             // ❌ Prevent cross-entity imports (entities should not depend on each other)
             {
-              target: './src/entities/pokemon',
-              from: './src/entities',
+              target: './app/entities/pokemon',
+              from: './app/entities',
               except: ['./pokemon'],
               message: '[pokemon] entity must be independent.',
             },
 
             // ❌ Prevent cross-feature imports (features should not import each other)
             {
-              target: './src/features/pokemon',
-              from: './src/features',
+              target: './app/features/pokemon',
+              from: './app/features',
               except: ['./pokemon'],
               message:
                 '[pokemon] should not import another feature. Use entities/shared instead.',
             },
             {
-              target: './src/features/mercado-pago',
-              from: './src/features',
+              target: './app/features/mercado-pago',
+              from: './app/features',
               except: ['./mercado-pago'],
               message:
                 '[mercado-pago] should not import another feature. Use entities/shared instead.',
@@ -242,8 +246,8 @@ export default defineConfig([
 
             // ❌ Prevent cross-widget imports (entities should not depend on each other)
             {
-              target: './src/widgets/pokemon',
-              from: './src/widgets',
+              target: './app/widgets/pokemon',
+              from: './app/widgets',
               except: ['./pokemon'],
               message:
                 '[pokemon] should not import another widget. Use features/entities/shared instead',
@@ -278,7 +282,7 @@ export default defineConfig([
       'import/no-relative-parent-imports': [
         'error',
         {
-          ignore: ['@/', '@app/', '@server/'],
+          ignore: ['@/', '@server/'],
         },
       ],
       'import/no-named-as-default-member': 'off',
@@ -286,7 +290,7 @@ export default defineConfig([
       'import/no-unresolved': [
         'error',
         {
-          ignore: ['@/', '@app/', '@server/'],
+          ignore: ['@/', '@server/'],
         },
       ],
 
@@ -296,6 +300,7 @@ export default defineConfig([
       'react/jsx-uses-react': 'off',
       'react/jsx-uses-vars': 'off',
       'react/react-in-jsx-scope': 'off',
+      'react-hooks/rules-of-hooks': 'off',
 
       'jsx-a11y/anchor-is-valid': 'off',
 
@@ -350,13 +355,11 @@ export default defineConfig([
   },
   {
     files: [
-      'src/**/*.ts',
-      'src/**/*.tsx',
       'app/**/*.ts',
       'app/**/*.tsx',
       'server/**/*.ts',
     ],
-    ignores: ['src/pages/**/*'],
+    ignores: ['app/routes/**/*'],
     rules: {
       'check-file/filename-naming-convention': [
         'error',

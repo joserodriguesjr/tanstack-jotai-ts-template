@@ -4,6 +4,7 @@ import {
   HeadContent,
   Link,
   Outlet,
+  ScriptOnce,
   Scripts,
   createRootRouteWithContext,
 } from '@tanstack/react-router';
@@ -22,16 +23,15 @@ export const Route = createRootRouteWithContext<{
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
-        title: 'Pokedex App',
-        description: `A PWA for browsing Pokémon data. `,
+        title: 'Pokedex',
+        description: `A PWA for browsing Pokémon data. (__ROOT) `,
       },
     ],
     links: [
       { rel: 'stylesheet', href: globalCss },
       { rel: 'icon', href: '/favicon.ico' },
-      { rel: 'manifest', href: '/manifest.webmanifest' },
       { rel: 'manifest', href: '/manifest.json' },
-      { rel: 'apple-touch-icon', sizes: '192x192', href: '/logo192.png' },
+      { rel: 'apple-touch-icon', sizes: '192x192', href: 'icons/logo192.png' },
     ],
   }),
   component: RootComponent,
@@ -65,6 +65,30 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         {children}
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <TanStackRouterDevtools position="bottom-right" />
+
+        {/* <ScriptOnce>
+					{`document.documentElement.classList.toggle(
+            'dark',
+            localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+            )`}
+				</ScriptOnce> */}
+
+        <ScriptOnce>
+          {`(async () => {
+              if ('serviceWorker' in navigator) {
+                const registration = await navigator.serviceWorker.register('/_build/sw.js');
+                
+                registration.addEventListener('updatefound', () => {
+                  const newWorker = registration.installing;
+                  newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      dispatchEvent(new CustomEvent('swUpdated'));
+                    }
+                  });
+                });
+              }
+            })();`}
+        </ScriptOnce>
         <Scripts />
       </body>
     </html>
