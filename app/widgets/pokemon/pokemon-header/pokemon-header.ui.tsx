@@ -1,18 +1,40 @@
 import { Link } from '@tanstack/react-router';
+import { RefreshCw } from 'lucide-react';
 
 import { SearchPokemon } from '@/features/pokemon';
 import { BrasilFlag, EuaFlag } from '@/shared/assets';
+import { ThemeSwitch } from '@/shared/components/theme-switch';
 import { Button } from '@/shared/components/ui/button';
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from '@/shared/components/ui/sheet';
-import { useTheme } from '@/shared/hooks/use-theme';
 import { useTranslate } from '@/shared/lib/i18n';
 
+// todo: remove this shi
+export default function HardReloadButton() {
+  const handleReload = () => {
+    const SW_NAME = '::pokedexServiceWorker';
+    const VERSION = 'v0.0.1';
+    const CACHE_NAME = VERSION + SW_NAME;
+
+    window.caches.delete(CACHE_NAME);
+    window.location.replace(window.location.pathname);
+  };
+
+  return (
+    <Button
+      onClick={handleReload}
+      variant="noBackground"
+      className="flex items-center gap-2"
+    >
+      <RefreshCw className="h-4 w-4" color="white" />
+    </Button>
+  );
+}
+
 export const PokemonHeader = () => {
-  const { theme, onToggleTheme } = useTheme();
   const { language, onChangeLanguage, translator } = useTranslate();
 
   return (
@@ -26,6 +48,7 @@ export const PokemonHeader = () => {
           {/* <img src="/pokeball.svg" alt="Pokeball" className="w-8 h-8" /> */}
           PokéDex
         </Link>
+        <HardReloadButton />
 
         {/* todo: create component from changing language */}
         <div className="flex items-center gap-2">
@@ -52,9 +75,10 @@ export const PokemonHeader = () => {
           </button>
         </div>
 
-        <Button variant={'noBackground'} size={'icon'} onClick={onToggleTheme}>
+        {/* <Button variant={'noBackground'} size={'icon'} onClick={onToggleTheme}>
           {theme === 'light' ? '🌙' : '☀️'}
-        </Button>
+        </Button> */}
+        <ThemeSwitch />
 
         {/* Barra de pesquisa */}
         <SearchPokemon />

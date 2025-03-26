@@ -53,6 +53,8 @@ This example demonstrates how to structure and utilize the template effectively.
 - Configure environment settings for development and production
 - Dockerize with PostgreSQL support
 - Implement frontend and backend testing
+- Headless CMS
+- Add debounce to infiniteQuery
 
 ## Key Features
 
@@ -70,6 +72,15 @@ This example demonstrates how to structure and utilize the template effectively.
 ✅ Linting and formatting via ESLint + Prettier \
 ✅ Git hooks with Husky and Lint Staged \
 ✅ FSD-like architecture enforced by ESLint
+
+## Good for (TODO)
+
+This is template is suitable for these types of application:
+
+- E-commerce
+- Custom blog
+- Hub
+- Internal management system
 
 ## Architecture
 

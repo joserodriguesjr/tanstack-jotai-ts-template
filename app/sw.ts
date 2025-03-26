@@ -5,13 +5,10 @@
 export type {};
 declare const self: ServiceWorkerGlobalScope;
 
-console.log('sw.ts');
-
 const SW_NAME = '::pokedexServiceWorker';
 const VERSION = 'v0.0.1';
 const CACHE_NAME = VERSION + SW_NAME;
 
-// const OFFLINE_URL = '/';
 const ASSETS = [
   '/',
   '/pokemons',
@@ -30,12 +27,7 @@ const ASSETS = [
   '/icons/logo512.png',
 ];
 
-const IGNORED_PATHS = [
-  '/_build/@react-refresh',
-  '/_build/@vite/client',
-  '/_build/node_modules',
-  '/PokeAPI',
-];
+const IGNORED_PATHS = ['/PokeAPI'];
 
 self.addEventListener('install', (event) => {
   console.log('SW installing...');
@@ -65,32 +57,14 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-self.addEventListener('fetch', async (event) => {
-  const request = event.request;
+self.addEventListener('fetch', async (event: FetchEvent) => {
   const url = new URL(event.request.url);
 
-  // Ignore Vite's dev assets (avoids caching problems in dev mode)
   if (IGNORED_PATHS.some((ignored) => url.pathname.startsWith(ignored))) {
     return;
   }
 
-  // console.log('url.pathname = ', url.pathname);
-
-  // Serve from cache first, then fallback to network
-  event.respondWith(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.match(request).then((cachedResponse) => {
-        return (
-          cachedResponse ||
-          fetch(request).then((networkResponse) => {
-            cache.put(request, networkResponse.clone());
-            return networkResponse;
-          })
-        );
-      });
-    }),
-  );
-
+  event.respondWith(networkFirst(event));
   return;
 
   // // Handle navigation requests (HTML pages)
@@ -182,4 +156,37 @@ self.addEventListener('fetch', async (event) => {
   // }
 });
 
-// const storeAssets = (request) => {};
+// todo: make more utils fn
+
+// cacheFirst strategy
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function cacheFirst(event: FetchEvent) {
+  console.log('Using cache-first strategy...');
+
+  const cache = await caches.open(CACHE_NAME);
+  const cachedResponse = await cache.match(event.request);
+
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  const networkResponse = await fetch(event.request);
+  cache.put(event.request, networkResponse.clone());
+  return networkResponse;
+}
+
+// networkFirst strategy
+async function networkFirst(event: FetchEvent) {
+  console.log('Using network-first strategy...');
+
+  const cache = await caches.open(CACHE_NAME);
+
+  try {
+    const networkResponse = await fetch(event.request);
+    cache.put(event.request, networkResponse.clone());
+    return networkResponse;
+  } catch {
+    const cachedResponse = await cache.match(event.request);
+    return cachedResponse || new Response('Offline', { status: 503 });
+  }
+}
