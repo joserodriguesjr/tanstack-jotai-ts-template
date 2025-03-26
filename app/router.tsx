@@ -12,7 +12,6 @@ import { createIDBPersister } from '@/shared/lib/indexed-db';
 import { queryConfig } from '@/shared/lib/react-query';
 
 export function createRouter() {
-  console.log('🔥 createRouter() is running!');
   const queryClient = new QueryClient({ defaultOptions: queryConfig });
   const persister = createIDBPersister();
 
