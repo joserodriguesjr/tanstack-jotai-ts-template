@@ -5,7 +5,7 @@ import { getPokemons } from '@server/pokemon/pokemon.controller';
 
 export const getPokemonsQueryOptions = (search = '') => {
   return infiniteQueryOptions({
-    queryKey: ['pokemon', search ?? ''],
+    queryKey: ['pokemon', search],
     queryFn: async ({ pageParam }) => {
       const result = await getPokemons({ data: { search, pageParam } });
 
@@ -24,10 +24,13 @@ export const getPokemonsQueryOptions = (search = '') => {
 
 type UsePokemonsOptions = {
   queryConfig?: QueryConfig<typeof getPokemonsQueryOptions>;
-  search: string;
+  search?: string;
 };
 
-export const usePokemons = ({ queryConfig, search }: UsePokemonsOptions) => {
+export const usePokemons = ({
+  queryConfig = {},
+  search = '',
+}: UsePokemonsOptions = {}) => {
   return useInfiniteQuery({
     ...getPokemonsQueryOptions(search),
     ...queryConfig,

@@ -27,7 +27,7 @@ export const PokemonModal: React.FC<PokemonModalProps> = ({
 
   return (
     <Dialog open onOpenChange={() => setSelectedPokemon(null)}>
-      <DialogContent className="max-w-lg p-6">
+      <DialogContent>
         <DialogTitle className="text-center text-2xl font-bold capitalize">
           {pokemon.englishName}, #{pokemon.nationalNumber}
         </DialogTitle>
@@ -66,7 +66,9 @@ export const PokemonModal: React.FC<PokemonModalProps> = ({
             </p>
           </div>
 
-          <h3 className="-mx-16 my-5 text-lg font-semibold">Base Stats</h3>
+          <h3 className="mt-6 mb-2 text-center text-lg font-semibold">
+            Base Stats
+          </h3>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <p>
               <strong>HP:</strong> {pokemon.hp}

@@ -1,87 +1,62 @@
-import { QueryClient, dehydrate, hydrate } from '@tanstack/react-query';
+import { dehydrate, hydrate, QueryClient } from '@tanstack/react-query';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { createRouter as createTanStackRouter } from '@tanstack/react-router';
 import { routerWithQueryClient } from '@tanstack/react-router-with-query';
 import { Provider as JotaiProvider } from 'jotai';
+import { StrictMode } from 'react';
 
 import { routeTree } from '@/routeTree.gen';
+import { DefaultCatchBoundary } from '@/shared/components/default-catch-boundary';
 import { SwPrompt } from '@/shared/components/sw-prompt';
 import { createIDBPersister } from '@/shared/lib/indexed-db';
 import { queryConfig } from '@/shared/lib/react-query';
 
 export function createRouter() {
-  // Make sure you create your loader client or similar data
-  // stores inside of your `createRouter` function. This ensures
-  // that your data stores are unique to each request and
-  // always present on both server and client.
+  console.log('🔥 createRouter() is running!');
   const queryClient = new QueryClient({ defaultOptions: queryConfig });
-
   const persister = createIDBPersister();
 
   return routerWithQueryClient(
     createTanStackRouter({
       routeTree,
-      // Optionally provide your loaderClient to the router context for
-      // convenience (you can provide anything you want to the router
-      // context!)
+      defaultPreload: 'intent',
+      defaultPreloadStaleTime: 0,
+      defaultErrorComponent: DefaultCatchBoundary,
+      scrollRestoration: true,
+      defaultStructuralSharing: true,
       context: { queryClient },
-      // On the server, dehydrate the loader client so the router
-      // can serialize it and send it to the client for us
       dehydrate: () => {
         return {
           queryClientState: dehydrate(queryClient),
         };
       },
-      // On the client, hydrate the loader client with the data
-      // we dehydrated on the server
       hydrate: (dehydrated) => {
         hydrate(queryClient, dehydrated.queryClientState);
       },
-      // Optionally, we can use `Wrap` to wrap our router in the loader client provider
       Wrap: ({ children }) => {
         return (
-          <PersistQueryClientProvider
-            client={queryClient}
-            persistOptions={{
-              persister,
-              maxAge: 1000 * 60 * 60 * 24, // 24 hours
-              // dehydrateOptions: {
-              //   shouldDehydrateQuery: (query) => {
-              //     console.log(query)
-              //     // returns true to queries that you want to save
-              //     return (
-              //       // defaultShouldDehydrateQuery contains default logic (state === 'success')
-              //       defaultShouldDehydrateQuery(query) // &&
-              //       // myCustomShouldDehydrateQuery(query)
-              //     )
-              //   },
-              // },
-              // hydrateOptions: {
-              //   defaultOptions: {
-              //     deserializeData: (data) => {
-              //       console.log(data)
-              //     }
-              //   }
-              // }
-            }}
-            onSuccess={() => {
-              queryClient.resumePausedMutations();
-              // .then(() => queryClient.invalidateQueries());
-            }}
-          >
-            <JotaiProvider>
-              <SwPrompt />
-              {children}
-            </JotaiProvider>
-          </PersistQueryClientProvider>
+          <>
+            <StrictMode>
+              <PersistQueryClientProvider
+                client={queryClient}
+                persistOptions={{
+                  persister,
+                  maxAge: 1000 * 60 * 60 * 24, // 24 hours
+                }}
+                onSuccess={() => {
+                  queryClient.resumePausedMutations();
+                  // .then(() => queryClient.invalidateQueries());
+                }}
+              >
+                <JotaiProvider>
+                  <SwPrompt />
+                  {children}
+                </JotaiProvider>
+              </PersistQueryClientProvider>
+            </StrictMode>
+          </>
         );
       },
-      defaultPreload: 'intent',
-      // Since we're using React Query, we don't want loader calls to ever be stale
-      // This will ensure that the loader is always called when the route is preloaded or visited
-      defaultPreloadStaleTime: 0,
-      scrollRestoration: true,
-      defaultStructuralSharing: true,
     }),
     queryClient,
   );

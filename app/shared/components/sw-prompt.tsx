@@ -16,18 +16,37 @@ export function SwPrompt() {
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
-      setTimeout(() => setShowPrompt(true), 2000);
+      navigator.serviceWorker.getRegistration().then((registration) => {
+        if (!registration) {
+          setTimeout(() => setShowPrompt(true), 2000);
+        }
+      });
     }
   }, []);
 
   const registerServiceWorker = async () => {
     try {
-      const swPromise = navigator.serviceWorker.register('/sw.js');
-      await toast.promise(swPromise, {
+      const swPromise = navigator.serviceWorker.register('sw.js');
+      toast.promise(swPromise, {
         loading: 'Registering Service Worker...',
-        success: 'Service Worker Registered! 🎉',
+        success: 'Service Worker Registered!!!!!!!!!!!!!!!!!! 🎉',
         error: 'Failed to register Service Worker ❌',
       });
+      // const sw = await swPromise;
+      // sw.addEventListener('updatefound', () => {
+      //   const newWorker = sw.installing;
+      //   newWorker?.addEventListener('statechange', () => {
+      //     if (
+      //       newWorker.state === 'installed' &&
+      //       navigator.serviceWorker.controller
+      //     ) {
+      //       window.location.reload(); // Force refresh when a new SW is installed
+      //     }
+      //   });
+      //   navigator.serviceWorker.addEventListener('controllerchange', () => {
+      //     window.location.reload(); // Ensures new content is loaded
+      //   });
+      // });
     } catch (error) {
       console.error('[SW] Registration Failed:', error);
     } finally {

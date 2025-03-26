@@ -1,5 +1,5 @@
 console.log("sw.ts");
-const c = "::pokedexServiceWorker", a = "v0.0.1", o = a + c, r = [
+const o = "::pokedexServiceWorker", c = "v0.0.1", n = c + o, a = [
   "/",
   "/pokemons",
   "/pokemons/",
@@ -13,29 +13,32 @@ const c = "::pokedexServiceWorker", a = "v0.0.1", o = a + c, r = [
   // '/assets/screenshot-mobile.png',
   "/icons/logo192.png",
   "/icons/logo512.png"
-], d = [
-  "/_build/@react-refresh",
-  "/_build/@vite/client",
-  "/_build/node_modules",
-  "/PokeAPI"
-];
+], i = ["/PokeAPI"];
 self.addEventListener("install", (e) => {
   console.log("SW installing..."), e.waitUntil(
-    caches.open(o).then((t) => t.addAll(r))
+    caches.open(n).then((t) => t.addAll(a))
   ), self.skipWaiting();
 });
 self.addEventListener("activate", (e) => {
   console.log("SW activating..."), e.waitUntil(
     caches.keys().then(
       (t) => Promise.all(
-        t.filter((n) => n !== o).map((n) => caches.delete(n))
+        t.filter((s) => s !== n).map((s) => caches.delete(s))
       )
     )
   ), self.clients.claim();
 });
 self.addEventListener("fetch", async (e) => {
-  const t = e.request, n = new URL(e.request.url);
-  d.some((s) => n.pathname.startsWith(s)) || e.respondWith(
-    caches.open(o).then((s) => s.match(t).then((i) => i || fetch(t).then((l) => (s.put(t, l.clone()), l))))
-  );
+  const t = new URL(e.request.url);
+  i.some((s) => t.pathname.startsWith(s)) || e.respondWith(r(e));
 });
+async function r(e) {
+  console.log("Using network-first strategy...");
+  const t = await caches.open(n);
+  try {
+    const s = await fetch(e.request);
+    return t.put(e.request, s.clone()), s;
+  } catch {
+    return await t.match(e.request) || new Response("Offline", { status: 503 });
+  }
+}

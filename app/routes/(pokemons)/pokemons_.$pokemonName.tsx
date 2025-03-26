@@ -1,4 +1,4 @@
-import { Link, Navigate, createFileRoute } from '@tanstack/react-router';
+import { Link, createFileRoute } from '@tanstack/react-router';
 
 import { getPokemonQueryOptions, usePokemon } from '@/entities/pokemon';
 import Loading from '@/shared/components/loading';
@@ -9,7 +9,6 @@ export const Route = createFileRoute('/(pokemons)/pokemons_/$pokemonName')({
   loader: async ({ context: { queryClient }, params: { pokemonName } }) =>
     await queryClient.ensureQueryData(getPokemonQueryOptions(pokemonName)),
   component: PokemonView,
-  errorComponent: () => <Navigate to="/pokemons" replace />,
   notFoundComponent: () => {
     const {
       error,
@@ -24,15 +23,12 @@ export const Route = createFileRoute('/(pokemons)/pokemons_/$pokemonName')({
       />
     );
   },
+  pendingComponent: () => <Loading />,
 });
 
 function PokemonView() {
   const { pokemonName } = Route.useParams();
   const pokemonQuery = usePokemon({ pokemonName });
-
-  if (pokemonQuery.isLoading) {
-    return <Loading />;
-  }
 
   const pokemon = pokemonQuery?.data;
 

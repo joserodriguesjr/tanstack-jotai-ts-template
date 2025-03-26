@@ -45,6 +45,12 @@ function watchServiceWorker(): Plugin {
 }
 
 export default defineConfig({
+  server: {
+    https: {
+      key: './.cert/key.pem',
+      cert: './.cert/cert.pem',
+    },
+  },
   vite: {
     ssr: { external: ['drizzle-orm'] },
     plugins: [

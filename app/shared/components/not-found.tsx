@@ -1,4 +1,4 @@
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, Link } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/shared/components/ui/button';
@@ -6,12 +6,12 @@ import { Card, CardContent } from '@/shared/components/ui/card';
 
 export function NotFound({
   countdown = 5,
-  redirectTo,
+  redirectTo = '/',
   errorMessage = 'Oops! Page not found.',
 }: {
-  countdown: number;
-  redirectTo: string;
-  errorMessage: string;
+  countdown?: number;
+  redirectTo?: string;
+  errorMessage?: string;
 }) {
   const navigate = useNavigate();
   const [count, setCount] = useState(countdown);
@@ -40,12 +40,9 @@ export function NotFound({
             Redirecting in <span className="font-semibold">{count}</span>{' '}
             seconds...
           </p>
-          <Button
-            onClick={() => navigate({ to: redirectTo, replace: true })}
-            className="mt-4 cursor-pointer"
-          >
-            Go Back Now
-          </Button>
+          <Link to={redirectTo}>
+            <Button className="mt-4 cursor-pointer">Go back</Button>
+          </Link>
         </CardContent>
       </Card>
     </div>

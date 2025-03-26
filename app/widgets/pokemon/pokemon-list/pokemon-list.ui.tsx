@@ -32,7 +32,7 @@ export function PokemonList() {
   });
 
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+    <div className="mx-auto grid max-w-4xl grid-cols-2 gap-4 p-6 md:grid-cols-3 lg:grid-cols-4">
       {pokemons.map((pokemon, index) => (
         <PokemonCard
           ref={index === lastPokemonIndex ? loadMoreRef : undefined}
