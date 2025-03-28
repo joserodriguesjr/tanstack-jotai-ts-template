@@ -50,15 +50,10 @@ export const PokemonHeader = () => {
         </Link>
         <HardReloadButton />
 
-        {/* todo: create component from changing language */}
         <LanguageSwitch />
 
-        {/* <Button variant={'noBackground'} size={'icon'} onClick={onToggleTheme}>
-          {theme === 'light' ? '🌙' : '☀️'}
-        </Button> */}
         <ThemeSwitch />
 
-        {/* Barra de pesquisa */}
         <SearchPokemon />
 
         {/* Menu desktop */}
