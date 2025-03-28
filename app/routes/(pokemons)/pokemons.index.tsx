@@ -1,26 +1,17 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
 
-import { usePokemons } from '@/entities/pokemon';
 import { SelectPokemon } from '@/features/pokemon';
-import Loading from '@/shared/components/loading';
+import { useIsMounted } from '@/shared/hooks/use-is-mounted';
 import { PokemonList } from '@/widgets/pokemon';
+import { PokemonListSkeleton } from '@/widgets/pokemon/pokemon-list/pokemon-list.skeleton';
 
 export const Route = createFileRoute('/(pokemons)/pokemons/')({
   component: () => {
-    const { isLoading } = usePokemons();
-    const [isIndexedDBLoaded, setIsIndexedDBLoaded] = useState(false);
+    const isMounted = useIsMounted();
 
-    useEffect(() => {
-      if (!isLoading) {
-        setIsIndexedDBLoaded(true);
-      }
-    }, [isLoading]);
-
-    // todo: tentar com suspense
     return (
       <>
-        {isIndexedDBLoaded ? <PokemonList /> : <Loading />}
+        {isMounted ? <PokemonList /> : <PokemonListSkeleton />}
         <SelectPokemon />
       </>
     );
