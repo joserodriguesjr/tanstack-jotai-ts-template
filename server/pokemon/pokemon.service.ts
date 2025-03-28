@@ -1,5 +1,6 @@
 import { notFound } from '@tanstack/react-router';
 
+import { logger } from '@server/logger/logger';
 import type { Pokemon, PokemonDTO } from '@server/pokemon/pokemon.schema';
 
 export interface IPokemonRepository {
@@ -24,11 +25,12 @@ export class PokemonService {
   }: {
     pokemonName: string;
   }): Promise<Pokemon> {
-    console.info(`Fetching pokemons, looking for ${pokemonName}...`);
+    logger.info(`Fetching pokemons, looking for ${pokemonName}...`);
 
     const pokemon = await this.pokemonRepository.getPokemonByName(pokemonName);
 
     if (!pokemon) {
+      logger.warn(`No Pokemon found with the given name: ${pokemonName}`);
       throw notFound({
         data: `No Pokemon found with the given name: ${pokemonName}`,
       });
@@ -46,7 +48,7 @@ export class PokemonService {
     pageParam: number;
     pageSize: number;
   }): Promise<PokemonDTO> {
-    console.info(`Fetching pokemons for page ${pageParam}...`);
+    logger.info(`Fetching pokemons for page ${pageParam}...`);
 
     const offset = (pageParam - 1) * pageSize;
     const [pokemonsData, totalCount] = await Promise.all([

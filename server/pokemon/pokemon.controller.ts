@@ -1,5 +1,6 @@
 import { createServerFn } from '@tanstack/react-start';
 
+import { logger } from '@server/logger/logger';
 import { PokemonRepository } from '@server/pokemon/pokemon.repository';
 import { PokemonService } from '@server/pokemon/pokemon.service';
 
@@ -20,14 +21,17 @@ export const getPokemons = createServerFn({
       pageSize?: number;
     }) => {
       if (typeof search !== 'string') {
+        logger.error('Invalid search text');
         throw new Error('Invalid search text');
       }
 
       if (typeof pageParam !== 'number') {
+        logger.error('Invalid page number');
         throw new Error('Invalid page number');
       }
 
       if (typeof pageSize !== 'number') {
+        logger.error('Invalid page size');
         throw new Error('Invalid page size');
       }
 
@@ -41,6 +45,7 @@ export const getPokemon = createServerFn({
 })
   .validator((pokemonName: string): { pokemonName: string } => {
     if (typeof pokemonName !== 'string') {
+      logger.error('Invalid pokemonName');
       throw new Error('Invalid pokemonName');
     }
 
