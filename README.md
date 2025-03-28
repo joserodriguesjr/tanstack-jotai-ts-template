@@ -50,20 +50,22 @@ This example demonstrates how to structure and utilize the template effectively.
 - Implement mutations with redirects to new resources
 - Integrate authentication using [Better Auth](https://www.better-auth.com/docs/installation)
 - Add WebSocket and SSE support ([reference](https://nize.foo/blog/tanstack-start-websockets))
-- Improve server function structure (useServerFn, ...)
-- Enhance backend architecture with IoC (Inversion of Control)
-- Implement frontend and backend testing (vitest + cypress (<https://github.com/profydev/prolog-app/tree/main?tab=readme-ov-fileests>))
+- Implement frontend testing (cypress (<https://github.com/profydev/prolog-app/tree/main?tab=readme-ov-fileests>))
 - Configure environment settings for development and production
+- Project configuration through env
+- Improve SW (caches, add metadata, auth?)
+- Implement Zod (validateSearchParams)
 - Dockerize with PostgreSQL support
 - Buildpack / nimpacks (dokploy with nixpacks) | Vercel
-- Add debounce to infiniteQuery
-- Add monitoring (<https://www.datadoghq.com/blog/monitoring-mean-stack-applications-with-datadog/>)
 - Error monitoring (Sentry, new relic, rollbar, bugsnag)
-- Logging in backend, apm tools
 - Admin page (headless CMS?)
 - Pocketbase
 - Remove eslint-disable from files
 - Share types between server functions and client code?
+- Integrate hooks for payment and external APIs
+- Fix mobile experience (useIsMobile hook?)
+- Add monitoring (<https://www.datadoghq.com/blog/monitoring-mean-stack-applications-with-datadog/>)
+- Add webtracking (UTMs, for A/B tests, etc...)
 
 ### Pokedex
 
@@ -72,21 +74,31 @@ This example demonstrates how to structure and utilize the template effectively.
 
 ## Key Features
 
+### Project
+
+✅ Linting and formatting via ESLint + Prettier \
+✅ Git hooks with Husky and Lint Staged
+
+### Client
+
 ✅ PWA built-in support \
-✅ Fullstack setup with client and server integration \
 ✅ File-based routing powered by TanStack Router \
 ✅ Optimized data fetching with TanStack Query \
 ✅ Global state management using Jotai \
 ✅ Offline cache support via IndexedDB (Synced with react query) \
-✅ SSR and API handlers for server-side logic \
-✅ Type-safe ORM with Drizzle \
 ✅ Schema validation with Zod \
 ✅ Modern styling using Tailwind CSS + Shadcn UI \
 ✅ Skeleton UI to prevent hydration error \
 ✅ Multilanguage support with i18n \
-✅ Linting and formatting via ESLint + Prettier \
-✅ Git hooks with Husky and Lint Staged \
 ✅ FSD-like architecture enforced by ESLint
+
+### Server
+
+✅ SSR, Server functions and API handlers \
+✅ Type-safe ORM with Drizzle \
+✅ IoC pattern \
+✅ Logger using winston
+✅ Tests using Vitest
 
 ## Good for (TODO)
 
@@ -112,7 +124,7 @@ There are some set of rules in ESLint to avoid coupling layers, following Featur
 - There can't be any cross-import inside `app/entities`, `app/features` or `app/widgets`
 - Should import only from `index.ts` files (you need to add `eslint-disable import/no-internal-modules` rule inside them)
 
-### Folder Structure
+### Folder Structure (todo: improve)
 
 ```txt
 .
@@ -153,7 +165,6 @@ There are some set of rules in ESLint to avoid coupling layers, following Featur
 
 <!-- TODO -->
 <!-- And [React Spring](https://www.react-spring.dev/) for animations. -->
-<!-- **Pattern:** Colocation + MVVM? -->
 <!-- **Inputs Validation:** React Hook Form + Zod -->
 <!-- **Deploy:** Dokploy + Nixpacks -->
 
