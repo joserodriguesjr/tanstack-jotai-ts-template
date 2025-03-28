@@ -19,6 +19,7 @@ export const getPokemonsQueryOptions = (search = '') => {
     },
     getNextPageParam: (lastPage) => lastPage.nextPage ?? undefined,
     initialPageParam: 1,
+    retryDelay: 2000,
   });
 };
 
