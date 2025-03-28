@@ -1,19 +1,49 @@
 import { createServerFn } from '@tanstack/react-start';
 
-import { findAllPokemons, findPokemon } from '@server/pokemon/pokemon.service';
-import {
-  validatePokemonName,
-  validateSearchParams,
-} from '@server/pokemon/pokemon.validator';
+import { PokemonRepository } from '@server/pokemon/pokemon.repository';
+import { PokemonService } from '@server/pokemon/pokemon.service';
+
+const pokemonRepository = new PokemonRepository();
+const pokemonService = new PokemonService(pokemonRepository);
 
 export const getPokemons = createServerFn({
   method: 'GET',
 })
-  .validator(validateSearchParams)
-  .handler(async ({ data }) => findAllPokemons(data));
+  .validator(
+    ({
+      search,
+      pageParam,
+      pageSize = 24,
+    }: {
+      search?: string;
+      pageParam: number;
+      pageSize?: number;
+    }) => {
+      if (typeof search !== 'string') {
+        throw new Error('Invalid search text');
+      }
+
+      if (typeof pageParam !== 'number') {
+        throw new Error('Invalid page number');
+      }
+
+      if (typeof pageSize !== 'number') {
+        throw new Error('Invalid page size');
+      }
+
+      return { search, pageParam, pageSize };
+    },
+  )
+  .handler(async ({ data }) => pokemonService.findAllPokemons(data));
 
 export const getPokemon = createServerFn({
   method: 'GET',
 })
-  .validator(validatePokemonName)
-  .handler(async ({ data }) => findPokemon(data));
+  .validator((pokemonName: string): { pokemonName: string } => {
+    if (typeof pokemonName !== 'string') {
+      throw new Error('Invalid pokemonName');
+    }
+
+    return { pokemonName };
+  })
+  .handler(async ({ data }) => pokemonService.findPokemon(data));
