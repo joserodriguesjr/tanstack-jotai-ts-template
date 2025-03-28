@@ -70,6 +70,7 @@ export default defineConfig([
       'app/**/*.tsx',
       'server/**/*.ts',
       'app.config.ts',
+      'vitest.config.ts',
     ],
 
     extends: fixupConfigRules(
