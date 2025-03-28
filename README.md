@@ -45,16 +45,30 @@ This example demonstrates how to structure and utilize the template effectively.
 
 ## Roadmap
 
+### Template
+
 - Implement mutations with redirects to new resources
 - Integrate authentication using [Better Auth](https://www.better-auth.com/docs/installation)
 - Add WebSocket and SSE support ([reference](https://nize.foo/blog/tanstack-start-websockets))
 - Improve server function structure (useServerFn, ...)
 - Enhance backend architecture with IoC (Inversion of Control)
+- Implement frontend and backend testing (vitest + cypress (<https://github.com/profydev/prolog-app/tree/main?tab=readme-ov-fileests>))
 - Configure environment settings for development and production
 - Dockerize with PostgreSQL support
-- Implement frontend and backend testing
-- Headless CMS
+- Buildpack / nimpacks (dokploy with nixpacks) | Vercel
 - Add debounce to infiniteQuery
+- Add monitoring (<https://www.datadoghq.com/blog/monitoring-mean-stack-applications-with-datadog/>)
+- Error monitoring (Sentry, new relic, rollbar, bugsnag)
+- Logging in backend, apm tools
+- Admin page (headless CMS?)
+- Pocketbase
+- Remove eslint-disable from files
+- Share types between server functions and client code?
+
+### Pokedex
+
+- Filter by element (select)
+- Favorite pokemon
 
 ## Key Features
 
@@ -68,6 +82,7 @@ This example demonstrates how to structure and utilize the template effectively.
 ✅ Type-safe ORM with Drizzle \
 ✅ Schema validation with Zod \
 ✅ Modern styling using Tailwind CSS + Shadcn UI \
+✅ Skeleton UI to prevent hydration error \
 ✅ Multilanguage support with i18n \
 ✅ Linting and formatting via ESLint + Prettier \
 ✅ Git hooks with Husky and Lint Staged \
@@ -95,7 +110,7 @@ There are some set of rules in ESLint to avoid coupling layers, following Featur
 - Only `app/entities/<entity>/api` can import `server/`  
 - `server/` can't import any file inside `app/`  
 - There can't be any cross-import inside `app/entities`, `app/features` or `app/widgets`
-- Should import only from `index.ts` files
+- Should import only from `index.ts` files (you need to add `eslint-disable import/no-internal-modules` rule inside them)
 
 ### Folder Structure
 
@@ -156,6 +171,25 @@ Configure Drizzle ORM by defining your schema in `/app/db/schema.ts` and updatin
 
 - Loaders run on the client during navigation but execute on the server on full-page reloads.
 - Use Jotai for sharing state between components, particularly for filters and search parameters.
+
+### The route loading lifecycle
+
+Every time a URL/history update is detected, the router executes the following sequence:
+
+- Route Matching (Top-Down)
+  - route.params.parse
+  - route.validateSearch
+- Route Pre-Loading (Serial)
+  - route.beforeLoad
+  - route.onError
+    - route.errorComponent / parentRoute.errorComponent / router.defaultErrorComponent
+- Route Loading (Parallel)
+  - route.component.preload?
+  - route.loader
+    - route.pendingComponent (Optional)
+    - route.component
+  - route.onError
+    - route.errorComponent / parentRoute.errorComponent / router.defaultErrorComponent
 
 ## Why Choose TanStack Start Over Next.js?
 
