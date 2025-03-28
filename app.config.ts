@@ -1,15 +1,10 @@
 import { exec } from 'child_process';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
 
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from '@tanstack/react-start/config';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import type { Plugin } from 'vite';
 import tsConfigPaths from 'vite-tsconfig-paths';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 function debounce(fn: (...args: any[]) => void, delay: number) {
   let timeout: NodeJS.Timeout;
@@ -29,7 +24,7 @@ function watchServiceWorker(): Plugin {
         console.log('✔ SW rebuilt successfully.');
       }
     });
-  }, 300); // 300ms debounce to avoid multiple triggers
+  }, 300);
 
   return {
     name: 'watch-sw',
@@ -70,12 +65,5 @@ export default defineConfig({
         generatedRouteTree: './app/routeTree.gen.ts',
       }),
     ],
-
-    resolve: {
-      alias: {
-        '@': resolve(__dirname, './app'),
-        '@server': resolve(__dirname, './server'),
-      },
-    },
   },
 });

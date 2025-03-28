@@ -2,7 +2,7 @@ export const en = {
   translations: {
     pokemons: {
       header: {
-        searchBar: 'Search Pokemon......',
+        searchBar: 'Search Pokemon...',
         allPokemons: 'All Pokemons',
         types: 'Types',
         about: 'About',
