@@ -2,9 +2,7 @@ import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
-import { de } from './locales/de';
-import { en } from './locales/en';
-import { pt } from './locales/pt';
+import { pt, en, de } from './locales';
 
 export const defaultNS = 'translations';
 export const resources = {
