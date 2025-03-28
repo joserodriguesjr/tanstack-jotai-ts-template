@@ -2,7 +2,7 @@
 import { StartClient } from '@tanstack/react-start';
 import { hydrateRoot } from 'react-dom/client';
 
-import '@/shared/lib/i18n';
+import '@/shared/lib/i18n/i18n';
 import { createRouter } from '@/router';
 
 const router = createRouter();

@@ -7,13 +7,14 @@
     "dev": "npm run build:sw && vinxi dev",
     "build": "npm run build:sw && vinxi build",
     "start": "node -r dotenv/config .output/server/index.mjs",
-    "lint": "eslint '**/*.{js,jsx,ts,tsx}' --fix --cache",
+    "lint": "eslint '**/*.{js,ts,tsx}' --fix --cache",
     "cert": "rm -rf .cert && mkdir -p .cert && mkcert -key-file ./.cert/key.pem -cert-file ./.cert/cert.pem 'localhost'",
     "prepare": "husky install"
   },
   "dependencies": {
     "@libsql/client": "^0.14.0",
     "@radix-ui/react-dialog": "^1.1.6",
+    "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-slot": "^1.1.2",
     "@tailwindcss/vite": "^4.0.9",
     "@tanstack/query-core": "^5.66.11",
@@ -96,6 +97,6 @@
     "web-vitals": "^4.2.4"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,css,html,json}": "eslint --fix --cache"
+    "*.{ts,tsx,js,css,html,json}": "eslint --fix --cache"
   }
 }

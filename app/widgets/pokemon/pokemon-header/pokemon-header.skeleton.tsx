@@ -11,10 +11,7 @@ export const PokemonHeaderSkeleton = () => {
         <Skeleton className="h-8 w-8 rounded-full" />
 
         {/* Troca de idioma */}
-        <div className="flex items-center gap-2">
-          <Skeleton className="h-6 w-6 rounded-full" />
-          <Skeleton className="h-6 w-6 rounded-full" />
-        </div>
+        <Skeleton className="h-6 w-12 rounded-full" />
 
         {/* Troca de tema */}
         <Skeleton className="h-8 w-8 rounded-full" />

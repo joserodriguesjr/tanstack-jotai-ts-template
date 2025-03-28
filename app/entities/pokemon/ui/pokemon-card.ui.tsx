@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
 import { Card, CardContent } from '@/shared/components/ui/card';
-import { useTranslate } from '@/shared/lib/i18n';
+import { useI18n } from '@/shared/hooks/use-i18n';
 
 interface PokemonCardProps {
   nationalNumber: number;
@@ -16,9 +16,10 @@ export const PokemonCard = forwardRef<HTMLDivElement, PokemonCardProps>(
     { nationalNumber, englishName, primaryType, secondaryType, onClick },
     ref,
   ) => {
-    const { translator } = useTranslate();
+    const { translator } = useI18n();
+
     const translateType = (type: string | null) =>
-      type ? translator({ path: `pokemons.types.${type}` }) : '';
+      type ? translator(`pokemons.types.${type}`) : '';
 
     return (
       <Card

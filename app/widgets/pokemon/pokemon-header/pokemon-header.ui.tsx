@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { RefreshCw } from 'lucide-react';
 
 import { SearchPokemon } from '@/features/pokemon';
-import { BrasilFlag, EuaFlag } from '@/shared/assets';
+import { LanguageSwitch } from '@/shared/components/language-switch';
 import { ThemeSwitch } from '@/shared/components/theme-switch';
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -10,7 +10,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from '@/shared/components/ui/sheet';
-import { useTranslate } from '@/shared/lib/i18n';
+import { useI18n } from '@/shared/hooks/use-i18n';
 
 // todo: remove this shi
 export default function HardReloadButton() {
@@ -35,7 +35,7 @@ export default function HardReloadButton() {
 }
 
 export const PokemonHeader = () => {
-  const { language, onChangeLanguage, translator } = useTranslate();
+  const { translator } = useI18n();
 
   return (
     <header className="sticky top-0 z-50 bg-gray-800 shadow-md">
@@ -51,29 +51,7 @@ export const PokemonHeader = () => {
         <HardReloadButton />
 
         {/* todo: create component from changing language */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => onChangeLanguage('pt-BR')}
-            aria-label="Switch to Portuguese"
-          >
-            <img
-              src={BrasilFlag}
-              alt="Brazilian flag"
-              className={`h-6 w-6 cursor-pointer transition-all ${language === 'pt-BR' ? '' : 'opacity-50 grayscale'}`}
-            />
-          </button>
-
-          <button
-            onClick={() => onChangeLanguage('en-US')}
-            aria-label="Switch to English"
-          >
-            <img
-              src={EuaFlag}
-              alt="US flag"
-              className={`h-6 w-6 cursor-pointer transition-all ${language === 'en-US' ? '' : 'opacity-50 grayscale'}`}
-            />
-          </button>
-        </div>
+        <LanguageSwitch />
 
         {/* <Button variant={'noBackground'} size={'icon'} onClick={onToggleTheme}>
           {theme === 'light' ? '🌙' : '☀️'}
@@ -89,19 +67,19 @@ export const PokemonHeader = () => {
             to="/pokemons"
             className="font-medium text-white hover:underline"
           >
-            {translator({ path: 'pokemons.header.allPokemons' })}
+            {translator('pokemons.header.allPokemons')}
           </Link>
           <Link
             to="/pokemons/types"
             className="font-medium text-white hover:underline"
           >
-            {translator({ path: 'pokemons.header.types' })}
+            {translator('pokemons.header.types')}
           </Link>
           <Link
             to="/pokemons/about"
             className="font-medium text-white hover:underline"
           >
-            {translator({ path: 'pokemons.header.about' })}
+            {translator('pokemons.header.about')}
           </Link>
         </nav>
 
@@ -122,19 +100,19 @@ export const PokemonHeader = () => {
                 to="/pokemons"
                 className="text-lg font-medium hover:underline"
               >
-                {translator({ path: 'pokemons.header.allPokemons' })}
+                {translator('pokemons.header.allPokemons')}
               </Link>
               <Link
                 to="/pokemons/types"
                 className="text-lg font-medium hover:underline"
               >
-                {translator({ path: 'pokemons.header.types' })}
+                {translator('pokemons.header.types')}
               </Link>
               <Link
                 to="/pokemons/about"
                 className="text-lg font-medium hover:underline"
               >
-                {translator({ path: 'pokemons.header.about' })}
+                {translator('pokemons.header.about')}
               </Link>
             </nav>
           </SheetContent>

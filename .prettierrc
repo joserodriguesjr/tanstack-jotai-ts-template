@@ -11,7 +11,7 @@
   "tailwindFunctions": ["clsx", "cva", "cn", "tw"],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": ["*.ts", "*.tsx", "*.js"],
       "options": {
         "importOrder": null
       }
