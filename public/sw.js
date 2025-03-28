@@ -1,44 +1,41 @@
-console.log("sw.ts");
-const o = "::pokedexServiceWorker", c = "v0.0.1", n = c + o, a = [
+const c = "::pokedexServiceWorker", o = "v0.0.1", s = o + c, i = [
   "/",
   "/pokemons",
   "/pokemons/",
   "/manifest.json",
   "/favicon.ico",
-  // '/assets/blueprint-192x192.png',
-  // '/assets/blueprint-512x384.png',
-  // '/assets/blueprint-512x512.png',
+  "/icons/blueprint-192x192.png",
+  "/icons/blueprint-512x384.png",
+  "/icons/blueprint-512x512.png"
   // '/assets/blueprint.png',
   // '/assets/screenshot-desktop.png',
   // '/assets/screenshot-mobile.png',
-  "/icons/logo192.png",
-  "/icons/logo512.png"
-], i = ["/PokeAPI"];
+], a = ["/PokeAPI"];
 self.addEventListener("install", (e) => {
   console.log("SW installing..."), e.waitUntil(
-    caches.open(n).then((t) => t.addAll(a))
+    caches.open(s).then((n) => n.addAll(i))
   ), self.skipWaiting();
 });
 self.addEventListener("activate", (e) => {
   console.log("SW activating..."), e.waitUntil(
     caches.keys().then(
-      (t) => Promise.all(
-        t.filter((s) => s !== n).map((s) => caches.delete(s))
+      (n) => Promise.all(
+        n.filter((t) => t !== s).map((t) => caches.delete(t))
       )
     )
   ), self.clients.claim();
 });
 self.addEventListener("fetch", async (e) => {
-  const t = new URL(e.request.url);
-  i.some((s) => t.pathname.startsWith(s)) || e.respondWith(r(e));
+  const n = new URL(e.request.url);
+  a.some((t) => n.pathname.startsWith(t)) || e.respondWith(r(e));
 });
 async function r(e) {
   console.log("Using network-first strategy...");
-  const t = await caches.open(n);
+  const n = await caches.open(s);
   try {
-    const s = await fetch(e.request);
-    return t.put(e.request, s.clone()), s;
+    const t = await fetch(e.request);
+    return n.put(e.request, t.clone()), t;
   } catch {
-    return await t.match(e.request) || new Response("Offline", { status: 503 });
+    return await n.match(e.request) || new Response("Offline", { status: 503 });
   }
 }

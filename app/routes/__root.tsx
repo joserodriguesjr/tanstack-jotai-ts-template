@@ -29,12 +29,12 @@ export const Route = createRootRouteWithContext<{
     links: [
       { rel: 'stylesheet', href: globalCss },
       { rel: 'icon', href: '/favicon.ico' },
+      { rel: 'manifest', href: '/manifest.json' },
       {
-        rel: 'manifest',
-        crossOrigin: 'use-credentials',
-        href: 'manifest.json',
+        rel: 'apple-touch-icon',
+        sizes: '192x192',
+        href: '/icons/blueprint-192x192.png',
       },
-      { rel: 'apple-touch-icon', sizes: '192x192', href: 'icons/logo192.png' },
     ],
   }),
   errorComponent: (props) => {

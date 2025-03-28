@@ -26,11 +26,11 @@ export function SwPrompt() {
 
   const registerServiceWorker = async () => {
     try {
-      const swPromise = navigator.serviceWorker.register('sw.js');
+      const swPromise = navigator.serviceWorker.register('/sw.js');
       toast.promise(swPromise, {
-        loading: 'Registering Service Worker...',
-        success: 'Service Worker Registered!!!!!!!!!!!!!!!!!! 🎉',
-        error: 'Failed to register Service Worker ❌',
+        loading: 'Loading offline features...',
+        success: 'Offline enabled! 🎉',
+        error: 'Failed to load offline mode ❌',
       });
       // const sw = await swPromise;
       // sw.addEventListener('updatefound', () => {
