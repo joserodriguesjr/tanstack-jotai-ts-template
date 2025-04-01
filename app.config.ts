@@ -42,6 +42,9 @@ function watchServiceWorker(): Plugin {
 export default defineConfig({
   server: {
     // preset: 'digital-ocean',
+    experimental: {
+      websocket: true,
+    },
     https: {
       key: './.cert/key.pem',
       cert: './.cert/cert.pem',
@@ -66,4 +69,13 @@ export default defineConfig({
       }),
     ],
   },
-});
+}).then((config) =>
+  config.addRouter({
+    // todo: add env var
+    name: 'websocket',
+    type: 'http',
+    handler: './app/ws.ts',
+    target: 'server',
+    base: '/_ws',
+  }),
+);

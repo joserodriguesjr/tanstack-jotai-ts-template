@@ -35,6 +35,7 @@ export default defineConfig([
     'package.json',
     'package-lock.json',
     'generators/*',
+    '.vscode/*'
   ]),
   {
     extends: compat.extends('eslint:recommended'),
@@ -232,6 +233,13 @@ export default defineConfig([
               except: ['./pokemon'],
               message:
                 '[pokemon] should not import another widget. Use features/entities/shared instead',
+            },
+            {
+              target: './app/widgets/chat',
+              from: './app/widgets',
+              except: ['./chat'],
+              message:
+                '[chat] should not import another widget. Use features/entities/shared instead',
             },
           ],
         },
