@@ -48,24 +48,39 @@ This example demonstrates how to structure and utilize the template effectively.
 ### Template
 
 - Implement mutations with redirects to new resources
+
 - Integrate authentication using [Better Auth](https://www.better-auth.com/docs/installation)
-- Add WebSocket and SSE support ([reference](https://nize.foo/blog/tanstack-start-websockets))
-- Implement frontend testing (cypress (<https://github.com/profydev/prolog-app/tree/main?tab=readme-ov-fileests>))
+- Implement roles
+
+- Improve SW (caches, add metadata, auth?)
+- SSE support ([reference](https://nize.foo/blog/tanstack-start-websockets))
+- WebSocket room/topic management
+
+- Implement frontend testing (cypress (<https://github.com/profydev/prolog-app/tree/main?tab=readme-ov-fileests>)) (<https://github.com/alan2207/bulletproof-react/blob/master/docs/testing.md>)
+
 - Configure environment settings for development and production
 - Project configuration through env
-- Improve SW (caches, add metadata, auth?)
-- Implement Zod (validateSearchParams)
 - Dockerize with PostgreSQL support
-- Buildpack / nimpacks (dokploy with nixpacks) | Vercel
+- Buildpack / nimpacks (dokploy with nixpacks) | Docker Swarm | Vercel (<https://www.youtube.com/watch?v=td_KepzPEXE>, <https://www.youtube.com/watch?v=x2s_Y5ON-ms>, <https://www.youtube.com/watch?v=mznYKPvhcfw>)
+
+- Implement Zod (validateSearchParams)
+
 - Error monitoring (Sentry, new relic, rollbar, bugsnag)
+- Add monitoring (<https://www.datadoghq.com/blog/monitoring-mean-stack-applications-with-datadog/>)
+- [Grafana Faro](https://grafana.com/oss/faro/)
+- Add webtracking (UTMs, for A/B tests, etc...) (<https://www.campaignmonitor.com/resources/knowledge-base/how-to-know-if-someone-clicked-your-link/>)
+
 - Admin page (headless CMS?)
 - Pocketbase
+
 - Remove eslint-disable from files
 - Share types between server functions and client code?
-- Integrate hooks for payment and external APIs
 - Fix mobile experience (useIsMobile hook?)
-- Add monitoring (<https://www.datadoghq.com/blog/monitoring-mean-stack-applications-with-datadog/>)
-- Add webtracking (UTMs, for A/B tests, etc...)
+
+- Integrate hooks for payment and external APIs
+- Add prerender (<https://tanstack.com/start/latest/docs/framework/react/static-prerendering#prerendering-dynamic-routes-with-nitro>)
+
+- Remove model and ui folder from features
 
 ### Pokedex
 
@@ -91,6 +106,7 @@ This example demonstrates how to structure and utilize the template effectively.
 ✅ Skeleton UI to prevent hydration error \
 ✅ Multilanguage support with i18n \
 ✅ FSD-like architecture enforced by ESLint
+✅ WebSocket
 
 ### Server
 
@@ -99,6 +115,7 @@ This example demonstrates how to structure and utilize the template effectively.
 ✅ IoC pattern \
 ✅ Logger using winston
 ✅ Tests using Vitest
+✅ WebSocket
 
 ## Good for (TODO)
 

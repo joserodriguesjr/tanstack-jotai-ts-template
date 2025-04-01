@@ -2,7 +2,7 @@ import { exec } from 'child_process';
 
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from '@tanstack/react-start/config';
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
+// import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import type { Plugin } from 'vite';
 import tsConfigPaths from 'vite-tsconfig-paths';
 
@@ -40,6 +40,12 @@ function watchServiceWorker(): Plugin {
 }
 
 export default defineConfig({
+  tsr: {
+    target: 'react',
+    autoCodeSplitting: true,
+    routesDirectory: './app/routes',
+    generatedRouteTree: './app/routeTree.gen.ts',
+  },
   server: {
     // preset: 'digital-ocean',
     experimental: {
@@ -61,21 +67,20 @@ export default defineConfig({
 
       tailwindcss(),
 
-      TanStackRouterVite({
-        target: 'react',
-        autoCodeSplitting: true,
-        routesDirectory: './app/routes',
-        generatedRouteTree: './app/routeTree.gen.ts',
-      }),
+      // TanStackRouterVite({
+      //   target: 'react',
+      //   autoCodeSplitting: true,
+      //   routesDirectory: './app/routes',
+      //   generatedRouteTree: './app/routeTree.gen.ts',
+      // }),
     ],
   },
-}).then((config) =>
-  config.addRouter({
-    // todo: add env var
+}).then((config) => {
+  return config.addRouter({
     name: 'websocket',
     type: 'http',
     handler: './app/ws.ts',
     target: 'server',
     base: '/_ws',
-  }),
-);
+  });
+});

@@ -1,3 +1,5 @@
+import { ENV } from '@/shared/config/env';
+
 export interface EventMessage {
   user: string;
   message: string;
@@ -6,8 +8,8 @@ export interface EventMessage {
 export class WebSocketClient {
   private socket: WebSocket;
 
-  constructor() {
-    this.socket = new WebSocket('wss://localhost:3000/_ws');
+  constructor(host: string = ENV.WS_URL) {
+    this.socket = new WebSocket(host);
 
     this.socket.onopen = () => {
       console.log(`WebSocket connected`);
