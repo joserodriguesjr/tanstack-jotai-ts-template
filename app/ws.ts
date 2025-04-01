@@ -1,4 +1,4 @@
-// todo: improve ws
+// todo: improve ws (add to message: user, chat, timestamp, ...)
 
 import {
   defineEventHandler,
@@ -155,6 +155,15 @@ function broadcastMessage(peer: Peer, topic: string, message: string) {
 function removePeerFromAllTopics(peer: Peer) {
   topicSubscriptions.forEach((peers, topic) => {
     if (peers.has(peer)) {
+      peer.unsubscribe(topic);
+      sendMessage(
+        peer,
+        {
+          user: 'server',
+          message: `${peer} has disconnected from '${topic}' room! Bye!`,
+        },
+        topic,
+      );
       peers.delete(peer);
       console.log(`[ws] ${peer.id} removed from ${topic}`);
     }

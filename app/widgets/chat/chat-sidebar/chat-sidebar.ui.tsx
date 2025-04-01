@@ -13,6 +13,7 @@ export function ChatSidebar() {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<EventMessage[]>([]);
   const [topic, setTopic] = useState('general');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!wsInstance) {
@@ -20,6 +21,7 @@ export function ChatSidebar() {
       wsInstance = new WebSocketClient();
 
       wsInstance.onMessage((event) => {
+        setIsLoading(false);
         console.log('event = ', event);
         setMessages((prev) => [...prev, event]);
       });
@@ -81,11 +83,15 @@ export function ChatSidebar() {
           </div>
           <Card className="mb-2 h-64 overflow-y-auto">
             <CardContent>
-              {messages.map((msg, index) => (
-                <div key={index} className="mb-2">
-                  <strong>{msg.user}:</strong> {msg.message}
-                </div>
-              ))}
+              {isLoading ? (
+                <div>Carregando mensagens...</div>
+              ) : (
+                messages.map((msg, index) => (
+                  <div key={index} className="mb-2">
+                    <strong>{msg.user}:</strong> {msg.message}
+                  </div>
+                ))
+              )}
             </CardContent>
           </Card>
           <div className="flex gap-2">
