@@ -1,8 +1,7 @@
-import { createServerFn } from '@tanstack/react-start';
-
 import { logger } from '@server/logger/logger';
 import { PokemonRepository } from '@server/pokemon/pokemon.repository';
 import { PokemonService } from '@server/pokemon/pokemon.service';
+import { createServerFn } from '@tanstack/react-start';
 
 const pokemonRepository = new PokemonRepository();
 const pokemonService = new PokemonService(pokemonRepository);

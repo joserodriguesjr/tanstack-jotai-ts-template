@@ -6,7 +6,7 @@ export default defineConfig({
     outDir: ".temp/",
     emptyOutDir: false,
     lib: {
-      entry: "app/sw.ts",
+      entry: "src/sw.ts",
       formats: ["es"],
       fileName: () => "sw.js",
     },

@@ -1,9 +1,8 @@
-import { eq, like, sql } from 'drizzle-orm';
-
 import { db } from '@server/db/db';
 import { pokemons } from '@server/db/schema';
 import type { Pokemon } from '@server/pokemon/pokemon.schema';
 import type { IPokemonRepository } from '@server/pokemon/pokemon.service';
+import { eq, like, sql } from 'drizzle-orm';
 
 export class PokemonRepository implements IPokemonRepository {
   async getPokemonByName(pokemonName: string): Promise<Pokemon | undefined> {

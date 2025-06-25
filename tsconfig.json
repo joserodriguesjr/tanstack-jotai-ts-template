@@ -2,7 +2,7 @@
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", ".vinxi", ".output"],
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2022",
     "module": "ESNext",
     "jsx": "react-jsx",
     "jsxImportSource": "react",
@@ -31,7 +31,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./app/*"],
+      "@/*": ["src/*"],
       "@server/*": ["./server/*"]
     }
   }
